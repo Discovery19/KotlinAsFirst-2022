@@ -57,6 +57,12 @@ fun main() {
     println("Root product: $x1x2")
 }
 
+
+fun suka(hours: Int,minutes:Int,seconds:Int): Int {
+    val s=hours*3600+minutes*60+seconds
+    return s
+}
+
 /**
  * Тривиальная (3 балла).
  *
@@ -65,7 +71,8 @@ fun main() {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int = TODO()
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int =suka(hours,minutes,seconds)
+
 
 /**
  * Тривиальная (1 балл)
