@@ -59,9 +59,9 @@ fun main() {
 }
 
 
-fun subaru(hours: Int,minutes:Int,seconds:Int): Int {
-    val s=hours*3600+minutes*60+seconds
-    return s
+fun timer(hours: Int,minutes:Int,seconds:Int): Int {
+    return hours * 3600 + minutes * 60 + seconds
+
 }
 
 /**
@@ -72,7 +72,7 @@ fun subaru(hours: Int,minutes:Int,seconds:Int): Int {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int = subaru(hours,minutes,seconds)
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int = timer(hours,minutes,seconds)
 
 
 /**
@@ -156,10 +156,10 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = burdashev(initial,
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun iuh(number: Int):Int{
+fun replacer(number: Int):Int{
     val f=number%10
     val s=number/10%10
     val t=number/100
     return f*100+s*10+t
 }
-fun numberRevert(number: Int): Int = iuh(number)
+fun numberRevert(number: Int): Int = replacer(number)
