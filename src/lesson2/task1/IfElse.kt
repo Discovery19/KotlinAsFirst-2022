@@ -173,6 +173,7 @@ fun line(a: Int, b: Int, c: Int, d: Int): Int{
     when{
         a<c -> if ((d>=b)&&(b-c>=0))  s= b-c else if (d<b)  s=d-c else s=-1
         a>c -> if ((d>=b))  s= b-a else if ((d<b)&& (d-a>=0))  s=d-a else s=-1
+        (a==c && b==d)-> s=b-a
     }
     return s
 }
