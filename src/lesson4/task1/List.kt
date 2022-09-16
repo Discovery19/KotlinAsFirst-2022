@@ -211,7 +211,51 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+
+
+/** Есть два варианта и ни один не проходит по времени. Не знаю как оптимизировать */
+fun easynumber(n:Int):String{
+    var list= mutableListOf<Int>()
+    var k=0
+    k=n
+    var i=2
+    while (i*i<=k){
+        while (n%i==0){
+            list.add(i)
+            k=k/i
+        }
+        i+=1
+    }
+    if (n>1) list.add(k)
+
+    print(list)
+    var string=""
+    //if (list[list.last()]!=list[list.last()-1])
+    for(s in list-1){
+        string =string+s+"*"
+    }
+    return string.substring(0, string.length - 1)
+}
+fun easynumber2(n:Int):String{
+    var list= mutableListOf<Int>()
+    var k=0
+    k=n
+    while (k>0){
+        for (i in 2..sqrt(n.toDouble()).toInt()){
+            if (k%i==0) list.add(i)
+            if (k%i==0) k=k/i
+        }
+        if (list.size==0) list.add(n)
+    }
+    print(list)
+    var string=""
+    //if (list[list.last()]!=list[list.last()-1])
+    for(s in list-1){
+        string =string+s+"*"
+    }
+    return string.substring(0, string.length - 1)
+}
+fun factorizeToString(n: Int): String = easynumber(n)
 
 /**
  * Средняя (3 балла)
