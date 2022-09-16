@@ -120,14 +120,24 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double = TODO()
+fun vector(list:List<Double>):Double{
+    var s=0.0
+    for (element in list){
+        s+=element*element
+    }
+    return sqrt(s)
+}
+fun abs(v: List<Double>): Double = vector(v)
 
 /**
  * Простая (2 балла)
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double = TODO()
+fun ari(list: List<Double>):Double{
+    return if (list.size==0) 0.0 else list.sum()/list.size
+}
+fun mean(list: List<Double>): Double = ari(list)
 
 /**
  * Средняя (3 балла)
@@ -137,7 +147,15 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun izmena(list: MutableList<Double>):MutableList<Double>{
+    val s=list.sum()/list.size
+    if (list.size==0) return list else
+    for (i in 0..list.size-1){
+        list[i]=list[i]-s
+    }
+    return list
+}
+fun center(list: MutableList<Double>): MutableList<Double> = izmena(list)
 
 /**
  * Средняя (3 балла)
@@ -146,7 +164,14 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int = TODO()
+fun scal(a: List<Int>,b: List<Int>):Int{
+    var s=0
+    for (i in 0..a.size-1){
+        s+=a[i]*b[i]
+    }
+    return  s
+}
+fun times(a: List<Int>, b: List<Int>): Int = scal(a,b)
 
 /**
  * Средняя (3 балла)
