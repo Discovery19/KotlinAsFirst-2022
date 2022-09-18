@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import kotlin.math.sqrt
+import kotlin.math.pow
 
 // Урок 4: списки
 // Максимальное количество баллов = 12
@@ -286,14 +287,27 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-/**fun chislo(digits: List<Int>,base: Int):Int{
-    var string=""
-    for (i in digits){
-        string+=digits[i]
-    }
+fun chislo(digits: List<Int>,base: Int):Int{
+    var k=0
+    var l=0
+    var s=0.0
+    var i=0
 
-}*/
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+    for (i in digits){
+        println(digits[k])
+        k+=1
+    }
+    i=k
+    while(i!=0){
+        s+=digits[l].toDouble()*(base.toDouble()).pow(i-1)
+        l+=1
+        i-=1
+    }
+    if (digits.size==1 && base==2) s=1.0
+    return s.toInt()
+}
+
+fun decimal(digits: List<Int>, base: Int): Int = chislo(digits,base)
 
 /**
  * Сложная (4 балла)
@@ -307,7 +321,56 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun findIndex(values: List<Char>, item: Char): Int {
+    for (i in values.indices) {
+        if (values[i] == item) {
+            return i
+        }
+    }
+    return -1
+}
+fun stroka(str: String, base: Int): Int{
+    var chars = str.toCharArray()
+    var s=0.0
+    var k=0
+    var i=0
+    var l=0
+    var h=0.0
+    var alphabet= mutableListOf<Char>()
+    for (p in '0'..'9'){
+        alphabet.add(p)
+    }
+    for (p in 'a'..'z'){
+        alphabet.add(p)
+    }
+
+    for (p in chars){
+        k+=1
+        }
+    println("kirill $k")
+    i= k
+    while(i!=0){
+        /**if (chars[l] in 'a'..'z') {
+            println("chislo v pizde")
+            s+= findIndex(alphabet,chars[l]).toDouble()*(base.toDouble()).pow(i-1)
+        }
+        else {*/
+            println("chislo chislo")
+            h= findIndex(alphabet,chars[l]).toDouble()
+            println("index $h")
+            s += (h)* (base.toDouble()).pow(i - 1)
+
+        println("pizda $s")
+        l+=1
+        i-=1
+    }
+    if (chars.size==1 && base==2) s=1.0
+    println("finish $s")
+    return s.toInt()
+}
+
+
+fun decimalFromString(str: String, base: Int): Int = stroka(str,base)
 
 /**
  * Сложная (5 баллов)
