@@ -234,7 +234,7 @@ fun hard(n:Int):Int{
     var j=0
     var str=0
     if (i==n) return 1
-    for (i in 1..10000) {
+    for (i in 1..10000000) {
         k = i * i
         j = 0
         while (k > 0) {
@@ -245,11 +245,17 @@ fun hard(n:Int):Int{
         k = i * i
         if (n in str - j..str) break
     }
+    println(k)
+    println(n)
+    println("blyat $str")
     if (k/10>0)
-    for (i in 1..str-n) {
-        k=k/10
-        print(k)
-    }
+        for (i in 1..str-n) {
+
+            k=k/10
+            println(k)
+
+
+        }
     return k%10
 }
 fun squareSequenceDigit(n: Int): Int = hard(n)

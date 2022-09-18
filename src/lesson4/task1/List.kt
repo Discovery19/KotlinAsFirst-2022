@@ -286,6 +286,13 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
+/**fun chislo(digits: List<Int>,base: Int):Int{
+    var string=""
+    for (i in digits){
+        string+=digits[i]
+    }
+
+}*/
 fun decimal(digits: List<Int>, base: Int): Int = TODO()
 
 /**

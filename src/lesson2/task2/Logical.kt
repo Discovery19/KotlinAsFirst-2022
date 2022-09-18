@@ -45,7 +45,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = chess(x1, y1, 
  */
 fun year(month: Int,year: Int):Int{
     var s:Int=0
-    if (year%4==0) if (month==2) s=29 else if (month==12) s=31 else when{
+    if (year%4==0) if (month==2) s=29 else if (month==12) s=31 else if (month==8) s=31 else if (month==9) s=30 else when{
         month%2==0->s=30
         month%2==1->s=31
     }
