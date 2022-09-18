@@ -343,29 +343,18 @@ fun stroka(str: String, base: Int): Int{
     for (p in 'a'..'z'){
         alphabet.add(p)
     }
-
     for (p in chars){
         k+=1
         }
-    println("kirill $k")
     i= k
     while(i!=0){
-        /**if (chars[l] in 'a'..'z') {
-            println("chislo v pizde")
-            s+= findIndex(alphabet,chars[l]).toDouble()*(base.toDouble()).pow(i-1)
-        }
-        else {*/
             println("chislo chislo")
             h= findIndex(alphabet,chars[l]).toDouble()
-            println("index $h")
             s += (h)* (base.toDouble()).pow(i - 1)
-
-        println("pizda $s")
         l+=1
         i-=1
     }
     if (chars.size==1 && base==2) s=1.0
-    println("finish $s")
     return s.toInt()
 }
 
