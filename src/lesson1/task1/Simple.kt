@@ -82,10 +82,10 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = timer(hours,minutes,s
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun egor(sagenes: Int,arshins: Int,vershoks: Int):Double{
+fun length(sagenes: Int,arshins: Int,vershoks: Int):Double{
     return sagenes*48*0.04445+arshins*16*0.04445+vershoks*0.04445
 }
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = egor(sagenes,arshins,vershoks)
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = length(sagenes,arshins,vershoks)
 
 /**
  * Тривиальная (1 балл)
@@ -93,11 +93,11 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = egor(sag
  * Пользователь задает угол в градусах, минутах и секундах (например, 36 градусов 14 минут 35 секунд).
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
-fun geyshark(deg: Int,min: Int,sec: Int):Double{
+fun angle(deg: Int,min: Int,sec: Int):Double{
     val gg=(deg.toDouble()+min.toDouble()/60+sec.toDouble()/3600)* PI/180
     return gg
 }
-fun angleInRadian(deg: Int, min: Int, sec: Int): Double = geyshark(deg, min, sec)
+fun angleInRadian(deg: Int, min: Int, sec: Int): Double = angle(deg, min, sec)
 
 /**
  * Тривиальная (1 балл)
@@ -106,10 +106,10 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double = geyshark(deg, min, sec
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
 
-fun dogass(x1:Double,y1: Double,x2: Double,y2: Double): Double{
+fun line(x1:Double,y1: Double,x2: Double,y2: Double): Double{
     return sqrt((x1-x2).pow(2.0)+(y1-y2).pow(2.0))
 }
-fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = dogass(x1, y1, x2, y2)
+fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = line(x1, y1, x2, y2)
 
 /**
  * Простая (2 балла)
@@ -117,10 +117,10 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = dogass
  * Пользователь задает целое число, больше или равно 100 (например, 3801).
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
-fun zxc(number: Int):Int{
+fun lastnumb(number: Int):Int{
     return number/100%10
 }
-fun thirdDigit(number: Int): Int = zxc(number)
+fun thirdDigit(number: Int): Int = lastnumb(number)
 
 /**
  * Простая (2 балла)
@@ -129,10 +129,10 @@ fun thirdDigit(number: Int): Int = zxc(number)
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun pudje(hoursDepart: Int,minutesDepart: Int,hoursArrive: Int,minutesArrive: Int): Int{
+fun train(hoursDepart: Int,minutesDepart: Int,hoursArrive: Int,minutesArrive: Int): Int{
     return  hoursArrive*60+minutesArrive-hoursDepart*60-minutesDepart
 }
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int = pudje(hoursDepart,minutesDepart,hoursArrive,minutesArrive)
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int = train(hoursDepart,minutesDepart,hoursArrive,minutesArrive)
 
 /**
  * Простая (2 балла)
@@ -141,13 +141,13 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun burdashev(initial: Int,percent: Int):Double{
+fun bank(initial: Int,percent: Int):Double{
     val g1= initial+initial*(percent.toDouble()/100)
     val g2=g1+g1*percent.toDouble()/100
     val g3=g2+g2*percent.toDouble()/100
     return g3
 }
-fun accountInThreeYears(initial: Int, percent: Int): Double = burdashev(initial,percent)
+fun accountInThreeYears(initial: Int, percent: Int): Double = bank(initial,percent)
 
 
 /**
