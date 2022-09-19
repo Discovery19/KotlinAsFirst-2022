@@ -250,13 +250,14 @@ fun easynumber2(n:Int):String{
     }
     print(list)
     var string=""
-    //if (list[list.last()]!=list[list.last()-1])
+
     for(s in list-1){
         string =string+s+"*"
     }
     return string.substring(0, string.length - 1)
 }
-fun factorizeToString(n: Int): String = easynumber(n)
+
+fun factorizeToString(n: Int): String = TODO()
 
 /**
  * Средняя (3 балла)
@@ -303,7 +304,7 @@ fun chislo(digits: List<Int>,base: Int):Int{
         l+=1
         i-=1
     }
-    if (digits.size==1 && base==2) s=1.0
+    if (digits.size==1 && base==2) s=1.0 else if (digits.size==1 && base==2) s=0.0
     return s.toInt()
 }
 
@@ -354,7 +355,7 @@ fun stroka(str: String, base: Int): Int{
         l+=1
         i-=1
     }
-    if (chars.size==1 && base==2) s=1.0
+    if (chars.size==1 && base==2) s=1.0 else if (chars.size==1 && base==2) s=0.0
     return s.toInt()
 }
 
