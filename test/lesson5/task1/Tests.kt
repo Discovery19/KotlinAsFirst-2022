@@ -100,6 +100,7 @@ class Tests {
     }
 
     @Test
+
     @Tag("2")
     fun buildGrades() {
         assertEquals(

@@ -134,7 +134,6 @@ fun filterByCountryCode(
             namesToRemove.add(name)
         }
     }
-
     for (name in namesToRemove) {
         phoneBook.remove(name)
     }
