@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import ru.spbstu.wheels.NullableMonad.filter
+
 
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
@@ -224,7 +226,7 @@ fun price(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
             middle.put(name.first, name.second)
             xy.put(name.first, 1)
         } else {
-            val x= middle[name.first]
+            val x = middle[name.first]
             val y = xy[name.first]
             if (x != null && y != null) {
                 middle[name.first] = x + name.second
@@ -259,27 +261,26 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun shop(stuff: Map<String, Pair<String, Double>>, kind: String):String?{
-    var min=0.0
-    var res: String?=""
-    val stuff2= stuff.toMutableMap()
-    min=9999.0
+fun shop(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    var min = 0.0
+    var res: String? = ""
+    val stuff2 = stuff.toMutableMap()
+    min = 9999.0
 
-    for (name in stuff2.values){
-        if (name.second<min && name.first==kind){
-            min=name.second
-            println(min)
-            res=stuff2.filter { min == name.second }.keys.first()
+    for (name in stuff2.values) {
+        if (name.second < min && name.first == kind) {
+            min = name.second
+
+            res = stuff2.filter { min == name.second }!!.keys.first()
         }
-        if (name.second<min && name.first!=kind){
-            res=null
+        if (name.second < min && name.first != kind) {
+            res = null
         }
     }
-    println(min)
-    println(res)
     return res
 }
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = shop(stuff,kind)
+
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = shop(stuff, kind)
 
 /**
  * Средняя (3 балла)
@@ -373,7 +374,19 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun numbers(list: List<Int>, number: Int): Pair<Int, Int> {
+    for (numb in 0..list.size - 2) {
+        for (i in 1..list.size - 1) {
+            if (list[numb] + list[i] == number) {
+                val spisok = Pair(numb, i)
+                return spisok
+            }
+        }
+    }
+    return Pair(-1, -1)
+}
+
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = numbers(list, number)
 
 /**
  * Очень сложная (8 баллов)
@@ -396,4 +409,17 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
  *     450
  *   ) -> emptySet()
  */
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+// res = stuff2.filter { min == name.second }.keys.first()
+fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int):Set<String>{
+    var m=0
+    var spisok= setOf<String>()
+    val back=treasures.toMutableMap()
+        for (numb in treasures.values){
+            if (numb.first<=capacity && numb.second>=m){
+                m=numb.second
+                spisok+= back.filter { numb.second==m}!!.keys.first().toString()
+            }
+    }
+    return spisok
+}
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = chest(treasures,capacity)
