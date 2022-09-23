@@ -304,7 +304,7 @@ fun chislo(digits: List<Int>,base: Int):Int{
         l+=1
         i-=1
     }
-    if (digits.size==1 && base==2) s=1.0 else if (digits.size==1 && base==2) s=0.0
+    if (digits.size==1 && base==2 && digits[1]==1) s=1.0 else if (digits.size==1 && base==2 && digits[1]==0) s=0.0
     return s.toInt()
 }
 
