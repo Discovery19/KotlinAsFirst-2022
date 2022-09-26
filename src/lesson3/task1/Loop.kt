@@ -1,8 +1,10 @@
 @file:Suppress("UNUSED_PARAMETER")
 
 package lesson3.task1
+
 import  kotlin.math.pow
 import kotlin.math.sqrt
+
 // Урок 3: циклы
 // Максимальное количество баллов = 9
 // Рекомендуемое количество баллов = 7
@@ -72,14 +74,15 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-fun number(a:Int):Int{
-    var k=0
-    if (a==0) k=0 else
-    while (a>0){
-        if (a%10>=0 && a/10>0) k+=1 else break
-    }
-    return  k
+fun number(a: Int): Int {
+    var k = 0
+    if (a == 0) k = 0 else
+        while (a > 0) {
+            if (a % 10 >= 0 && a / 10 > 0) k += 1 else break
+        }
+    return k
 }
+
 fun digitNumber(n: Int): Int = number(n)
 
 /**
@@ -88,16 +91,16 @@ fun digitNumber(n: Int): Int = number(n)
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fibonach(n:Int):Int{
-    var k=0
-    var a=1
-    var b=1
-    if (n<=2) k=1 else
-        for (i in 3..n){
-            k=a+b
-            a=b
-            b=k
-    }
+fun fibonach(n: Int): Int {
+    var k = 0
+    var a = 1
+    var b = 1
+    if (n <= 2) k = 1 else
+        for (i in 3..n) {
+            k = a + b
+            a = b
+            b = k
+        }
     return k
 }
 
@@ -141,23 +144,24 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun nok(m:Int,n:Int):Int{
-    var k=1
-    var a=0
-    var b=0
-    if (m==n) k=m else
-    a=Math.max(m,n)
-    b=Math.min(m,n)
-    if (a%b==0) k=b else
-    while (k>0){
-        if (a%b==0) break else
-            k=a%b
-            a=b
-            b=k
-    }
-    return m*n/k
+fun nok(m: Int, n: Int): Int {
+    var k = 1
+    var a = 0
+    var b = 0
+    if (m == n) k = m else
+        a = Math.max(m, n)
+    b = Math.min(m, n)
+    if (a % b == 0) k = b else
+        while (k > 0) {
+            if (a % b == 0) break else
+                k = a % b
+            a = b
+            b = k
+        }
+    return m * n / k
 }
-fun lcm(m: Int, n: Int): Int = nok(m,n)
+
+fun lcm(m: Int, n: Int): Int = nok(m, n)
 
 /**
  * Средняя (3 балла)
@@ -229,12 +233,12 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hard(n:Int):Int{
-    var i=1
-    var k=0
-    var j=0
-    var str=0
-    if (i==n) return 1
+fun hard(n: Int): Int {
+    var i = 1
+    var k = 0
+    var j = 0
+    var str = 0
+    if (i == n) return 1
     for (i in 1..10000000) {
         k = i * i
         j = 0
@@ -246,19 +250,13 @@ fun hard(n:Int):Int{
         k = i * i
         if (n in str - j..str) break
     }
-    println(k)
-    println(n)
-    println("blyat $str")
-    if (k/10>0)
-        for (i in 1..str-n) {
-
-            k=k/10
-            println(k)
-
-
+    if (k / 10 > 0)
+        for (i in 1..str - n) {
+            k = k / 10
         }
-    return k%10
+    return k % 10
 }
+
 fun squareSequenceDigit(n: Int): Int = hard(n)
 
 /**
@@ -270,28 +268,29 @@ fun squareSequenceDigit(n: Int): Int = hard(n)
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hardfib(n:Int):Int{
-    var i=1
-    var m=0
-    var j=0
-    var str=0
-    if (i==n) return 1
-        for (i in 1..n) {
-            m = fibonach(i)
-            j=0
-            while (m > 0) {
-                m = m / 10
-                j += 1
-                }
-            str += j
-            m= ((m*10.0.pow(j))+ fibonach(i)).toInt()
-            if (n in str - j..str) break
+fun hardfib(n: Int): Int {
+    var i = 1
+    var m = 0
+    var j = 0
+    var str = 0
+    if (i == n) return 1
+    for (i in 1..n) {
+        m = fibonach(i)
+        j = 0
+        while (m > 0) {
+            m = m / 10
+            j += 1
         }
-    if (m/10>0)
-        for (i in 1..str-n) {
-            m=m/10
+        str += j
+        m = ((m * 10.0.pow(j)) + fibonach(i)).toInt()
+        if (n in str - j..str) break
+    }
+    if (m / 10 > 0)
+        for (i in 1..str - n) {
+            m = m / 10
             print(m)
         }
-    return m%10
+    return m % 10
 }
+
 fun fibSequenceDigit(n: Int): Int = hardfib(n)

@@ -2,7 +2,6 @@
 
 package lesson5.task1
 
-import ru.spbstu.wheels.NullableMonad.filter
 
 
 // Урок 5: ассоциативные массивы и множества
@@ -409,17 +408,32 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = numbers(list, n
  *     450
  *   ) -> emptySet()
  */
-// res = stuff2.filter { min == name.second }.keys.first()
-fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int):Set<String>{
-    var m=0
-    var spisok= setOf<String>()
-    val back=treasures.toMutableMap()
-        for (numb in treasures.values){
-            if (numb.first<=capacity && numb.second>=m){
-                m=numb.second
-                spisok+= back.filter { numb.second==m}!!.keys.first().toString()
-            }
+// for (name in stuff2.values) {
+//        if (name.second < min && name.first == kind) {
+//            min = name.second
+//
+//            res = stuff2.filter { min == name.second }!!.keys.first()
+//        }
+//        if (name.second < min && name.first != kind) {
+//            res = null
+//        }
+//    }
+fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
+    var m = 0
+    var spisok = setOf<String>()
+    val back = treasures.toMutableMap()
+
+    for (numb in treasures.values) {
+        println("fist max $m")
+        if (numb.first <= capacity && numb.second >= m) {
+            m = numb.second
+            println("max $m")
+            //spisok = back.filter { it.value.second == m }!!.keys.first()
+        }
+        println("spisok $spisok")
     }
+    println("finish $spisok")
     return spisok
 }
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = chest(treasures,capacity)
+
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
