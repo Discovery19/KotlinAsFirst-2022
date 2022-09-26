@@ -95,6 +95,7 @@ fun date(str: String): String {
     var m = 0
     if (list.size<3) return ""
     if (list[2].toInt() / 4 == 0 && list[1] == "февраля" && list[0] == "28") return ""
+
     for (i in 0..year.size - 1) {
         if (list[1] == year[i]) {
             m = i + 1
@@ -103,10 +104,13 @@ fun date(str: String): String {
     if (m==0) return ""
     val n=list[0].toInt()
     println(mounthnumb[m-1])
-    if (list[0].toInt() >= mounthnumb[m - 1]) return "" else {
+    if (list[0].toInt() > mounthnumb[m - 1]) return "" else {
         if (n in 0..9) result += "0$n." else result += "$n."
+
         if (m in 0..9) result += "0$m." else result += "$m."
+
         result += list[2]
+
     }
     return result
 }
