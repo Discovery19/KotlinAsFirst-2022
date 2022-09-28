@@ -293,7 +293,7 @@ fun chislo(digits: List<Int>,base: Int):Int{
     var l=0
     var s=0.0
     var i=0
-
+    if (digits.size==1 && base==2 && digits[0]==1) return 1 else if (digits.size==1 && base==2 && digits[0]==0) return 0
     for (i in digits){
         println(digits[k])
         k+=1
@@ -304,7 +304,7 @@ fun chislo(digits: List<Int>,base: Int):Int{
         l+=1
         i-=1
     }
-    if (digits.size==1 && base==2 && digits[1]==1) s=1.0 else if (digits.size==1 && base==2 && digits[1]==0) s=0.0
+
     return s.toInt()
 }
 
@@ -331,13 +331,15 @@ fun findIndex(values: List<Char>, item: Char): Int {
     return -1
 }
 fun stroka(str: String, base: Int): Int{
-    var chars = str.toCharArray()
+    var chars = str.toList()
     var s=0.0
     var k=0
     var i=0
     var l=0
     var h=0.0
+    println(chars)
     var alphabet= mutableListOf<Char>()
+    if (chars.size==1 && base==2 && chars[0]=='1') return 1 else if (chars.size==1 && base==2 && chars[0]=='0') return 0
     for (p in '0'..'9'){
         alphabet.add(p)
     }

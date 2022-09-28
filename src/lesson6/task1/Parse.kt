@@ -91,26 +91,29 @@ fun date(str: String): String {
         "декабря"
     )
     val mounthnumb = listOf<Int>(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+    val n = list[0].toInt()
     var result = ""
     var m = 0
-    if (list.size<3) return ""
-    if (list[2].toInt() / 4 == 0 && list[1] == "февраля" && list[0] == "28") return ""
+    when {
+        (list.size < 3) -> return ""
+        (list[2].toInt() % 4 == 0 && list[1] == "февраля" && list[0] == "28") -> return ""
+        (list[2].toInt() % 4 == 0 && list[1] == "февраля" && list[0] == "29") -> return "29.02." + list[2]
+    }
 
     for (i in 0..year.size - 1) {
         if (list[1] == year[i]) {
             m = i + 1
         }
     }
-    if (m==0) return ""
-    val n=list[0].toInt()
-    println(mounthnumb[m-1])
+    if (m == 0) return ""
+
+    println(mounthnumb[m - 1])
     if (list[0].toInt() > mounthnumb[m - 1]) return "" else {
         if (n in 0..9) result += "0$n." else result += "$n."
 
         if (m in 0..9) result += "0$m." else result += "$m."
 
         result += list[2]
-
     }
     return result
 }
@@ -127,6 +130,7 @@ fun dateStrToDigit(str: String): String = date(str)
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
+
 fun dateDigitToStr(digital: String): String = TODO()
 
 /**

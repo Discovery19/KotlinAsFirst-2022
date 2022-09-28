@@ -201,6 +201,7 @@ class Tests {
     @Test
     @Tag("3")
     fun decimal() {
+        assertEquals(0, decimal(listOf(0), 2))
         assertEquals(1, decimal(listOf(1), 2))
         assertEquals(100, decimal(listOf(1, 2, 1, 0), 4))
         assertEquals(250, decimal(listOf(1, 3, 12), 14))
