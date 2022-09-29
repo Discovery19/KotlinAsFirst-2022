@@ -195,6 +195,7 @@ fun line2(a: Int, b: Int, c: Int, d: Int): Int {
         a >= c && b >= c && b >= d -> s = d - a
         a >= c && d <= d -> s = b - a
     }
+    if (s<0) return -1
     return s
 }
 

@@ -3,7 +3,6 @@
 package lesson5.task1
 
 
-
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -378,7 +377,7 @@ fun numbers(list: List<Int>, number: Int): Pair<Int, Int> {
         for (i in 1..list.size - 1) {
             println(list[numb])
             println(list[i])
-            if (list[numb] + list[i] == number && numb!=i) return Pair(numb, i)
+            if (list[numb] + list[i] == number && numb != i) return Pair(numb, i)
         }
     }
     return Pair(-1, -1)
