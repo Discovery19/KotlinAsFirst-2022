@@ -34,6 +34,7 @@ class Tests {
     @Test
     @Tag("4")
     fun dateStrToDigit() {
+        assertEquals("", dateStrToDigit(""))
         assertEquals("29.02.1803600", dateStrToDigit("29 февраля 1803600"))
         assertEquals("", dateStrToDigit("29 февраля 494200"))
         assertEquals("29.02.499652", dateStrToDigit("29 февраля 499652"))

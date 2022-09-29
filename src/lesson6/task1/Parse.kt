@@ -74,8 +74,13 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
+fun throwExample() {
+
+    throw NumberFormatException("NumberFormatException.forInputString(NumberFormatException.java:67)")
+}
 fun date(str: String): String {
     val list = str.split(" ")
+    throwExample()
     val year = listOf<String>(
         "января",
         "февраля",
