@@ -376,10 +376,9 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
 fun numbers(list: List<Int>, number: Int): Pair<Int, Int> {
     for (numb in 0..list.size - 2) {
         for (i in 1..list.size - 1) {
-            if (list[numb] + list[i] == number) {
-                val spisok = Pair(numb, i)
-                return spisok
-            }
+            println(list[numb])
+            println(list[i])
+            if (list[numb] + list[i] == number && numb!=i) return Pair(numb, i)
         }
     }
     return Pair(-1, -1)

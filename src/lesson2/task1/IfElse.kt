@@ -70,7 +70,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageFun(num: Int): String {
-     if (num % 10 == 1 && (num / 10 % 10 != 1)) return "$num год" else when {
+    if (num % 10 == 1 && (num / 10 % 10 != 1)) return "$num год" else when {
         (num % 10 in 2..4) && (num / 10 % 10 != 1) -> return "$num года"
         else -> return "$num лет"
     }
@@ -173,15 +173,29 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = triangle(a, b, c)
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun line(a: Int, b: Int, c: Int, d: Int): Int {
+/**fun line(a: Int, b: Int, c: Int, d: Int): Int {
+var s = 0
+when {
+a == c -> if (d > b) s = d - b else if (d <= b) s = b - d else -1
+a < c -> if ((d >= b) && (b - c >= 0)) s = b - c else if (d < b) s = d - c else s = -1
+a > c -> if ((d >= b)) s = b - a else if ((d < b) && (d - a >= 0)) s = d - a else s = -1
+(a == c && b == d) -> s = b - a
+}
+return s
+}*/
+fun line2(a: Int, b: Int, c: Int, d: Int): Int {
     var s = 0
     when {
-        a == c -> if (d > b) s = d - b else if (d <= b) s = b - d else -1
-        a < c -> if ((d >= b) && (b - c >= 0)) s = b - c else if (d < b) s = d - c else s = -1
-        a > c -> if ((d >= b)) s = b - a else if ((d < b) && (d - a >= 0)) s = d - a else s = -1
-        (a == c && b == d) -> s = b - a
+        a <= c && b <= d && d >= c -> s = b - c
+        a < c && b < d && b < c -> s = -1
+        a <= c && b <= c && b <= d -> s = b - c
+        a <= c && b >= d -> s = d - c
+        a >= c && b >= d && d >= a -> s = d - a
+        a > c && b > c && b > d -> s = -1
+        a >= c && b >= c && b >= d -> s = d - a
+        a >= c && d <= d -> s = b - a
     }
     return s
 }
 
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = line(a, b, c, d)
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = line2(a, b, c, d)

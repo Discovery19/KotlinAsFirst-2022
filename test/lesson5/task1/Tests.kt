@@ -307,6 +307,10 @@ class Tests {
     fun findSumOfTwo() {
         assertEquals(
             Pair(-1, -1),
+            findSumOfTwo(listOf(1, 1, 1, 0, 1, 1), 0)
+        )
+        assertEquals(
+            Pair(-1, -1),
             findSumOfTwo(emptyList(), 1)
         )
         assertEquals(
