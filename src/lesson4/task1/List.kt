@@ -121,13 +121,14 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun vector(list:List<Double>):Double{
-    var s=0.0
-    for (element in list){
-        s+=element*element
+fun vector(list: List<Double>): Double {
+    var s = 0.0
+    for (element in list) {
+        s += element * element
     }
     return sqrt(s)
 }
+
 fun abs(v: List<Double>): Double = vector(v)
 
 /**
@@ -135,9 +136,10 @@ fun abs(v: List<Double>): Double = vector(v)
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun ari(list: List<Double>):Double{
-    return if (list.size==0) 0.0 else list.sum()/list.size
+fun ari(list: List<Double>): Double {
+    return if (list.size == 0) 0.0 else list.sum() / list.size
 }
+
 fun mean(list: List<Double>): Double = ari(list)
 
 /**
@@ -148,14 +150,15 @@ fun mean(list: List<Double>): Double = ari(list)
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun izmena(list: MutableList<Double>):MutableList<Double>{
-    val s=list.sum()/list.size
-    if (list.size==0) return list else
-    for (i in 0..list.size-1){
-        list[i]=list[i]-s
-    }
+fun izmena(list: MutableList<Double>): MutableList<Double> {
+    val s = list.sum() / list.size
+    if (list.size == 0) return list else
+        for (i in 0..list.size - 1) {
+            list[i] = list[i] - s
+        }
     return list
 }
+
 fun center(list: MutableList<Double>): MutableList<Double> = izmena(list)
 
 /**
@@ -165,14 +168,15 @@ fun center(list: MutableList<Double>): MutableList<Double> = izmena(list)
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun scal(a: List<Int>,b: List<Int>):Int{
-    var s=0
-    for (i in 0..a.size-1){
-        s+=a[i]*b[i]
+fun scal(a: List<Int>, b: List<Int>): Int {
+    var s = 0
+    for (i in 0..a.size - 1) {
+        s += a[i] * b[i]
     }
-    return  s
+    return s
 }
-fun times(a: List<Int>, b: List<Int>): Int = scal(a,b)
+
+fun times(a: List<Int>, b: List<Int>): Int = scal(a, b)
 
 /**
  * Средняя (3 балла)
@@ -215,44 +219,45 @@ fun factorize(n: Int): List<Int> = TODO()
 
 
 /** Есть два варианта и ни один не проходит по времени. Не знаю как оптимизировать */
-fun easynumber(n:Int):String{
-    var list= mutableListOf<Int>()
-    var k=0
-    k=n
-    var i=2
-    while (i*i<=k){
-        while (n%i==0){
+fun easynumber(n: Int): String {
+    var list = mutableListOf<Int>()
+    var k = 0
+    k = n
+    var i = 2
+    while (i * i <= k) {
+        while (n % i == 0) {
             list.add(i)
-            k=k/i
+            k = k / i
         }
-        i+=1
+        i += 1
     }
-    if (n>1) list.add(k)
+    if (n > 1) list.add(k)
 
     print(list)
-    var string=""
+    var string = ""
     //if (list[list.last()]!=list[list.last()-1])
-    for(s in list-1){
-        string =string+s+"*"
+    for (s in list - 1) {
+        string = string + s + "*"
     }
     return string.substring(0, string.length - 1)
 }
-fun easynumber2(n:Int):String{
-    var list= mutableListOf<Int>()
-    var k=0
-    k=n
-    while (k>0){
-        for (i in 2..sqrt(n.toDouble()).toInt()){
-            if (k%i==0) list.add(i)
-            if (k%i==0) k=k/i
+
+fun easynumber2(n: Int): String {
+    var list = mutableListOf<Int>()
+    var k = 0
+    k = n
+    while (k > 0) {
+        for (i in 2..sqrt(n.toDouble()).toInt()) {
+            if (k % i == 0) list.add(i)
+            if (k % i == 0) k = k / i
         }
-        if (list.size==0) list.add(n)
+        if (list.size == 0) list.add(n)
     }
     print(list)
-    var string=""
+    var string = ""
 
-    for(s in list-1){
-        string =string+s+"*"
+    for (s in list - 1) {
+        string = string + s + "*"
     }
     return string.substring(0, string.length - 1)
 }
@@ -288,27 +293,27 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun chislo(digits: List<Int>,base: Int):Int{
-    var k=0
-    var l=0
-    var s=0.0
-    var i=0
-    if (digits.size==1 && base==2 && digits[0]==1) return 1 else if (digits.size==1 && base==2 && digits[0]==0) return 0
-    for (i in digits){
+fun chislo(digits: List<Int>, base: Int): Int {
+    var k = 0
+    var l = 0
+    var s = 0.0
+    var i = 0
+    if (digits.size == 1 && base == 2 && digits[0] == 1) return 1 else if (digits.size == 1 && base == 2 && digits[0] == 0) return 0
+    for (i in digits) {
         println(digits[k])
-        k+=1
+        k += 1
     }
-    i=k
-    while(i!=0){
-        s+=digits[l].toDouble()*(base.toDouble()).pow(i-1)
-        l+=1
-        i-=1
+    i = k
+    while (i != 0) {
+        s += digits[l].toDouble() * (base.toDouble()).pow(i - 1)
+        l += 1
+        i -= 1
     }
 
     return s.toInt()
 }
 
-fun decimal(digits: List<Int>, base: Int): Int = chislo(digits,base)
+fun decimal(digits: List<Int>, base: Int): Int = chislo(digits, base)
 
 /**
  * Сложная (4 балла)
@@ -330,39 +335,40 @@ fun findIndex(values: List<Char>, item: Char): Int {
     }
     return -1
 }
-fun stroka(str: String, base: Int): Int{
+
+fun stroka(str: String, base: Int): Int {
     var chars = str.toList()
-    var s=0.0
-    var k=0
-    var i=0
-    var l=0
-    var h=0.0
+    var s = 0.0
+    var k = 0
+    var i = 0
+    var l = 0
+    var h = 0.0
     println(chars)
-    var alphabet= mutableListOf<Char>()
-    if (chars.size==1 && base==2 && chars[0]=='1') return 1 else if (chars.size==1 && base==2 && chars[0]=='0') return 0
-    for (p in '0'..'9'){
+    var alphabet = mutableListOf<Char>()
+    if (chars.size == 1 && base == 2 && chars[0] == '1') return 1 else if (chars.size == 1 && base == 2 && chars[0] == '0') return 0
+    for (p in '0'..'9') {
         alphabet.add(p)
     }
-    for (p in 'a'..'z'){
+    for (p in 'a'..'z') {
         alphabet.add(p)
     }
-    for (p in chars){
-        k+=1
-        }
-    i= k
-    while(i!=0){
-            println("chislo chislo")
-            h= findIndex(alphabet,chars[l]).toDouble()
-            s += (h)* (base.toDouble()).pow(i - 1)
-        l+=1
-        i-=1
+    for (p in chars) {
+        k += 1
     }
-    if (chars.size==1 && base==2) s=1.0 else if (chars.size==1 && base==2) s=0.0
+    i = k
+    while (i != 0) {
+        println("chislo chislo")
+        h = findIndex(alphabet, chars[l]).toDouble()
+        s += (h) * (base.toDouble()).pow(i - 1)
+        l += 1
+        i -= 1
+    }
+    if (chars.size == 1 && base == 2) s = 1.0 else if (chars.size == 1 && base == 2) s = 0.0
     return s.toInt()
 }
 
 
-fun decimalFromString(str: String, base: Int): Int = stroka(str,base)
+fun decimalFromString(str: String, base: Int): Int = stroka(str, base)
 
 /**
  * Сложная (5 баллов)
@@ -372,7 +378,23 @@ fun decimalFromString(str: String, base: Int): Int = stroka(str,base)
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun rome(n: Int): String {
+    val numblist = listOf<Int>(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+    val romelist = listOf<String>("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+    var result = ""
+    var num = n
+    for (d in 0..numblist.size - 1) {
+        for (k in d..romelist.size - 1) {
+            while (num >= numblist[d]) {
+                result += romelist[k]
+                num -= numblist[d]
+            }
+        }
+    }
+    return result
+}
+
+fun roman(n: Int): String = rome(n)
 
 /**
  * Очень сложная (7 баллов)
@@ -381,4 +403,5 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
+
 fun russian(n: Int): String = TODO()
