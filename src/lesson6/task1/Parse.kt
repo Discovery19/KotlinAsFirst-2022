@@ -120,8 +120,7 @@ fun date(str: String): String {
             result += list[2]
         }
         return result
-    }
-    catch (e: NumberFormatException) {
+    } catch (e: NumberFormatException) {
         return ""
     }
 }
@@ -191,7 +190,31 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun throwExample() {
+
+    throw IllegalArgumentException()
+}
+fun number(expression: String): Int {
+    val list = expression.split(" ")
+    var count = list[0].toInt()
+    throwExample()
+    var i=1
+    if (list.size==1) return list[0].toInt()
+    while (i<list.size) {
+        if ((list[i] == "+" || list[i] == "-") && list[i + 1].toInt() is Int) {
+            if (list[i] == "+")
+                count = count + list[i + 1].toInt()
+            else count = count - list[i + 1].toInt()
+        }
+        else {
+            println("bleay")
+            throwExample()}
+        i+=2
+    }
+    return count
+}
+
+fun plusMinus(expression: String): Int = number(expression)
 
 /**
  * Сложная (6 баллов)
