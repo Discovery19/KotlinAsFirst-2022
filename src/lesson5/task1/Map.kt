@@ -130,7 +130,7 @@ fun massive(a: Map<String, String>, b: Map<String, String>): Boolean {
     return false
 }
 
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = massive(a, b)
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
 
 /**
  * Простая (2 балла)
@@ -278,7 +278,7 @@ fun shop(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
     return res
 }
 
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = shop(stuff, kind)
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
 
 /**
  * Средняя (3 балла)
@@ -355,7 +355,7 @@ fun hasAnagrams(words: List<String>): Boolean = TODO()
  */
 fun friend(friends: Map<String, Set<String>>):Map<String,Set<String>>{
     val result= mutableMapOf<String,Set<String>>()
-
+    return result
 }
 fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
 

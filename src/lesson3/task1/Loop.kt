@@ -87,7 +87,7 @@ fun number(a: Int): Int {
     return k
 }
 
-fun digitNumber(n: Int): Int = number(n)
+fun digitNumber(n: Int): Int = TODO()
 
 /**
  * Простая (2 балла)

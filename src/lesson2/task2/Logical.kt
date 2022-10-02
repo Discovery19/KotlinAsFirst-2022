@@ -55,7 +55,7 @@ fun year(month: Int,year: Int):Int{
     }
     return s
 }
-fun daysInMonth(month: Int, year: Int): Int = year(month, year)
+fun daysInMonth(month: Int, year: Int): Int = TODO()
 
 /**
  * Простая (2 балла)
@@ -78,4 +78,10 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun kirpich(a: Int, b: Int, c: Int, r: Int, s: Int):Boolean{
+    if ((a<=r && b <=s) || (b<=r && a<=s) ||
+        (a<=r && c <=s) || (c<=r && a<=s) ||
+        (c<=r && b <=s) || (b<=r && c<=s)) return true
+    return false
+}
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = kirpich(a, b, c, r, s)
