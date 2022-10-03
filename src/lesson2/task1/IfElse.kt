@@ -69,14 +69,13 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageFun(num: Int): String {
+
+fun ageDescription(num: Int): String {
     if (num % 10 == 1 && (num / 10 % 10 != 1)) return "$num год" else when {
         (num % 10 in 2..4) && (num / 10 % 10 != 1) -> return "$num года"
-        else -> return "$num лет"
     }
+    return "$num лет"
 }
-
-fun ageDescription(age: Int): String = ageFun(age)
 
 /**
  * Простая (2 балла)
@@ -151,16 +150,15 @@ fun triangle(a: Double, b: Double, c: Double): Int {
     val sum = a + b + c
     var m = 0.0
     var s = 0.0
-
-    if (a > b && a > c) m = a else if (b > c && b > a) m = b else m = c
-    if (a < b && a < c) s = a else if (b < c && b < a) s = b else s = c
-
+    m = maxOf(a, maxOf(b, c))
+    s = minOf(a, minOf(b, c))
     if ((a + b > c) && (a + c > b) && (b + c > a))
-        if (m.pow(2.0) == s.pow(2.0) + (sum - m - s).pow(2.0)) return 1
-        else if (m.pow(2.0) > s.pow(2.0) + (sum - m - s).pow(2.0)) return 2
-        else return 0
-    else return -1
-
+        when {
+            (m.pow(2.0) == s.pow(2.0) + (sum - m - s).pow(2.0)) -> return 1
+            (m.pow(2.0) > s.pow(2.0) + (sum - m - s).pow(2.0)) -> return 2
+            (m.pow(2.0) < s.pow(2.0) + (sum - m - s).pow(2.0)) -> return 0
+        }
+    return -1
 }
 
 fun triangleKind(a: Double, b: Double, c: Double): Int = triangle(a, b, c)
@@ -195,7 +193,7 @@ fun line2(a: Int, b: Int, c: Int, d: Int): Int {
         a >= c && b >= c && b >= d -> s = d - a
         a >= c && d <= d -> s = b - a
     }
-    if (s<0) return -1
+    if (s < 0) return -1
     return s
 }
 

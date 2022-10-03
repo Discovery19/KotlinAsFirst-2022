@@ -214,7 +214,7 @@ fun number(expression: String): Int {
     return count
 }
 
-fun plusMinus(expression: String): Int = number(expression)
+fun plusMinus(expression: String): Int =TODO()
 
 /**
  * Сложная (6 баллов)

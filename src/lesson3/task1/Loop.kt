@@ -74,19 +74,6 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-fun number(a: Int): Int {
-    var k = 0
-    var n=a
-    if (n == 0) k = 0 else
-        while (n > 0) {
-            if (n % 10 >= 0 && n / 10 > 0) {
-                n /= 10
-                k += 1
-            } else break
-        }
-    return k
-}
-
 fun digitNumber(n: Int): Int = TODO()
 
 /**
@@ -108,7 +95,18 @@ fun fibonach(n: Int): Int {
     return k
 }
 
-fun fib(n: Int): Int = fibonach(n)
+fun fib(n: Int): Int {
+    var k = 0
+    var a = 1
+    var b = 1
+    if (n <= 2) k = 1 else
+        for (i in 3..n) {
+            k = a + b
+            a = b
+            b = k
+        }
+    return k
+}
 
 /**
  * Простая (2 балла)
@@ -243,7 +241,7 @@ fun hard(n: Int): Int {
     var j = 0
     var str = 0
     if (i == n) return 1
-    for (i in 1..10000000) {
+    for (i in 1..100000000) {
         k = i * i
         j = 0
         while (k > 0) {

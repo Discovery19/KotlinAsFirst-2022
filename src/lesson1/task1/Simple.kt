@@ -78,8 +78,8 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = hours * 3600 + minute
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int):
-        Double = sagenes * 48 * 0.04445 + arshins * 16 * 0.04445 + vershoks * 0.04445
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
+    sagenes * 48 * 0.04445 + arshins * 16 * 0.04445 + vershoks * 0.04445
 
 /**
  * Тривиальная (1 балл)
@@ -87,8 +87,8 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int):
  * Пользователь задает угол в градусах, минутах и секундах (например, 36 градусов 14 минут 35 секунд).
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
-fun angleInRadian(deg: Int, min: Int, sec: Int):
-        Double = (deg.toDouble() + min.toDouble() / 60 + sec.toDouble() / 3600) * PI / 180
+fun angleInRadian(deg: Int, min: Int, sec: Int): Double =
+    (deg.toDouble() + min.toDouble() / 60 + sec.toDouble() / 3600) * PI / 180
 
 /**
  * Тривиальная (1 балл)
@@ -141,11 +141,10 @@ fun accountInThreeYears(initial: Int, percent: Int): Double {
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun replacer(number: Int): Int {
+
+fun numberRevert(number: Int): Int {
     val f = number % 10
     val s = number / 10 % 10
     val t = number / 100
     return f * 100 + s * 10 + t
 }
-
-fun numberRevert(number: Int): Int = replacer(number)
