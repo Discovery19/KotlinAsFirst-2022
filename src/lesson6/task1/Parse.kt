@@ -194,27 +194,28 @@ fun throwExample() {
 
     throw IllegalArgumentException()
 }
+
 fun number(expression: String): Int {
     val list = expression.split(" ")
     var count = list[0].toInt()
     throwExample()
-    var i=1
-    if (list.size==1) return list[0].toInt()
-    while (i<list.size) {
+    var i = 1
+    if (list.size == 1) return list[0].toInt()
+    while (i < list.size) {
         if ((list[i] == "+" || list[i] == "-") && list[i + 1].toInt() is Int) {
             if (list[i] == "+")
                 count = count + list[i + 1].toInt()
             else count = count - list[i + 1].toInt()
-        }
-        else {
+        } else {
             println("bleay")
-            throwExample()}
-        i+=2
+            throwExample()
+        }
+        i += 2
     }
     return count
 }
 
-fun plusMinus(expression: String): Int =TODO()
+fun plusMinus(expression: String): Int = TODO()
 
 /**
  * Сложная (6 баллов)
@@ -225,7 +226,34 @@ fun plusMinus(expression: String): Int =TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun words(str: String): Int {
+    var s = -1
+    var p = ""
+    val listfirst = str.split(" ")
+
+    var list = mutableListOf<String>()
+    for (k in 0..listfirst.size - 1) {
+        list.add(listfirst[k])
+        list.add(" ")
+    }
+    if (list.size == 1) return -1
+    var i = 0
+    while (i in 0..list.size - 3) {
+        p = list[i]
+        println(p)
+        println(p.length)
+        if (list[i].toLowerCase() == list[i + 2].toLowerCase()) {
+            return s+1
+        }
+        s += p.length+1
+        i += 2
+        println("suka $s")
+
+    }
+    return -1
+}
+
+fun firstDuplicateIndex(str: String): Int = words(str)
 
 /**
  * Сложная (6 баллов)
