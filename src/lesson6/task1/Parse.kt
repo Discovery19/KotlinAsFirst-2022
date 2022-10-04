@@ -198,21 +198,17 @@ fun number(expression: String): Int {
     var count = 0
     if (list.size == 1 && list[0].all { it.isDigit() }) return list[0].toInt()
     else
-    for (i in 0..list.size - 1 step 2) {
-        println("Blyat")
-        println(list[i])
-        if (i == 0 && list[0].all { it.isDigit() }) count += list[0].toInt()
-        else
-            if (i > 0 && (list[i - 1] == "+" || list[i - 1] == "-") && list[i].all { it.isDigit() }) {
-                println("Blyat 2")
-                if (list[i - 1] == "+") count += list[i].toInt()
-                else count -= list[i].toInt()
-            } else {
-                println("bleay")
-                throwExample()
-            }
-        println("suka $count")
-    }
+        for (i in 0..list.size - 1 step 2) {
+
+            if (i == 0 && list[0].all { it.isDigit() }) count += list[0].toInt()
+            else
+                if (i > 0 && (list[i - 1] == "+" || list[i - 1] == "-")
+                    && list[i].all { it.isDigit() }
+                ) {
+                    if (list[i - 1] == "+") count += list[i].toInt()
+                    else count -= list[i].toInt()
+                } else throwExample()
+        }
     return count
 }
 
