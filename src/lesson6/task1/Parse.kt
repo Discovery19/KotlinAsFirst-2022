@@ -99,9 +99,7 @@ fun date(str: String): String {
         when {
             (list.size < 3) -> return ""
             (list[2].toInt() % 4 == 0 && list[1] == "февраля" && list[0] == "28") -> return ""
-            (list[2].toInt() % 4 == 0 &&
-                    (list[2].toInt() % 100 != 0 || list[2].toInt() % 400 == 0)
-                    && list[1] == "февраля" && list[0] == "29") -> return "29.02." + list[2]
+            (list[2].toInt() % 4 == 0 && (list[2].toInt() % 100 != 0 || list[2].toInt() % 400 == 0) && list[1] == "февраля" && list[0] == "29") -> return "29.02." + list[2]
         }
 
         for (i in 0..year.size - 1) {
@@ -191,31 +189,34 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun throwExample() {
-
     throw IllegalArgumentException()
 }
 
 fun number(expression: String): Int {
+
     val list = expression.split(" ")
-    var count = list[0].toInt()
-    throwExample()
-    var i = 1
-    if (list.size == 1) return list[0].toInt()
-    while (i < list.size) {
-        if ((list[i] == "+" || list[i] == "-") && list[i + 1].toInt() is Int) {
-            if (list[i] == "+")
-                count = count + list[i + 1].toInt()
-            else count = count - list[i + 1].toInt()
-        } else {
-            println("bleay")
-            throwExample()
-        }
-        i += 2
+    var count = 0
+    if (list.size == 1 && list[0].all { it.isDigit() }) return list[0].toInt()
+    else
+    for (i in 0..list.size - 1 step 2) {
+        println("Blyat")
+        println(list[i])
+        if (i == 0 && list[0].all { it.isDigit() }) count += list[0].toInt()
+        else
+            if (i > 0 && (list[i - 1] == "+" || list[i - 1] == "-") && list[i].all { it.isDigit() }) {
+                println("Blyat 2")
+                if (list[i - 1] == "+") count += list[i].toInt()
+                else count -= list[i].toInt()
+            } else {
+                println("bleay")
+                throwExample()
+            }
+        println("suka $count")
     }
     return count
 }
 
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int = number(expression)
 
 /**
  * Сложная (6 баллов)
@@ -243,9 +244,9 @@ fun words(str: String): Int {
         println(p)
         println(p.length)
         if (list[i].toLowerCase() == list[i + 2].toLowerCase()) {
-            return s+1
+            return s + 1
         }
-        s += p.length+1
+        s += p.length + 1
         i += 2
         println("suka $s")
 
