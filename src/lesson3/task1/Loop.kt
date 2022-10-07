@@ -237,6 +237,7 @@ fun fibonach(n: Int): Int {
         }
     return k
 }
+
 fun hard(n: Int): Int {
     var i = 1
     var k = 0
