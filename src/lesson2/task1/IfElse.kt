@@ -71,8 +71,9 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 
 fun ageDescription(num: Int): String {
-    if (num % 10 == 1 && (num / 10 % 10 != 1)) return "$num год" else when {
-        (num % 10 in 2..4) && (num / 10 % 10 != 1) -> return "$num года"
+    when{
+        num % 10 == 1 && num / 10 % 10 != 1 -> return "$num год"
+        num % 10 in 2..4 && num / 10 % 10 != 1 -> return "$num года"
     }
     return "$num лет"
 }
@@ -146,22 +147,21 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangle(a: Double, b: Double, c: Double): Int {
+
+fun triangleKind(a: Double, b: Double, c: Double): Int {
     val sum = a + b + c
     var m = 0.0
     var s = 0.0
-    m = maxOf(a, maxOf(b, c))
-    s = minOf(a, minOf(b, c))
-    if ((a + b > c) && (a + c > b) && (b + c > a))
+    m = maxOf(a, b, c)
+    s = minOf(a, b, c)
+    if (a + b > c && a + c > b && b + c > a)
         when {
-            (m.pow(2.0) == s.pow(2.0) + (sum - m - s).pow(2.0)) -> return 1
-            (m.pow(2.0) > s.pow(2.0) + (sum - m - s).pow(2.0)) -> return 2
-            (m.pow(2.0) < s.pow(2.0) + (sum - m - s).pow(2.0)) -> return 0
+            m.pow(2.0) == s.pow(2.0) + (sum - m - s).pow(2.0) -> return 1
+            m.pow(2.0) > s.pow(2.0) + (sum - m - s).pow(2.0) -> return 2
+            m.pow(2.0) < s.pow(2.0) + (sum - m - s).pow(2.0) -> return 0
         }
     return -1
 }
-
-fun triangleKind(a: Double, b: Double, c: Double): Int = triangle(a, b, c)
 
 /**
  * Средняя (3 балла)
@@ -171,17 +171,8 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = triangle(a, b, c)
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-/**fun line(a: Int, b: Int, c: Int, d: Int): Int {
-var s = 0
-when {
-a == c -> if (d > b) s = d - b else if (d <= b) s = b - d else -1
-a < c -> if ((d >= b) && (b - c >= 0)) s = b - c else if (d < b) s = d - c else s = -1
-a > c -> if ((d >= b)) s = b - a else if ((d < b) && (d - a >= 0)) s = d - a else s = -1
-(a == c && b == d) -> s = b - a
-}
-return s
-}*/
-fun line2(a: Int, b: Int, c: Int, d: Int): Int {
+
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     var s = 0
     when {
         a <= c && b <= d && d >= c -> s = b - c
@@ -196,5 +187,3 @@ fun line2(a: Int, b: Int, c: Int, d: Int): Int {
     if (s < 0) return -1
     return s
 }
-
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = line2(a, b, c, d)

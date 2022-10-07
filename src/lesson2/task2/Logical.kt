@@ -42,28 +42,6 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
  * Дан номер месяца (от 1 до 12 включительно) и год (положительный).
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
-fun year(month: Int, year: Int): Int {
-    var s: Int = 0
-    when {
-        year % 4 == 0 && month == 2 -> s = 29
-        month == 12 -> s = 31
-        month == 8 -> s = 31
-        month == 9 -> s = 30
-        month == 11 -> s = 30
-    }
-    if (year % 4 == 0) if (month == 2) s = 29
-    else
-        when {
-            month % 2 == 0 -> s = 30
-            month % 2 > 0 -> s = 31
-        }
-    else if (month == 2) s = 28 else if (month == 12) s = 31 else when {
-        month % 2 == 0 -> s = 30
-        month % 2 > 0 -> s = 31
-    }
-    return s
-}
-
 fun daysInMonth(month: Int, year: Int): Int = TODO()
 
 /**

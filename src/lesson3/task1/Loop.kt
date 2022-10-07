@@ -82,18 +82,6 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fibonach(n: Int): Int {
-    var k = 0
-    var a = 1
-    var b = 1
-    if (n <= 2) k = 1 else
-        for (i in 3..n) {
-            k = a + b
-            a = b
-            b = k
-        }
-    return k
-}
 
 fun fib(n: Int): Int {
     var k = 0
@@ -235,6 +223,20 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+
+/** Эта функция нужна для выполнения задачи*/
+fun fibonach(n: Int): Int {
+    var k = 0
+    var a = 1
+    var b = 1
+    if (n <= 2) k = 1 else
+        for (i in 3..n) {
+            k = a + b
+            a = b
+            b = k
+        }
+    return k
+}
 fun hard(n: Int): Int {
     var i = 1
     var k = 0
@@ -276,7 +278,7 @@ fun hardfib(n: Int): Int {
     var j = 0
     var str = 0
     if (i == n) return 1
-    while(true) {
+    for (i in 1..100000000) {
         m = fibonach(i)
         j = 0
         while (m > 0) {
@@ -290,7 +292,7 @@ fun hardfib(n: Int): Int {
     if (m / 10 > 0)
         for (i in 1..str - n) {
             m = m / 10
-            print(m)
+
         }
     return m % 10
 }
