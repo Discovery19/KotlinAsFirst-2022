@@ -44,15 +44,19 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
  */
 fun year(month: Int, year: Int): Int {
     var s: Int = 0
-    if (year % 4 == 0) if (month == 2) s = 29
-    else if (month == 12) s = 31
-    else if (month == 8) s = 31
-    else if (month == 9) s = 30
-    else if (month == 11) s = 30
-    else when {
-        month % 2 == 0 -> s = 30
-        month % 2 > 0 -> s = 31
+    when {
+        year % 4 == 0 && month == 2 -> s = 29
+        month == 12 -> s = 31
+        month == 8 -> s = 31
+        month == 9 -> s = 30
+        month == 11 -> s = 30
     }
+    if (year % 4 == 0) if (month == 2) s = 29
+    else
+        when {
+            month % 2 == 0 -> s = 30
+            month % 2 > 0 -> s = 31
+        }
     else if (month == 2) s = 28 else if (month == 12) s = 31 else when {
         month % 2 == 0 -> s = 30
         month % 2 > 0 -> s = 31
@@ -83,12 +87,11 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun kirpich(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
     if ((a <= r && b <= s) || (b <= r && a <= s) ||
         (a <= r && c <= s) || (c <= r && a <= s) ||
         (c <= r && b <= s) || (b <= r && c <= s)
     ) return true
     return false
 }
-
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = kirpich(a, b, c, r, s)
