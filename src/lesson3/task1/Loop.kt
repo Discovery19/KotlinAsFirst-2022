@@ -224,27 +224,14 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-/** Эта функция нужна для выполнения задачи*/
-fun fibonach(n: Int): Int {
-    var k = 0
-    var a = 1
-    var b = 1
-    if (n <= 2) k = 1 else
-        for (i in 3..n) {
-            k = a + b
-            a = b
-            b = k
-        }
-    return k
-}
 
-fun hard(n: Int): Int {
+fun squareSequenceDigit(n: Int): Int {
     var i = 1
     var k = 0
     var j = 0
     var str = 0
     if (i == n) return 1
-    for (i in 1..100000000) {
+    for (i in 1..n) {
         k = i * i
         j = 0
         while (k > 0) {
@@ -262,8 +249,6 @@ fun hard(n: Int): Int {
     return k % 10
 }
 
-fun squareSequenceDigit(n: Int): Int = hard(n)
-
 /**
  * Сложная (5 баллов)
  *
@@ -280,14 +265,14 @@ fun hardfib(n: Int): Int {
     var str = 0
     if (i == n) return 1
     for (i in 1..100000000) {
-        m = fibonach(i)
+        m = fib(i)
         j = 0
         while (m > 0) {
             m = m / 10
             j += 1
         }
         str += j
-        m = ((m * 10.0.pow(j)) + fibonach(i)).toInt()
+        m = ((m * 10.0.pow(j)) + fib(i)).toInt()
         if (n in str - j..str) break
     }
     if (m / 10 > 0)

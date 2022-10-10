@@ -71,7 +71,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 
 fun ageDescription(num: Int): String {
-    when{
+    when {
         num % 10 == 1 && num / 10 % 10 != 1 -> return "$num год"
         num % 10 in 2..4 && num / 10 % 10 != 1 -> return "$num года"
     }
@@ -150,10 +150,8 @@ fun rookOrBishopThreatens(
 
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     val sum = a + b + c
-    var m = 0.0
-    var s = 0.0
-    m = maxOf(a, b, c)
-    s = minOf(a, b, c)
+    var m = maxOf(a, b, c)
+    var s = minOf(a, b, c)
     if (a + b > c && a + c > b && b + c > a)
         when {
             m.pow(2.0) == s.pow(2.0) + (sum - m - s).pow(2.0) -> return 1
