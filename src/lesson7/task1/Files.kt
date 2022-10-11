@@ -97,9 +97,15 @@ fun substr(inputName: String, substrings: List<String>): Map<String, Int> {
     var s = 0
     fun readFile(fileName: String): List<String> = File(fileName).readLines()
     val spisok = readFile(inputName)
+    println(spisok)
     for (i in 0..substrings.size - 1) {
-        s = spisok.count { it.toLowerCase() == substrings[i].toLowerCase() }
+        for (k in spisok) {
+            if (k == substrings[i]) {
+                s += 1
+            }
+        }
         result.put(substrings[i], s)
+        s = 0
     }
     return result
 }
