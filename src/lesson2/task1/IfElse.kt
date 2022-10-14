@@ -71,11 +71,11 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 
 fun ageDescription(num: Int): String {
-    when {
-        num % 10 == 1 && num / 10 % 10 != 1 -> return "$num год"
-        num % 10 in 2..4 && num / 10 % 10 != 1 -> return "$num года"
+    return when {
+        num % 10 == 1 && num / 10 % 10 != 1 -> "$num год"
+        num % 10 in 2..4 && num / 10 % 10 != 1 -> "$num года"
+        else -> "$num лет"
     }
-    return "$num лет"
 }
 
 /**
@@ -85,23 +85,23 @@ fun ageDescription(num: Int): String {
  * и t3 часов — со скоростью v3 км/час.
  * Определить, за какое время он одолел первую половину пути?
  */
-
+/**
 fun speed(t1: Double, v1: Double, t2: Double, v2: Double, t3: Double, v3: Double): Double {
-    val s = t1 * v1 + t2 * v2 + t3 * v3
-    val s2 = s / 2
-    val s3 = s2 - v1 * t1
-    val s4 = s2 - v1 * t1 - v2 * t2
-    var t = 0.0
-    when {
-        (v1 * t1 == s2) -> t = t1
-        (v1 * t1 > s2) -> t = s2 / v1
-        (v1 * t1 + v2 * t2 == s2) -> t = t1 + t2
-        (v1 * t1 < s2) -> t = s3 / v2 + t1
-        (v1 * t1 + v2 * t2 < s2) -> t = s4 / v3 + t1 + t2
-    }
-    return t
+val s = t1 * v1 + t2 * v2 + t3 * v3
+val s2 = s / 2
+val s3 = s2 - v1 * t1
+val s4 = s2 - v1 * t1 - v2 * t2
+var t = 0.0
+when {
+(v1 * t1 == s2) -> t = t1
+(v1 * t1 > s2) -> t = s2 / v1
+(v1 * t1 + v2 * t2 == s2) -> t = t1 + t2
+(v1 * t1 < s2) -> t = s3 / v2 + t1
+(v1 * t1 + v2 * t2 < s2) -> t = s4 / v3 + t1 + t2
 }
-
+return t
+}
+ */
 fun timeForHalfWay(
     t1: Double, v1: Double,
     t2: Double, v2: Double,
@@ -153,10 +153,10 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     var m = maxOf(a, b, c)
     var s = minOf(a, b, c)
     if (a + b > c && a + c > b && b + c > a)
-        when {
-            m.pow(2.0) == s.pow(2.0) + (sum - m - s).pow(2.0) -> return 1
-            m.pow(2.0) > s.pow(2.0) + (sum - m - s).pow(2.0) -> return 2
-            m.pow(2.0) < s.pow(2.0) + (sum - m - s).pow(2.0) -> return 0
+        return when {
+            m.pow(2.0) == s.pow(2.0) + (sum - m - s).pow(2.0) -> 1
+            m.pow(2.0) > s.pow(2.0) + (sum - m - s).pow(2.0) -> 2
+            else -> 0
         }
     return -1
 }
@@ -171,16 +171,14 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  */
 
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    var s = 0
-    when {
-        a <= c && b <= d && d >= c -> s = b - c
-        a < c && b < d && b < c -> s = -1
-        a <= c && b <= c && b <= d -> s = b - c
-        a <= c && b >= d -> s = d - c
-        a >= c && b >= d && d >= a -> s = d - a
-        a > c && b > c && b > d -> s = -1
-        a >= c && b >= c && b >= d -> s = d - a
-        a >= c && d <= d -> s = b - a
+    val s = when {
+        a <= c && b <= d && d >= c -> b - c
+        a <= c && b <= c && b <= d -> b - c
+        a <= c && b >= d -> d - c
+        a >= c && b >= d && d >= a -> d - a
+        a >= c && b >= c && b >= d -> d - a
+        a >= c && d <= d -> b - a
+        else -> -1
     }
     if (s < 0) return -1
     return s

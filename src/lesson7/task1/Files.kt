@@ -96,21 +96,17 @@ fun substr(inputName: String, substrings: List<String>): Map<String, Int> {
     val result = mutableMapOf<String, Int>()
     var s = 0
     fun readFile(fileName: String): List<String> = File(fileName).readLines()
-    val spisok = readFile(inputName)
+    val spisok = readFile(inputName).joinToString()
     println(spisok)
     for (i in 0..substrings.size - 1) {
-        for (k in spisok) {
-            if (k == substrings[i]) {
-                s += 1
-            }
-        }
+        s = spisok.count { it.toString() == substrings[i] }
         result.put(substrings[i], s)
-        s = 0
+
     }
     return result
 }
 
-fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
+fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = substr(inputName, substrings)
 
 
 /**
