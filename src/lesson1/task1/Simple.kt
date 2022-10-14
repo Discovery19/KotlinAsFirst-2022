@@ -99,8 +99,8 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double =
  */
 
 
-fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double):
-        Double = sqrt((x1 - x2).pow(2.0) + (y1 - y2).pow(2.0))
+fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double =
+    sqrt((x1 - x2).pow(2.0) + (y1 - y2).pow(2.0))
 
 /**
  * Простая (2 балла)
@@ -108,7 +108,8 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double):
  * Пользователь задает целое число, больше или равно 100 (например, 3801).
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
-fun thirdDigit(number: Int): Int = number / 100 % 10
+fun thirdDigit(number: Int): Int =
+    number / 100 % 10
 
 /**
  * Простая (2 балла)
