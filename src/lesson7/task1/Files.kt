@@ -90,18 +90,24 @@ fun deleteMarked(inputName: String, outputName: String) {
  * На вход подаётся список строк substrings.
  * Вернуть ассоциативный массив с числом вхождений каждой из строк в текст.
  * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
- *
+ *println( spisok.windowed(substrings[i].length))
+ * s = spisok.count { it.toString() == substrings[i] }
+result.put(substrings[i], s)
  */
 fun substr(inputName: String, substrings: List<String>): Map<String, Int> {
     val result = mutableMapOf<String, Int>()
     var s = 0
     fun readFile(fileName: String): List<String> = File(fileName).readLines()
-    val spisok = readFile(inputName).joinToString()
+    val spisok = readFile(inputName).joinToString().toLowerCase()
     println(spisok)
     for (i in 0..substrings.size - 1) {
-        s = spisok.count { it.toString() == substrings[i] }
+        var index: Int = spisok.indexOf(substrings[i].toLowerCase(), 0)
+        while (index > -1) {
+            s += 1
+            index = spisok.indexOf(substrings[i].toLowerCase(), index + 1)
+        }
         result.put(substrings[i], s)
-
+        s = 0
     }
     return result
 }
@@ -198,6 +204,9 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  * Ключи в ассоциативном массиве должны быть в нижнем регистре.
  *
  */
+fun words(inputName: String):Map<String,Int>{
+    var alphabet= listOf<String>("!",",",".","?","/","|","$","#","(",")")
+}
 fun top20Words(inputName: String): Map<String, Int> = TODO()
 
 /**
