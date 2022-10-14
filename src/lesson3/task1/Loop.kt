@@ -264,7 +264,7 @@ fun hardfib(n: Int): Int {
     var j = 0
     var str = 0
     if (i == n) return 1
-    for (i in 1..100000000) {
+    for (i in 1..n) {
         m = fib(i)
         j = 0
         while (m > 0) {

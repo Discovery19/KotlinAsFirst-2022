@@ -244,7 +244,6 @@ fun words(str: String): Int {
         }
         s += p.length + 1
         i += 2
-        println("suka $s")
 
     }
     return -1
