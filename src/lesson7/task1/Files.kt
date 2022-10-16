@@ -94,10 +94,10 @@ fun deleteMarked(inputName: String, outputName: String) {
  * s = spisok.count { it.toString() == substrings[i] }
 result.put(substrings[i], s)
  */
+fun readFile(fileName: String): List<String> = File(fileName).readLines()
 fun substr(inputName: String, substrings: List<String>): Map<String, Int> {
     val result = mutableMapOf<String, Int>()
     var s = 0
-    fun readFile(fileName: String): List<String> = File(fileName).readLines()
     val spisok = readFile(inputName).joinToString().toLowerCase()
     println(spisok)
     for (i in 0..substrings.size - 1) {
@@ -206,6 +206,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  */
 fun words(inputName: String):Map<String,Int>{
     var alphabet= listOf<String>("!",",",".","?","/","|","$","#","(",")")
+    val  line = readFile(inputName)
 }
 fun top20Words(inputName: String): Map<String, Int> = TODO()
 
