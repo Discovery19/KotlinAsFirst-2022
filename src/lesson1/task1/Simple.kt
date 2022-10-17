@@ -123,8 +123,7 @@ fun travelMinutes(
     minutesDepart: Int,
     hoursArrive: Int,
     minutesArrive: Int
-):
-        Int =
+): Int =
     hoursArrive * 60 + minutesArrive - hoursDepart * 60 - minutesDepart
 
 /**

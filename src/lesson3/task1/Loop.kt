@@ -134,7 +134,7 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun nok(m: Int, n: Int): Int {
+fun lcm(m: Int, n: Int): Int {
     var k = 1
     var a = 0
     var b = 0
@@ -150,8 +150,6 @@ fun nok(m: Int, n: Int): Int {
         }
     return m * n / k
 }
-
-fun lcm(m: Int, n: Int): Int = nok(m, n)
 
 /**
  * Средняя (3 балла)
@@ -258,7 +256,9 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hardfib(n: Int): Int {
+
+
+fun fibSequenceDigit(n: Int): Int {
     var i = 1
     var m = 0
     var j = 0
@@ -282,5 +282,3 @@ fun hardfib(n: Int): Int {
         }
     return m % 10
 }
-
-fun fibSequenceDigit(n: Int): Int = hardfib(n)
