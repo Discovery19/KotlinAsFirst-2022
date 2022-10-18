@@ -67,7 +67,6 @@ fun marker(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     fun readFile(fileName: String): List<String> = File(fileName).readLines()
     val spisok = readFile(inputName)
-
     for (i in 0..spisok.size - 1) {
         line = spisok[i]
         if (line.isBlank() == true) writer.newLine()
@@ -208,24 +207,30 @@ fun top20Words(inputName: String): Map<String, Int> {
     val res = mutableMapOf<String, Int>()
     var alphabet =
         listOf<Char>(
-            '!', ',', '.', '?', '/','-',
+            '!', ',', '.', '?', '/', '-',
             '|', '$', '#', '(', ')', '0', '1', '2',
             '3', '4', '5', '6', '7', '8', '9'
         )
     var line = readFile(inputName).joinToString()
-    var s=0
+    var s = 1
     for (i in 0..alphabet.size - 1) {
         line = line.filterNot { it == alphabet[i] }
     }
-    val fin=line.split(' ')
-    for (i in 0..fin.size-1){
+    if (line == "") return res
+    var fin = line.split(' ')
+    fin=fin.filterNot { it == " " }
+    println("ebanaya stroka $line")
+    println("ebuchiy massiv $fin")
+    for (i in 0..fin.size - 1) {
         var index: Int = line.indexOf(fin[i].toLowerCase(), 0)
         while (index > -1) {
             s += 1
             index = line.indexOf(fin[i].toLowerCase(), index + 1)
         }
         res.put(fin[i], s)
-        s = 0
+        println(res)
+        println("suka $s")
+        s = 1
     }
     return res
 }
