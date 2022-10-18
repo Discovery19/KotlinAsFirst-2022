@@ -202,35 +202,35 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
  * Ключи в ассоциативном массиве должны быть в нижнем регистре.
  *
+ * var index: Int = line.indexOf(fin[i], 0)
+while (index > -1) {
+s += 1
+index = line.indexOf(fin[i], index + 1)
+}
  */
 fun top20Words(inputName: String): Map<String, Int> {
     val res = mutableMapOf<String, Int>()
     var alphabet =
-        listOf<Char>(
-            '!', ',', '.', '?', '/', '-',
-            '|', '$', '#', '(', ')', '0', '1', '2',
-            '3', '4', '5', '6', '7', '8', '9'
+        listOf<String>(
+            "!", ",", ".", "?", "/", "—", ";", ":", "«", "»","-",
+            "|", "$", "#", "(", ")", "0", "1", "2",
+            "3", "4", "5", "6", "7", "8", "9"
         )
     var line = readFile(inputName).joinToString()
-    var s = 1
+    var s = 0
     for (i in 0..alphabet.size - 1) {
-        line = line.filterNot { it == alphabet[i] }
+        line = line.replace(alphabet[i], "")
     }
+    line = line.replace("  ", " ")
+    line = line.toLowerCase()
     if (line == "") return res
-    var fin = line.split(' ')
-    fin=fin.filterNot { it == " " }
+    var fin = mutableListOf<String>()
+    fin=line.split(' ').toMutableList()
+    fin.removeAll{ it=='' }
     println("ebanaya stroka $line")
     println("ebuchiy massiv $fin")
     for (i in 0..fin.size - 1) {
-        var index: Int = line.indexOf(fin[i].toLowerCase(), 0)
-        while (index > -1) {
-            s += 1
-            index = line.indexOf(fin[i].toLowerCase(), index + 1)
-        }
-        res.put(fin[i], s)
-        println(res)
-        println("suka $s")
-        s = 1
+        res.put(fin[i], fin.count { it == fin[i] })
     }
     return res
 }
