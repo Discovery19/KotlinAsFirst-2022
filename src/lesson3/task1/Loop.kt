@@ -236,14 +236,12 @@ fun squareSequenceDigit(n: Int): Int {
     var i = 1
     var k = 0
     var j = 0
-    var mut = 0
     var str = 0
     if (i == n) return 1
     for (i in 1..n) {
-        mut = i * i
-        j = help(mut)
-        str += j
         k = i * i
+        j = help(k)
+        str += j
         if (n in str - j..str) break
     }
     if (k / 10 > 0)
@@ -272,7 +270,11 @@ fun fibSequenceDigit(n: Int): Int {
     if (i == n) return 1
     for (i in 1..n) {
         m = fib(i)
-        j = help(m)
+        j = 0
+        while (m > 0) {
+            m = m / 10
+            j += 1
+        }
         str += j
         m = ((m * 10.0.pow(j)) + fib(i)).toInt()
         if (n in str - j..str) break
@@ -280,6 +282,7 @@ fun fibSequenceDigit(n: Int): Int {
     if (m / 10 > 0)
         for (i in 1..str - n) {
             m = m / 10
+
         }
     return m % 10
 }

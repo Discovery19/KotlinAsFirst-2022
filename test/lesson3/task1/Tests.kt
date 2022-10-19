@@ -229,6 +229,7 @@ class Tests {
     @Test
     @Tag("5")
     fun fibSequenceDigit() {
+        assertEquals(2, fibSequenceDigit(58))
         assertEquals(1, fibSequenceDigit(1))
         assertEquals(1, fibSequenceDigit(2))
         assertEquals(3, fibSequenceDigit(4))
