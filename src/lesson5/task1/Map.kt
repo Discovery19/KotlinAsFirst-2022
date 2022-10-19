@@ -353,10 +353,7 @@ fun hasAnagrams(words: List<String>): Boolean = TODO()
  *          "GoodGnome" to setOf()
  *        )
  */
-fun friend(friends: Map<String, Set<String>>):Map<String,Set<String>>{
-    val result= mutableMapOf<String,Set<String>>()
-    return result
-}
+
 fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
 
 /**
@@ -410,32 +407,28 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = numbers(list, n
  *     450
  *   ) -> emptySet()
  */
-// for (name in stuff2.values) {
-//        if (name.second < min && name.first == kind) {
-//            min = name.second
-//
-//            res = stuff2.filter { min == name.second }!!.keys.first()
-//        }
-//        if (name.second < min && name.first != kind) {
-//            res = null
-//        }
-//    }
 fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
     var m = 0
+    var i=0
     var spisok = setOf<String>()
-    val back = treasures.toMutableMap()
-
-    for (numb in treasures.values) {
-        println("fist max $m")
-        if (numb.first <= capacity && numb.second >= m) {
-            m = numb.second
-            println("max $m")
-            //spisok = back.filter { it.value.second == m }!!.keys.first()
+    val back = mutableMapOf<String, Pair<Int, Int>>()
+    val list=treasures.keys.toList()
+    while (i in 0..list.size-1) {
+        for (numb in treasures.values) {
+            println("fist max $m")
+            println(numb.first)
+            println(numb.second)
+            if (numb.first <= capacity && numb.second >= m) {
+                spisok = setOf(list[i])
+                m = numb.second
+                println("max $m")
+            }
+            i+=1
+            println("spisok $spisok")
         }
-        println("spisok $spisok")
     }
     println("finish $spisok")
     return spisok
 }
 
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = chest(treasures, capacity)

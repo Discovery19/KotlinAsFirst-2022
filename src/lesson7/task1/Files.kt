@@ -208,7 +208,7 @@ s += 1
 index = line.indexOf(fin[i], index + 1)
 }
  */
-fun top20Words(inputName: String): Map<String, Int> {
+/*fun top20Words(inputName: String): Map<String, Int> {
     val res = mutableMapOf<String, Int>()
     var alphabet =
         listOf<String>(
@@ -226,14 +226,14 @@ fun top20Words(inputName: String): Map<String, Int> {
     if (line == "") return res
     var fin = mutableListOf<String>()
     fin=line.split(' ').toMutableList()
-    fin.removeAll{ it=='' }
+    //fin.removeAll{ it=='' }
     println("ebanaya stroka $line")
     println("ebuchiy massiv $fin")
     for (i in 0..fin.size - 1) {
         res.put(fin[i], fin.count { it == fin[i] })
     }
     return res
-}
+}*/
 
 /**
  * Средняя (14 баллов)
