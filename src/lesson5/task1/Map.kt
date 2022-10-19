@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import kotlin.math.pow
+
 
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
@@ -431,4 +433,40 @@ fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
     return spisok
 }
 
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = chest(treasures, capacity)
+fun chest2(treasures: Map<String, Pair<Int, Int>>, capacity: Int):Set<String>{
+    var m=0
+
+    var maxweight=0
+    var name= mutableListOf<String>()
+    var weight= mutableListOf<Int>()
+    var price=mutableListOf<Int>()
+    var name2= mutableListOf<String>()
+    var weight2= mutableListOf<Int>()
+    var price2=mutableListOf<Int>()
+    var result= mutableSetOf<String>()
+    for (i in treasures.keys){
+        name.add(i)
+    }
+    for (i in treasures.values){
+        weight.add(i.first)
+        price.add(i.second)
+    }
+    for (i in 1..(2.0).pow(price.size).toInt()) {
+        name2=name
+        price2=price
+        weight2=weight
+        while (price.size != 0) {
+
+            if (price.max() < m && maxweight + weight[price.indexOf(price.max())] <= capacity) {
+                result.add(name[price.indexOf(price.max())])
+                maxweight += weight[price.indexOf(price.max())]
+                m += price.max()
+            }
+            if (capacity - maxweight == 0) break
+            price.remove(price.max())
+            weight.removeAt(price.indexOf(price.max()))
+            name.removeAt(price.indexOf(price.max()))
+        }
+    }
+}
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
