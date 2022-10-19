@@ -208,7 +208,7 @@ s += 1
 index = line.indexOf(fin[i], index + 1)
 }
  */
-/*fun top20Words(inputName: String): Map<String, Int> {
+fun top20Words(inputName: String): Map<String, Int> {
     val res = mutableMapOf<String, Int>()
     var alphabet =
         listOf<String>(
@@ -233,7 +233,7 @@ index = line.indexOf(fin[i], index + 1)
         res.put(fin[i], fin.count { it == fin[i] })
     }
     return res
-}*/
+}
 
 /**
  * Средняя (14 баллов)
