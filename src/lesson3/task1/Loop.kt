@@ -270,13 +270,8 @@ fun fibSequenceDigit(n: Int): Int {
     if (i == n) return 1
     for (i in 1..n) {
         m = fib(i)
-        j = 0
-        while (m > 0) {
-            m = m / 10
-            j += 1
-        }
+        j = help(m)
         str += j
-        m = ((m * 10.0.pow(j)) + fib(i)).toInt()
         if (n in str - j..str) break
     }
     if (m / 10 > 0)
