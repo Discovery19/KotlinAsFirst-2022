@@ -247,7 +247,7 @@ fun top20Words(inputName: String): Map<String, Int> {
             count += 1
             if (count >= 20) break
         }
-        if
+            //if
     }
     return res
 }
