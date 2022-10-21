@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.DeclaredMemberIndex.Empty
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -329,12 +330,15 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
         val repeated = findDuplicates(name)
         println(repeated)
         println(name.size-2)
-        if (repeated.size==0 && name.size-2>=m){
+        println(repeated.size)
+        if (repeated.size==1 && name.size-2>=m){
             res.add(i)
             m=name.size
         }
     }
-    for (i in res){
+    println("blyat")
+    val res2=res
+    for (i in res2){
         if (i.length!=m) res.remove(i)
     }
     print(res)
