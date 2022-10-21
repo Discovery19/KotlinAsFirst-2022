@@ -209,28 +209,42 @@ index = line.indexOf(fin[i], index + 1)
 }
  */
 fun top20Words(inputName: String): Map<String, Int> {
+    var resstr = mutableListOf<String>()
+    var resnum = mutableListOf<Int>()
     val res = mutableMapOf<String, Int>()
     var alphabet =
         listOf<String>(
-            "!", ",", ".", "?", "/", "—", ";", ":", "«", "»","-",
+            "!", ",", " .", ".", "?", "/", ";", ":", "«", "»",
             "|", "$", "#", "(", ")", "0", "1", "2",
             "3", "4", "5", "6", "7", "8", "9"
         )
     var line = readFile(inputName).joinToString()
     var s = 0
+    var fin = listOf<String>()
     for (i in 0..alphabet.size - 1) {
         line = line.replace(alphabet[i], "")
     }
+    line = line.replace("—", " ")
+    line = line.replace("-", " ")
     line = line.replace("  ", " ")
     line = line.toLowerCase()
+
     if (line == "") return res
-    var fin = mutableListOf<String>()
-    fin=line.split(' ').toMutableList()
-    //fin.removeAll{ it=='' }
-    println("ebanaya stroka $line")
-    println("ebuchiy massiv $fin")
+
+    fin = line.split(" ")
+
     for (i in 0..fin.size - 1) {
-        res.put(fin[i], fin.count { it == fin[i] })
+        if (fin[i] != "") {
+            resstr.add(fin[i])
+            resnum.add(fin.count { it == fin[i] })
+        }
+        //res.put(fin[i], fin.count { it == fin[i] })
+    }
+    while (res.size != 21) {
+
+        res.put(resstr[resnum.indexOf(resnum.max())], resnum.max())
+        resstr.removeAt(resnum.indexOf((resnum.max())))
+        resnum.remove(resnum.max())
     }
     return res
 }
@@ -298,8 +312,34 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  *
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
+fun findDuplicates(values: List<String>): Set<String> {
+    return values.groupingBy { it }.eachCount().filter { it.value > 1 }.keys
+}
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    var list= mutableListOf<String>()
+    var res= mutableListOf<String>()
+    var m=0
+    for (line in File(inputName).readLines()){
+        list.add(line)
+    }
+    for (i in list){
+        val name=i.toLowerCase().split("")
+        println(name)
+        val repeated = findDuplicates(name)
+        println(repeated)
+        println(name.size-2)
+        if (repeated.size==0 && name.size-2>=m){
+            res.add(i)
+            m=name.size
+        }
+    }
+    for (i in res){
+        if (i.length!=m) res.remove(i)
+    }
+    print(res)
+    writer.write(res.joinToString (","))
+    writer.close()
 }
 
 /**

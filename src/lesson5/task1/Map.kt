@@ -468,5 +468,6 @@ fun chest2(treasures: Map<String, Pair<Int, Int>>, capacity: Int):Set<String>{
             name.removeAt(price.indexOf(price.max()))
         }
     }
+    return result
 }
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
