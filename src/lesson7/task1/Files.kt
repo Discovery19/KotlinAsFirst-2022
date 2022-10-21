@@ -316,34 +316,37 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
 fun findDuplicates(values: List<String>): Set<String> {
     return values.groupingBy { it }.eachCount().filter { it.value > 1 }.keys
 }
+
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
-    var list= mutableListOf<String>()
-    var res= mutableListOf<String>()
-    var m=0
-    for (line in File(inputName).readLines()){
+    var list = mutableListOf<String>()
+    var res = mutableListOf<String>()
+    var m = 0
+    for (line in File(inputName).readLines()) {
         list.add(line)
     }
-    for (i in list){
-        val name=i.toLowerCase().split("")
+    for (i in list) {
+        val name = i.toLowerCase().split("")
         println(name)
         val repeated = findDuplicates(name)
         println(repeated)
-        println(name.size-2)
+        println(name.size - 2)
         println(repeated.size)
-        if (repeated.size==1 && name.size-2>=m){
+        if (repeated.size == 1 && name.size - 2 >= m) {
             res.add(i)
-            m=name.size
+            m = name.size
         }
     }
     println("blyat")
-    val res2=res
-    for (i in res2){
-        if (i.length!=m) res.remove(i)
+    println(res)
+    var res2= mutableListOf<String>()
+    for (i in res){
+        if (i.length>=m-2) res2.add(i)
     }
-    print(res)
-    writer.write(res.joinToString (","))
-    writer.close()
+    print(res2)
+    val line=res2.joinToString (",")
+    println(line)
+    File(outputName).writeText(line)
 }
 
 /**
