@@ -210,23 +210,15 @@ index = line.indexOf(fin[i], index + 1)
 }
  */
 fun top20Words(inputName: String): Map<String, Int> {
-    var resstr = mutableListOf<String>()
-    var resnum = mutableListOf<Int>()
+    var resstr = mutableListOf<Pair<String,Int>>()
+    //var resnum = mutableListOf<Int>()
     val res = mutableMapOf<String, Int>()
-    var alphabet =
-        listOf<String>(
-            "!", ",", " .", ".", "?", "/", ";", ":", "«", "»",
-            "|", "$", "#", "(", ")", "0", "1", "2",
-            "3", "4", "5", "6", "7", "8", "9"
-        )
+
     var line = readFile(inputName).joinToString()
     var s = 0
     var fin = listOf<String>()
-    for (i in 0..alphabet.size - 1) {
-        line = line.replace(alphabet[i], "")
-    }
-    line = line.replace("—", " ")
-    line = line.replace("-", " ")
+    line = line.replace(regex = Regex("""[^A-Za-zА-Яа-яёЁ]""")," ")
+
     line = line.replace("  ", " ")
     line = line.toLowerCase()
 
@@ -236,17 +228,17 @@ fun top20Words(inputName: String): Map<String, Int> {
 
     for (i in 0..fin.size - 1) {
         if (fin[i] != "") {
-            resstr.add(fin[i])
-            resnum.add(fin.count { it == fin[i] })
+            resstr.add(Pair(fin[i],fin.count { it == fin[i] }))
+            //resnum.add()
         }
         //res.put(fin[i], fin.count { it == fin[i] })
     }
-    while (res.size != 21) {
-
-        res.put(resstr[resnum.indexOf(resnum.max())], resnum.max())
-        resstr.removeAt(resnum.indexOf((resnum.max())))
-        resnum.remove(resnum.max())
-    }
+//    while (res.size != 21) {
+//
+//        res.put(resstr[resnum.indexOf(resnum.max())], resnum.max())
+//        resstr.removeAt(resnum.indexOf((resnum.max())))
+//        resnum.remove(resnum.max())
+//    }
     return res
 }
 
@@ -327,24 +319,29 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     }
     for (i in list) {
         val name = i.toLowerCase().split("")
+
         println(name)
+
         val repeated = findDuplicates(name)
+
         println(repeated)
         println(name.size - 2)
         println(repeated.size)
-        if (repeated.size == 1 && name.size - 2 >= m) {
+
+        if (repeated.size == 1 && name.size >= m) {
             res.add(i)
             m = name.size
         }
+        println("res $res")
     }
-    println("blyat")
+    println("finish")
     println(res)
-    var res2= mutableListOf<String>()
-    for (i in res){
-        if (i.length>=m-2) res2.add(i)
+    var res2 = mutableListOf<String>()
+    for (i in res) {
+        if (i.length >= m - 2) res2.add(i)
     }
     print(res2)
-    val line=res2.joinToString (",")
+    val line = res2.joinToString(", ")
     println(line)
     File(outputName).writeText(line)
 }
