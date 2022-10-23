@@ -211,35 +211,20 @@ index = line.indexOf(fin[i], index + 1)
  */
 fun top20Words(inputName: String): Map<String, Int> {
     var resstr = mutableListOf<Pair<String, Int>>()
-    //var resnum = mutableListOf<Int>()
     val res = mutableMapOf<String, Int>()
-
     var line = readFile(inputName).joinToString()
-    var s = 0
     var fin = listOf<String>()
     line = line.replace(regex = Regex("""[^A-Za-zА-Яа-яёЁ]"""), " ")
-
     line = line.replace("  ", " ")
     line = line.toLowerCase()
-
     if (line == "") return res
-
     fin = line.split(" ")
-
     for (i in 0..fin.size - 1) {
         if (fin[i] != "") {
             resstr.add(Pair(fin[i], fin.count { it == fin[i] }))
-            //resnum.add()
         }
-        //res.put(fin[i], fin.count { it == fin[i] })
     }
     resstr.sortByDescending { it.second }
-//    while (res.size != 21) {
-//
-//        res.put(resstr[resnum.indexOf(resnum.max())], resnum.max())
-//        resstr.removeAt(resnum.indexOf((resnum.max())))
-//        resnum.remove(resnum.max())
-//    }
     var count = 0
     while (true) {
         for (i in 0..resstr.size - 1) {
@@ -247,7 +232,9 @@ fun top20Words(inputName: String): Map<String, Int> {
             count += 1
             if (count >= 20) break
         }
-            //if
+        while (resstr[count - 1] == resstr[count]) {
+            res.put(resstr[count].first, resstr[count].second)
+        }
     }
     return res
 }
