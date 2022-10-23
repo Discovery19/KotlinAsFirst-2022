@@ -225,12 +225,11 @@ fun top20Words2(inputName: String): Map<String, Int> {
     var resstr = mutableListOf<Pair<String, Int>>()
     val res = mutableMapOf<String, Int>()
     var line = readFile(inputName).joinToString()
-    var fin = listOf<String>()
     line = line.replace(regex = Regex("""[^A-Za-zА-Яа-яёЁ]"""), " ")
     line = line.replace("  ", " ")
     line = line.toLowerCase()
     if (line == "") return res
-    fin = line.split(" ")
+    var fin = line.split(" ")
     for (i in 0..fin.size - 1) {
         if (fin[i] != "") {
             resstr.add(Pair(fin[i], fin.count { it == fin[i] }))
@@ -329,7 +328,6 @@ fun findDuplicates(values: List<String>): Set<String> {
 }
 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
-    val writer = File(outputName).bufferedWriter()
     var list = mutableListOf<String>()
     var res = mutableListOf<String>()
     var m = 0
