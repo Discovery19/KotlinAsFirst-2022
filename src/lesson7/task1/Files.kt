@@ -151,7 +151,18 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    val file= readFile(inputName)
+    val filework= file.toMutableList()
+    //val res= mutableListOf<String>()
+    var max=0
+    for (i in file){
+        if (max<=i.length) max=i.length
+    }
+
+    for (i in filework){
+        val n=(max-i.length)/2
+        File(outputName).writeText(" ".repeat(n)+i)
+    }
 }
 
 /**
