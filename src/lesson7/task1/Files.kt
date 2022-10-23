@@ -225,16 +225,31 @@ fun top20Words(inputName: String): Map<String, Int> {
         }
     }
     resstr.sortByDescending { it.second }
+    var resstr2= mutableMapOf<String,Int>()
+    for (i in resstr){
+        resstr2.put(i.first,i.second)
+    }
+    println(resstr2)
     var count = 0
     while (true) {
-        for (i in 0..resstr.size - 1) {
-            res.put(resstr[i].first, resstr[i].second)
+        for (i in resstr2) {
+            res.put(i.key, i.value)
             count += 1
-            if (count >= 20) break
+            if (count >= 19) break
         }
-        while (resstr[count - 1] == resstr[count]) {
-            res.put(resstr[count].first, resstr[count].second)
-        }
+        println(count)
+        if (count >= 19) break
+    }
+//        try{
+//            resstr[count - 1] == resstr[count]
+//        }
+//        catch (e:IndexOutOfBoundsException){
+//            return res
+//        }
+    println(resstr2[count-1].second )
+    while (resstr2[count - 1].second == resstr2[count].second) {
+        res.put(resstr[count].first, resstr[count].second)
+        count += 1
     }
     return res
 }
