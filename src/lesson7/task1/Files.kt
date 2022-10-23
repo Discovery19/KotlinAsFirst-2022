@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import kotlin.collections.MutableMap.MutableEntry
 import kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.DeclaredMemberIndex.Empty
 
 // Урок 7: работа с файлами
@@ -209,7 +210,7 @@ s += 1
 index = line.indexOf(fin[i], index + 1)
 }
  */
-fun top20Words(inputName: String): Map<String, Int> {
+fun top20Words2(inputName: String): Map<String, Int> {
     var resstr = mutableListOf<Pair<String, Int>>()
     val res = mutableMapOf<String, Int>()
     var line = readFile(inputName).joinToString()
@@ -225,34 +226,29 @@ fun top20Words(inputName: String): Map<String, Int> {
         }
     }
     resstr.sortByDescending { it.second }
-    var resstr2= mutableMapOf<String,Int>()
-    for (i in resstr){
-        resstr2.put(i.first,i.second)
+    var resstr2 = mutableMapOf<String, Int>()
+    for (i in resstr) {
+        resstr2.put(i.first, i.second)
     }
-    println(resstr2)
     var count = 0
+    var k = 0
     while (true) {
         for (i in resstr2) {
-            res.put(i.key, i.value)
-            count += 1
-            if (count >= 19) break
+            if (count <= 19) {
+                res.put(i.key, i.value)
+                count += 1
+                k = i.value
+            } else if (k == i.value) {
+                res.put(i.key, k)
+            }
         }
-        println(count)
-        if (count >= 19) break
-    }
-//        try{
-//            resstr[count - 1] == resstr[count]
-//        }
-//        catch (e:IndexOutOfBoundsException){
-//            return res
-//        }
-    println(resstr2[count-1].second )
-    while (resstr2[count - 1].second == resstr2[count].second) {
-        res.put(resstr[count].first, resstr[count].second)
-        count += 1
+        break
     }
     return res
 }
+
+fun top20Words(inputName: String): Map<String, Int> = top20Words2(inputName)
+
 
 /**
  * Средняя (14 баллов)
@@ -344,9 +340,7 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
             res.add(i)
             m = name.size
         }
-        println("res $res")
     }
-    println("finish")
     println(res)
     var res2 = mutableListOf<String>()
     for (i in res) {
