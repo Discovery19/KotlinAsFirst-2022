@@ -222,7 +222,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-fun help(mut: Int): Int {
+fun counter(mut: Int): Int {
     var k = mut
     var j = 0
     while (k > 0) {
@@ -231,23 +231,28 @@ fun help(mut: Int): Int {
     }
     return j
 }
+fun findNum(k: Int, str: Int, n: Int): Int {
+    var m = k
+    if (m / 10 > 0)
+        for (i in 1..str - n) {
+            m = m / 10
+        }
+    return m
+}
 
 fun squareSequenceDigit(n: Int): Int {
     var i = 1
     var k = 0
-    var j = 0
     var str = 0
     if (i == n) return 1
     for (i in 1..n) {
+        var j = 0
         k = i * i
-        j = help(k)
+        j = counter(k)
         str += j
         if (n in str - j..str) break
     }
-    if (k / 10 > 0)
-        for (i in 1..str - n) {
-            k = k / 10
-        }
+    k = findNum(k, str, n)
     return k % 10
 }
 
@@ -270,14 +275,10 @@ fun fibSequenceDigit(n: Int): Int {
     if (i == n) return 1
     for (i in 1..n) {
         m = fib(i)
-        j = help(m)
+        j = counter(m)
         str += j
         if (n in str - j..str) break
     }
-    if (m / 10 > 0)
-        for (i in 1..str - n) {
-            m = m / 10
-
-        }
+    m = findNum(m, str, n)
     return m % 10
 }

@@ -2,8 +2,10 @@
 
 package lesson7.task1
 
+import ru.spbstu.wheels.out
 import java.io.File
 import kotlin.collections.MutableMap.MutableEntry
+import kotlin.math.absoluteValue
 import kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.DeclaredMemberIndex.Empty
 
 // Урок 7: работа с файлами
@@ -153,12 +155,15 @@ fun sibilants(inputName: String, outputName: String) {
 fun centerFile(inputName: String, outputName: String) {
     val filework = mutableListOf<String>()
     val file = readFile(inputName).toMutableList()
+
     for (i in file) {
         filework.add(i.trimStart().trimEnd())
     }
     val writer = File(outputName).bufferedWriter()
+
+    filework.maxOfOrNull { it.length } ?: 0
     var max = 0
-    for (i in file) {
+    for (i in filework) {
         if (max <= i.length) max = i.length
     }
 
@@ -168,6 +173,21 @@ fun centerFile(inputName: String, outputName: String) {
         writer.newLine()
     }
     writer.close()
+}
+
+
+fun sqr(x: Int) = x * x
+fun cube(x: Int) = x * x * x
+
+fun sqrList(list: MutableList<Int>) = modifyList(list, ::sqr)
+fun cubeList(list: MutableList<Int>) = modifyList(list, ::cube)
+
+fun absList(list: MutableList<Int>) = modifyList(list) { it.absoluteValue}
+
+fun modifyList(list: MutableList<Int>, f: (Int) -> Int) {
+    for (i in list.indices) {
+        list[i] = f(list[i])
+    }
 }
 
 /**
@@ -577,56 +597,90 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
 
  * Используемые пробелы, отступы и дефисы должны в точности соответствовать примеру.
  *
+ * var num = (lhv / rhv).toString().toMutableList()
+var line = ""
+var chislo = lhv.toString().toMutableList()
+var ost = mutableListOf<Int>()
+val writer = File(outputName).bufferedWriter()
+writer.write("$lhv / $rhv")
+writer.newLine()
+var i = 0
+var k = 0
+while (k / rhv <= 0) {
+k = k * 10 + chislo[i].toInt()
+i += 1
+}
+// первые две строки
+line = "-" + (k).toString()
+writer.write(line + "     " + "$rhv")
+writer.newLine()
+writer.write("-".repeat(line.length))
+k = k - rhv * num.first().toInt()
+writer.newLine()
+
+//центр
+for (j in 1..num.size - 1) {
+try {
+println(chislo[i])
+} catch (e: IndexOutOfBoundsException) {
+break
+}
+while (k / rhv <= 0) {
+k = k * 10 + chislo[i].toInt()
+i += 1
+writer.write(k.toString())
+writer.newLine()
+line = "-" + (rhv * num[j].toInt()).toString()
+writer.write(line)
+writer.newLine()
+writer.write("-".repeat(line.length))
+writer.newLine()
+}
+}
+//заключающая строка (остаток)
+line = (k - rhv * num.last().toInt()).toString()
+writer.write(line)
+writer.close()
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    var num = (lhv / rhv).toString().toMutableList()
-    var line = ""
-    var chislo = lhv.toString().toMutableList()
-    var ost = mutableListOf<Int>()
-    val writer = File(outputName).bufferedWriter()
-    writer.write("$lhv / $rhv")
-    writer.newLine()
-    var i = 0
-    var k = 0
-    while (k / rhv <= 0) {
-        k = k * 10 + chislo[i].toInt()
-        i += 1
-    }
-    line = "-" + (k).toString()
-    writer.write(line + "     " + "$rhv")
-    writer.newLine()
-    writer.write("-".repeat(line.length))
-    k = k - rhv * num.first().toInt()
-    writer.newLine()
-    for (j in 1..num.size - 1) {
-        try {
-            println(chislo[i])
-        } catch (e: IndexOutOfBoundsException) {
-            line = "-" + (rhv * num[j].toInt()).toString()
-            writer.write(line)
-            writer.newLine()
-            writer.write("-".repeat(line.length))
-            writer.newLine()
-            writer.newLine()
-            line = (k - rhv * num.last().toInt()).toString()
-            writer.write(line)
-            writer.close()
-        }
-        while (k / rhv <= 0) {
-            k = k * 10 + chislo[i].toInt()
-            i += 1
-            writer.write(k.toString())
-            writer.newLine()
-            line = "-" + (rhv * num[j].toInt()).toString()
-            writer.write(line)
-            writer.newLine()
-            writer.write("-".repeat(line.length))
-            writer.newLine()
-        }
-    }
-    writer.newLine()
-    line = (k - rhv * num.last().toInt()).toString()
-    writer.write(line)
-    writer.close()
+    TODO()
 }
+//    val digits = lhv.toString().toMutableList()
+//    val writer = File(outputName).bufferedWriter()
+//    val delit = mutableListOf<Int>()
+//    val ost = mutableListOf<Int>()
+//    var k = 0
+//    var con = 0
+//    for (i in 0..digits.size - 1) {
+//        con = con * 10 + digits[i].toInt()
+//        println(digits[i])
+//        println(con)
+//        k = i
+//        if (con / rhv > 0) {
+//            delit.add((con / rhv) * rhv)
+//            ost.add(con - (con / rhv) * rhv)
+//            break
+//        }
+//    }
+//    println(delit)
+//    println(ost)
+//    con = con - con / rhv * rhv
+//    for (i in k..digits.size - 1) {
+//        while (digits[i] != digits.last()) {
+//            con = con * 10 + digits[i].toInt()
+//            k = i
+//            delit.add(con / rhv * rhv)
+//            ost.add(con - con / rhv * rhv)
+//            if (con / rhv > 0) {
+//                con = con - con / rhv * rhv
+//                break
+//            }
+//        }
+//    }
+//    println(digits)
+//    println(delit)
+//    println(ost)
+//
+//}
+
 
