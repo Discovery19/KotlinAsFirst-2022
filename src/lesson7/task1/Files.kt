@@ -151,20 +151,20 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    val filework= mutableListOf<String>()
-    val file= readFile(inputName).toMutableList()
-    for (i in file){
+    val filework = mutableListOf<String>()
+    val file = readFile(inputName).toMutableList()
+    for (i in file) {
         filework.add(i.trimStart().trimEnd())
     }
     val writer = File(outputName).bufferedWriter()
-    var max=0
-    for (i in file){
-        if (max<=i.length) max=i.length
+    var max = 0
+    for (i in file) {
+        if (max <= i.length) max = i.length
     }
 
-    for (i in filework){
-        val n=(max-i.length)/2
-        writer.write(" ".repeat(n)+i)
+    for (i in filework) {
+        val n = (max - i.length) / 2
+        writer.write(" ".repeat(n) + i)
         writer.newLine()
     }
     writer.close()
@@ -579,6 +579,54 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  *
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()
+    var num = (lhv / rhv).toString().toMutableList()
+    var line = ""
+    var chislo = lhv.toString().toMutableList()
+    var ost = mutableListOf<Int>()
+    val writer = File(outputName).bufferedWriter()
+    writer.write("$lhv / $rhv")
+    writer.newLine()
+    var i = 0
+    var k = 0
+    while (k / rhv <= 0) {
+        k = k * 10 + chislo[i].toInt()
+        i += 1
+    }
+    line = "-" + (k).toString()
+    writer.write(line + "     " + "$rhv")
+    writer.newLine()
+    writer.write("-".repeat(line.length))
+    k = k - rhv * num.first().toInt()
+    writer.newLine()
+    for (j in 1..num.size - 1) {
+        try {
+            println(chislo[i])
+        } catch (e: IndexOutOfBoundsException) {
+            line = "-" + (rhv * num[j].toInt()).toString()
+            writer.write(line)
+            writer.newLine()
+            writer.write("-".repeat(line.length))
+            writer.newLine()
+            writer.newLine()
+            line = (k - rhv * num.last().toInt()).toString()
+            writer.write(line)
+            writer.close()
+        }
+        while (k / rhv <= 0) {
+            k = k * 10 + chislo[i].toInt()
+            i += 1
+            writer.write(k.toString())
+            writer.newLine()
+            line = "-" + (rhv * num[j].toInt()).toString()
+            writer.write(line)
+            writer.newLine()
+            writer.write("-".repeat(line.length))
+            writer.newLine()
+        }
+    }
+    writer.newLine()
+    line = (k - rhv * num.last().toInt()).toString()
+    writer.write(line)
+    writer.close()
 }
 
