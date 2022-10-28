@@ -222,7 +222,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-fun counter(mut: Int): Int {
+fun schetchikStroki(mut: Int): Int {
     var k = mut
     var j = 0
     while (k > 0) {
@@ -248,7 +248,7 @@ fun squareSequenceDigit(n: Int): Int {
     for (i in 1..n) {
         var j = 0
         k = i * i
-        j = counter(k)
+        j = schetchikStroki(k)
         str += j
         if (n in str - j..str) break
     }
@@ -275,7 +275,7 @@ fun fibSequenceDigit(n: Int): Int {
     if (i == n) return 1
     for (i in 1..n) {
         m = fib(i)
-        j = counter(m)
+        j = schetchikStroki(m)
         str += j
         if (n in str - j..str) break
     }

@@ -153,20 +153,11 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    val filework = mutableListOf<String>()
-    val file = readFile(inputName).toMutableList()
-
-    for (i in file) {
-        filework.add(i.trimStart().trimEnd())
-    }
+    val file = readFile(inputName).toList()
+    val filework = file.map { it.trimStart().trimEnd() }
     val writer = File(outputName).bufferedWriter()
-
-    filework.maxOfOrNull { it.length } ?: 0
-    var max = 0
-    for (i in filework) {
-        if (max <= i.length) max = i.length
-    }
-
+    val max = filework.maxOfOrNull { it.length } ?: 0
+    println(max)
     for (i in filework) {
         val n = (max - i.length) / 2
         writer.write(" ".repeat(n) + i)
@@ -182,7 +173,7 @@ fun cube(x: Int) = x * x * x
 fun sqrList(list: MutableList<Int>) = modifyList(list, ::sqr)
 fun cubeList(list: MutableList<Int>) = modifyList(list, ::cube)
 
-fun absList(list: MutableList<Int>) = modifyList(list) { it.absoluteValue}
+fun absList(list: MutableList<Int>) = modifyList(list) { it.absoluteValue }
 
 fun modifyList(list: MutableList<Int>, f: (Int) -> Int) {
     for (i in list.indices) {
