@@ -375,7 +375,8 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun numbers(list: List<Int>, number: Int): Pair<Int, Int> {
+
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     for (numb in 0..list.size - 2) {
         for (i in numb + 1..list.size - 1) {
             if (list[numb] + list[i] == number && numb != i) return Pair(numb, i)
@@ -383,8 +384,6 @@ fun numbers(list: List<Int>, number: Int): Pair<Int, Int> {
     }
     return Pair(-1, -1)
 }
-
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = numbers(list, number)
 
 /**
  * Очень сложная (8 баллов)
@@ -431,41 +430,70 @@ fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
     return spisok
 }
 
-fun chest2(treasures: Map<String, Pair<Int, Int>>, capacity: Int):Set<String>{
-    var m=0
-
-    var maxweight=0
-    var name= mutableListOf<String>()
-    var weight= mutableListOf<Int>()
-    var price=mutableListOf<Int>()
-    var name2= mutableListOf<String>()
-    var weight2= mutableListOf<Int>()
-    var price2=mutableListOf<Int>()
-    var result= mutableSetOf<String>()
-    for (i in treasures.keys){
-        name.add(i)
-    }
-    for (i in treasures.values){
-        weight.add(i.first)
-        price.add(i.second)
-    }
-    for (i in 1..(2.0).pow(price.size).toInt()) {
-        name2=name
-        price2=price
-        weight2=weight
-        while (price.size != 0) {
-
-            if (price.max() < m && maxweight + weight[price.indexOf(price.max())] <= capacity) {
-                result.add(name[price.indexOf(price.max())])
-                maxweight += weight[price.indexOf(price.max())]
-                m += price.max()
-            }
-            if (capacity - maxweight == 0) break
-            price.remove(price.max())
-            weight.removeAt(price.indexOf(price.max()))
-            name.removeAt(price.indexOf(price.max()))
-        }
-    }
-    return result
-}
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+//fun chest2(treasures: Map<String, Pair<Int, Int>>, capacity: Int):Set<String>{
+//    var m=0
+//
+//    var maxweight=0
+//    var name= mutableListOf<String>()
+//    var weight= mutableListOf<Int>()
+//    var price=mutableListOf<Int>()
+//    var name2= mutableListOf<String>()
+//    var weight2= mutableListOf<Int>()
+//    var price2=mutableListOf<Int>()
+//    var result= mutableSetOf<String>()
+//    for (i in treasures.keys){
+//        name.add(i)
+//    }
+//    for (i in treasures.values){
+//        weight.add(i.first)
+//        price.add(i.second)
+//    }
+//    for (i in 1..(2.0).pow(price.size).toInt()) {
+//        name2=name
+//        price2=price
+//        weight2=weight
+//        while (price.size != 0) {
+//
+//            if (price.max() < m && maxweight + weight[price.indexOf(price.max())] <= capacity) {
+//                result.add(name[price.indexOf(price.max())])
+//                maxweight += weight[price.indexOf(price.max())]
+//                m += price.max()
+//            }
+//            if (capacity - maxweight == 0) break
+//            price.remove(price.max())
+//            weight.removeAt(price.indexOf(price.max()))
+//            name.removeAt(price.indexOf(price.max()))
+//        }
+//    }
+//    return result
+//}
+//fun chest3(treasures: Map<String, Pair<Int, Int>>, capacity: Int):Set<String>{
+//    var set= mutableSetOf<String>()
+//    val weight= mutableListOf<Int>()
+//    val price= mutableListOf<Int>()
+//    for (i in treasures){
+//        weight.add(treasures.values.first().first)
+//        price.add(treasures.values.first().second)
+//    }
+//    val weightvar= weight
+//    val pricevar= price
+//    for (i in 0..weight.size-2){
+//        var j=i+1
+//        while (j <=weight.size-1){
+//            weightvar.add(weight[i]+weight[j])
+//            j+=1
+//        }
+//    }
+//    for (i in 0..price.size-2){
+//        for (j in 1..price.size-1){
+//            pricevar.add(price[i]+price[j])
+//        }
+//    }
+//    var m=0
+//    for (i in 0..weightvar.size-1){
+//        if (weightvar[i]<=capacity && pricevar[i]>=m){
+//            m=pricevar[i]
+//        }
+//    }
+//}
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = chest(treasures, capacity)
