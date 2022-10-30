@@ -411,7 +411,6 @@ fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
     var mweight = 0
     var i = 0
     var spisok = setOf<String>()
-    val back = mutableMapOf<String, Pair<Int, Int>>()
     val list = treasures.keys.toList()
     while (i in 0..list.size - 1) {
         for (numb in treasures.values) {
@@ -423,7 +422,7 @@ fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
                     mweight += numb.first
                     m += numb.second
                     spisok += list[i]
-                } else if (numb.second >= m) {
+                } else if (numb.second+m >= m) {
                     spisok = setOf(list[i])
                     m = numb.second
                     mweight = numb.first
