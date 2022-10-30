@@ -408,29 +408,29 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  */
 fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
     var m = 0
-    var mweight=0
-    var i=0
+    var mweight = 0
+    var i = 0
     var spisok = setOf<String>()
     val back = mutableMapOf<String, Pair<Int, Int>>()
-    val list=treasures.keys.toList()
-    while (i in 0..list.size-1) {
+    val list = treasures.keys.toList()
+    while (i in 0..list.size - 1) {
         for (numb in treasures.values) {
             println("fist max $m")
             println(numb.first)
             println(numb.second)
-            if (numb.first <= capacity && numb.second >= m) {
-                if (numb.first+mweight<=capacity){
-                    mweight+=numb.first
-                    m+=numb.second
-                    spisok+=list[i]
+            if (numb.first <= capacity) {
+                if (numb.first + mweight <= capacity && numb.second + m >= m) {
+                    mweight += numb.first
+                    m += numb.second
+                    spisok += list[i]
+                } else if (numb.second >= m) {
+                    spisok = setOf(list[i])
+                    m = numb.second
+                    mweight = numb.first
+                    println("max $m")
                 }
-                else{
-                spisok = setOf(list[i])
-                m = numb.second
-                mweight=numb.first
-                println("max $m")}
             }
-            i+=1
+            i += 1
             println("spisok $spisok")
         }
     }
