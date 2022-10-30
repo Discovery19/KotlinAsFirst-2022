@@ -422,7 +422,7 @@ fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
                     mweight += numb.first
                     m += numb.second
                     spisok += list[i]
-                } else if (numb.second+m >= m) {
+                } else if (numb.second>= m) {
                     spisok = setOf(list[i])
                     m = numb.second
                     mweight = numb.first
