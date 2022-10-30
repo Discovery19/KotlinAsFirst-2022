@@ -347,5 +347,12 @@ class Tests {
                 1
             )
         )
+        assertEquals(
+            setOf("Кубок", "Слиток"),
+            bagPacking(
+                mapOf("Кубок" to (1 to 1), "Слиток" to (1 to 2)),
+                2
+            )
+        )
     }
 }

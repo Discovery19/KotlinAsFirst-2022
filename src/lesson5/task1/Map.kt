@@ -408,6 +408,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  */
 fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
     var m = 0
+    var mweight=0
     var i=0
     var spisok = setOf<String>()
     val back = mutableMapOf<String, Pair<Int, Int>>()
@@ -418,9 +419,16 @@ fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
             println(numb.first)
             println(numb.second)
             if (numb.first <= capacity && numb.second >= m) {
+                if (numb.first+mweight<=capacity){
+                    mweight+=numb.first
+                    m+=numb.second
+                    spisok+=list[i]
+                }
+                else{
                 spisok = setOf(list[i])
                 m = numb.second
-                println("max $m")
+                mweight=numb.first
+                println("max $m")}
             }
             i+=1
             println("spisok $spisok")
@@ -496,4 +504,5 @@ fun chest(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
 //        }
 //    }
 //}
+
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = chest(treasures, capacity)
