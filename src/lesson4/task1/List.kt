@@ -2,9 +2,12 @@
 
 package lesson4.task1
 
+
 import lesson1.task1.discriminant
-import kotlin.math.sqrt
+import lesson5.task1.removeFillerWords
+import ru.spbstu.wheels.NullableMonad.filter
 import kotlin.math.pow
+import kotlin.math.sqrt
 
 // Урок 4: списки
 // Максимальное количество баллов = 12
@@ -98,13 +101,13 @@ fun squares(vararg array: Int) = squares(array.toList()).toTypedArray()
  * Пробелы не следует принимать во внимание при сравнении символов, например, строка
  * "А роза упала на лапу Азора" является палиндромом.
  */
-fun isPalindrome(str: String): Boolean {
-    val lowerCase = str.lowercase().filter { it != ' ' }
-    for (i in 0..lowerCase.length / 2) {
-        if (lowerCase[i] != lowerCase[lowerCase.length - i - 1]) return false
-    }
-    return true
-}
+//fun isPalindrome(str: String): Boolean {
+//    val lowerCase = str.lowercase().filter { it != ' ' }
+//    for (i in 0..lowerCase.length / 2) {
+//        if (lowerCase[i] != lowerCase[lowerCase.length - i - 1]) return false
+//    }
+//    return true
+//}
 
 /**
  * Пример
@@ -403,5 +406,85 @@ fun roman(n: Int): String = rome(n)
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
+fun suka(n: Int): String {
+    val dig1 = arrayOf(
+        "", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"
+    )
+    val dig01 = arrayOf(
+        "", "одна", "две", "три", "четыре"
+    )
+    val dig10 = arrayOf(
+        "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
+        "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
+    )
+    val dig20 = arrayOf(
+        "двадцать", "тридцать", "сорок", "пятьдесят",
+        "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
+    )
+    val dig100 = arrayOf(
+        "", "сто", "двести", "триста", "четыреста", "пятьсот",
+        "шестьсот", "семьсот", "восемьсот", "девятьсот"
+    )
+    val leword = arrayOf(
+        "тысяча", "тысячи", "тысяч"
+    )
+    if (n == 0) return "ноль"
+    val res = mutableListOf<String>()
+    var numb = n
+    while (numb > 0) {
+        if (numb % 100 in 10..19) {
+            res.add(dig10[numb % 10])
+            numb /= 100
+        } else {
+            res.add(dig1[numb % 10])
+            numb /= 10
+            if (numb % 10 in 2..9) res.add(dig20[numb % 10 - 2])
+            numb /= 10
+        }
+        res.add(dig100[numb % 10])
+        numb /= 10
+        if (numb % 100 in 10..19) {
+            res.add((dig10[numb % 10] + " "+leword[2]))
+            numb /= 10
+        } else {
+            if (numb % 10 == 0) {
+                res.add(dig01[numb % 10] + " " + leword[2])
+                numb /= 10
+            } else
+                if (numb % 10 == 1) {
+                    res.add(dig01[numb % 10] + " " + leword[0])
+                    numb /= 10
+                } else
+                    if (numb % 10 in 2..4) {
+                        res.add(dig01[numb % 10] + " " + leword[1])
+                        numb /= 10
+                    } else {
+                        println(numb % 10)
+                        res.add(dig1[numb % 10] + " " + leword[2])
+                        numb /= 10
+                    }
+            println(numb)
+            if (numb%10>0) res.add(dig20[numb % 10 - 2])
+            numb /= 10
+        }
 
-fun russian(n: Int): String = TODO()
+        res.add(dig100[numb % 10])
+        break
+    }
+    println(res)
+    val glist=res.map { it.trimStart() }
+    res=glist.toMutableList()
+    println(res[res.size-2])
+    if (glist[res.size-1] == "" && (glist[res.size-2]=="тысяча" || glist[res.size-2]=="тысячи" || glist[res.size-2]=="тысяч")) {
+        res.removeAt(res.size-1)
+        res.removeAt(res.size-1)
+    }
+    else if (n.toString().length<6)
+    res.removeAt(res.size-1)
+    println(res)
+    glist.filter { it.isEmpty() }
+    var result = glist.asReversed().joinToString(" ").replace("  "," ")
+    return result
+}
+
+fun russian(n: Int): String = suka(n)
