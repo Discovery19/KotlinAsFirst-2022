@@ -103,8 +103,8 @@ fun squares(vararg array: Int) = squares(array.toList()).toTypedArray()
  */
 //fun isPalindrome(str: String): Boolean {
 //    val lowerCase = str.lowercase().filter { it != ' ' }
-//    for (i in 0..lowerCase.length / 2) {
-//        if (lowerCase[i] != lowerCase[lowerCase.length - i - 1]) return false
+//    for (i in 0..lowerCase.toString().length / 2) {
+//        if (lowerCase[i]?.toString() ?:  != lowerCase?.get(lowerCase.length - i - 1) ?: ) return false
 //    }
 //    return true
 //}
@@ -406,7 +406,8 @@ fun roman(n: Int): String = rome(n)
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun suka(n: Int): String {
+
+fun russian(n: Int): String {
     val dig1 = arrayOf(
         "", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"
     )
@@ -418,7 +419,7 @@ fun suka(n: Int): String {
         "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
     )
     val dig20 = arrayOf(
-        "двадцать", "тридцать", "сорок", "пятьдесят",
+        "", "", "двадцать", "тридцать", "сорок", "пятьдесят",
         "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
     )
     val dig100 = arrayOf(
@@ -428,63 +429,46 @@ fun suka(n: Int): String {
     val leword = arrayOf(
         "тысяча", "тысячи", "тысяч"
     )
-    if (n == 0) return "ноль"
-    val res = mutableListOf<String>()
-    var numb = n
-    while (numb > 0) {
-        if (numb % 100 in 10..19) {
-            res.add(dig10[numb % 10])
-            numb /= 100
+    var i = n
+    var res = ""
+    val len = n.toString().length
+    while (i > 0) {
+        if (i % 100 in 10..19) {
+            res = dig10[i % 10] + res
+            i /= 100
         } else {
-            res.add(dig1[numb % 10])
-            numb /= 10
-            if (numb % 10 in 2..9) res.add(dig20[numb % 10 - 2])
-            numb /= 10
+            res = dig1[i % 10] + res
+            i /= 10
+            res = dig20[i % 10] + " " + res
+            i /= 10
         }
-        res.add(dig100[numb % 10])
-        numb /= 10
-        if (numb % 100 in 10..19) {
-            res.add((dig10[numb % 10] + " "+leword[2]))
-            numb /= 10
+        res = dig100[i % 10] + " " + res
+        i /= 10
+        if (i % 100 in 10..19) {
+            res = dig10[i % 10] + " " + leword[2] + " " + res
+            i /= 10
         } else {
-            if (numb % 10 == 0) {
-                res.add(dig01[numb % 10] + " " + leword[2])
-                numb /= 10
-            } else
-                if (numb % 10 == 1) {
-                    res.add(dig01[numb % 10] + " " + leword[0])
-                    numb /= 10
-                } else
-                    if (numb % 10 in 2..4) {
-                        res.add(dig01[numb % 10] + " " + leword[1])
-                        numb /= 10
-                    } else {
-                        println(numb % 10)
-                        res.add(dig1[numb % 10] + " " + leword[2])
-                        numb /= 10
-                    }
-            println(numb)
-            if (numb%10>0) res.add(dig20[numb % 10 - 2])
-            numb /= 10
+            if (i % 10 == 1) res = dig01[i % 10] + " " + leword[0] + " " + res else
+                if (i % 10 in 2..4) res = dig01[i % 10] + " " + leword[1] + " " + res else
+                    if (len >= 4) res = dig1[i % 10] + " " + leword[2] + " " + res
+
+            i /= 10
+        }
+        if (len >= 5) {
+            println(i)
+            res = dig20[i % 10] + " " + res
+            println(i)
+            i /= 10
         }
 
-        res.add(dig100[numb % 10])
+        println(i)
+        println(i % 10)
+        if (len == 6) res = dig100[i % 10] + " " + res
         break
     }
-    println(res)
-    val glist=res.map { it.trimStart() }
-    res=glist.toMutableList()
-    println(res[res.size-2])
-    if (glist[res.size-1] == "" && (glist[res.size-2]=="тысяча" || glist[res.size-2]=="тысячи" || glist[res.size-2]=="тысяч")) {
-        res.removeAt(res.size-1)
-        res.removeAt(res.size-1)
+    while ("  " in res) {
+        res = res.replace("  ", " ")
     }
-    else if (n.toString().length<6)
-    res.removeAt(res.size-1)
-    println(res)
-    glist.filter { it.isEmpty() }
-    var result = glist.asReversed().joinToString(" ").replace("  "," ")
-    return result
-}
+    return res.trimEnd().trimStart()
 
-fun russian(n: Int): String = suka(n)
+}
