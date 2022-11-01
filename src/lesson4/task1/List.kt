@@ -101,13 +101,13 @@ fun squares(vararg array: Int) = squares(array.toList()).toTypedArray()
  * Пробелы не следует принимать во внимание при сравнении символов, например, строка
  * "А роза упала на лапу Азора" является палиндромом.
  */
-//fun isPalindrome(str: String): Boolean {
-//    val lowerCase = str.lowercase().filter { it != ' ' }
-//    for (i in 0..lowerCase.toString().length / 2) {
-//        if (lowerCase[i]?.toString() ?:  != lowerCase?.get(lowerCase.length - i - 1) ?: ) return false
-//    }
-//    return true
-//}
+fun isPalindrome(str: String): Boolean {
+    val lowerCase = str.lowercase().filter { it != ' ' }
+    for (i in 0..lowerCase.toString().length / 2) {
+        if (lowerCase[i]?.toString() ?:  != lowerCase?.get(lowerCase.length - i - 1) ) return false
+    }
+    return true
+}
 
 /**
  * Пример

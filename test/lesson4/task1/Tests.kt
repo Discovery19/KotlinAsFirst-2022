@@ -69,13 +69,13 @@ class Tests {
         assertArrayEquals(arrayOf(1, 4, 9), squares(1, 2, -3))
     }
 
-//    @Test
-//    @Tag("Example")
-//    fun isPalindrome() {
-//        assertFalse(isPalindrome("Барабан"))
-//        assertTrue(isPalindrome("А роза упала на лапу Азора"))
-//        assertTrue(isPalindrome("Шалаш"))
-//    }
+    @Test
+    @Tag("Example")
+    fun isPalindrome() {
+        assertFalse(isPalindrome("Барабан"))
+        assertTrue(isPalindrome("А роза упала на лапу Азора"))
+        assertTrue(isPalindrome("Шалаш"))
+    }
 
     @Test
     @Tag("Example")
