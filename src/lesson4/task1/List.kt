@@ -103,8 +103,8 @@ fun squares(vararg array: Int) = squares(array.toList()).toTypedArray()
  */
 fun isPalindrome(str: String): Boolean {
     val lowerCase = str.lowercase().filter { it != ' ' }
-    for (i in 0..lowerCase.toString().length / 2) {
-        if (lowerCase[i]?.toString() ?:  != lowerCase?.get(lowerCase.length - i - 1) ) return false
+    for (i in 0..lowerCase.length / 2) {
+        if (lowerCase[i] != lowerCase[lowerCase.length - i - 1]) return false
     }
     return true
 }
