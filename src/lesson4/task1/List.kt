@@ -5,7 +5,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson5.task1.removeFillerWords
-import ru.spbstu.wheels.NullableMonad.filter
+//import ru.spbstu.wheels.NullableMonad.filter
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -101,13 +101,13 @@ fun squares(vararg array: Int) = squares(array.toList()).toTypedArray()
  * Пробелы не следует принимать во внимание при сравнении символов, например, строка
  * "А роза упала на лапу Азора" является палиндромом.
  */
-//fun isPalindrome(str: String): Boolean {
-//    val lowerCase = str.lowercase().filter { it != ' ' }
-//    for (i in 0..lowerCase.length / 2) {
-//        if (lowerCase[i] != lowerCase[lowerCase.length - i - 1]) return false
-//    }
-//    return true
-//}
+fun isPalindrome(str: String): Boolean {
+    val lowerCase = str.lowercase().filter { it != ' ' }
+    for (i in 0..lowerCase.length / 2) {
+        if (lowerCase[i] != lowerCase[lowerCase.length - i - 1]) return false
+    }
+    return true
+}
 
 /**
  * Пример
