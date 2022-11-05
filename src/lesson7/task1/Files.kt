@@ -167,19 +167,19 @@ fun centerFile(inputName: String, outputName: String) {
 }
 
 
-fun sqr(x: Int) = x * x
-fun cube(x: Int) = x * x * x
-
-fun sqrList(list: MutableList<Int>) = modifyList(list, ::sqr)
-fun cubeList(list: MutableList<Int>) = modifyList(list, ::cube)
-
-fun absList(list: MutableList<Int>) = modifyList(list) { it.absoluteValue }
-
-fun modifyList(list: MutableList<Int>, f: (Int) -> Int) {
-    for (i in list.indices) {
-        list[i] = f(list[i])
-    }
-}
+//fun sqr(x: Int) = x * x
+//fun cube(x: Int) = x * x * x
+//
+//fun sqrList(list: MutableList<Int>) = modifyList(list, ::sqr)
+//fun cubeList(list: MutableList<Int>) = modifyList(list, ::cube)
+//
+//fun absList(list: MutableList<Int>) = modifyList(list) { it.absoluteValue }
+//
+//fun modifyList(list: MutableList<Int>, f: (Int) -> Int) {
+//    for (i in list.indices) {
+//        list[i] = f(list[i])
+//    }
+//}
 
 /**
  * Сложная (20 баллов)
@@ -209,7 +209,24 @@ fun modifyList(list: MutableList<Int>, f: (Int) -> Int) {
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
 fun alignFileByWidth(inputName: String, outputName: String) {
-    TODO()
+    val text = readFile(inputName)
+    val writer = File(outputName).bufferedWriter()
+    val workText = text.map { it.trim().replace("  ", " ") }
+    val m = workText.maxOfOrNull { it.length } ?: 0
+    println(text)
+    println(workText)
+    for (i in workText) {
+        if (i == " ") writer.newLine()
+        if (i.length == m && i != " ") writer.write(i)
+        else {
+            var j = i.count { it == ' ' }
+            var str=i.toMutableList()
+            var index: Int = i.indexOf(" ", 0)
+            while (j <= (m - i.length)) {
+            }
+        }
+    }
+    writer.close()
 }
 
 /**
@@ -352,28 +369,17 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     }
     for (i in list) {
         val name = i.toLowerCase().split("")
-
-        println(name)
-
         val repeated = findDuplicates(name)
-
-        println(repeated)
-        println(name.size - 2)
-        println(repeated.size)
-
         if (repeated.size == 1 && name.size >= m) {
             res.add(i)
             m = name.size
         }
     }
-    println(res)
     var res2 = mutableListOf<String>()
     for (i in res) {
         if (i.length >= m - 2) res2.add(i)
     }
-    print(res2)
     val line = res2.joinToString(", ")
-    println(line)
     File(outputName).writeText(line)
 }
 
