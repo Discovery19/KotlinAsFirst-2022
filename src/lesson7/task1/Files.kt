@@ -208,7 +208,9 @@ fun centerFile(inputName: String, outputName: String) {
  * 7) В самой длинной строке каждая пара соседних слов должна быть отделена В ТОЧНОСТИ одним пробелом
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
-fun alignFileByWidth(inputName: String, outputName: String) { TODO()}
+fun alignFileByWidth(inputName: String, outputName: String) {
+    TODO()
+}
 //{
 //    val text = readFile(inputName)
 //    val writer = File(outputName).bufferedWriter()
@@ -340,13 +342,27 @@ fun top20Words(inputName: String): Map<String, Int> = top20Words2(inputName)
  */
 fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: String) {
     var list = readFile(inputName)
-    var work=list.toMutableList()
-    for (i in dictionary){
-        for (k in 0..work.size-1){
-            if (work[k]==i.key.toString()) work[k]=work[k].replace(work[k],i.value)
+    var counter = 0
+    val writer = File(outputName).bufferedWriter()
+    var work = mutableListOf<String>()
+    for (c in list) {
+        work = c.split("").toMutableList()
+        for (i in dictionary) {
+            for (k in 0..work.size - 1) {
+                if (work[k].toLowerCase() == i.key.toLowerCase().toString())
+                    work[k] = work[k].replace(work[k], i.value.toLowerCase())
+            }
+        }
+        counter++
+        work.removeIf { it!!.isBlank() }
+        work = work.joinToString("").split(" ").toMutableList()
+        if (counter <= 1) work[0] = work[0].capitalize()
+        for (i in work) {
+            writer.write(i)
+            writer.newLine()
         }
     }
-    println(work.joinToString(" "))
+    writer.close()
 }
 
 /**
