@@ -316,12 +316,23 @@ fun fromRoman(roman: String): Int = TODO()
  *
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
-    val check= listOf<Char>('>','<','[',']')
-    var i=cells/2
+    val check = listOf<Char>('>', '<', '[', ']', ' ')
+    var i = cells / 2
+    var counter = 0
+    val list = MutableList(cells) { 0 }
+    for (counter in 0..commands.length-1) {
+        if (commands[counter].toChar() !in check) throw Exception("IllegalArgumentException")
+    }
     if ('[' in commands && ']' !in commands || '[' !in commands && ']' in commands) throw Exception("IllegalArgumentException")
-    while (i in 0..commands.length-1){
-        if (commands[i] !in check) throw Exception("IllegalArgumentException")
+    while (counter <= commands.length || counter != limit) {
+        when {
+            commands[counter] == '>' -> i++
+            commands[counter] == '<' -> i--
+            commands[counter] == '+' -> list[i] = list[i] + 1
+            commands[counter] == '-' -> list[i] = list[i] - 1
+        }
 
     }
+    return list
 }
 

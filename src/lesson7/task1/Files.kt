@@ -213,17 +213,22 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val workText = text.map { it.trim().replace("  ", " ") }
     val m = workText.maxOfOrNull { it.length } ?: 0
-    println(text)
-    println(workText)
     for (i in workText) {
         if (i == " ") writer.newLine()
         if (i.length == m && i != " ") writer.write(i)
         else {
             var j = i.count { it == ' ' }
-            var str=i.toMutableList()
-            var index: Int = i.indexOf(" ", 0)
+            var str=i.split(" ").toMutableList()
+            //println(str)
+            var c=0
             while (j <= (m - i.length)) {
+                str[c]+=" "
+                if (c<str.size-2) c++
+                else c=0
+                j++
             }
+            writer.write(str.joinToString(" "))
+            writer.newLine()
         }
     }
     writer.close()
