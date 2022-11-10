@@ -208,32 +208,36 @@ fun centerFile(inputName: String, outputName: String) {
  * 7) В самой длинной строке каждая пара соседних слов должна быть отделена В ТОЧНОСТИ одним пробелом
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
-fun alignFileByWidth(inputName: String, outputName: String) {
-    val text = readFile(inputName)
-    val writer = File(outputName).bufferedWriter()
-    val workText = text.map { it.trim().replace("  ", " ") }
-    val m = workText.maxOfOrNull { it.length } ?: 0
-    for (i in workText) {
-        if (i == " ") writer.newLine()
-        if (i.length == m && i != " ") writer.write(i)
-        else {
-            var j = i.count { it == ' ' }
-            var str=i.split(" ").toMutableList()
-            //println(str)
-            var c=0
-            while (j <= (m - i.length)) {
-                str[c]+=" "
-                if (c<str.size-2) c++
-                else c=0
-                j++
-            }
-            println(str)
-            writer.write(str.joinToString("  "))
-        }
-        writer.newLine()
-    }
-    writer.close()
-}
+fun alignFileByWidth(inputName: String, outputName: String) { TODO()}
+//{
+//    val text = readFile(inputName)
+//    val writer = File(outputName).bufferedWriter()
+//    val workText = text.map { it.trim().replace("  ", " ") }
+//    val m = workText.maxOfOrNull { it.length } ?: 0
+//    for (i in workText) {
+//        if (i == " ") writer.newLine()
+//        if (i.length == m && i != " ") {
+//            writer.write(i)
+//            writer.newLine()}
+//        else {
+//            var j = i.count { it == ' ' }
+//            var str=i.split(" ").toMutableList()
+//            //println(str)
+//            var c=0
+//            while (j <= (m - i.length)) {
+//                str[c]+=" "
+//                if (c<str.size-2) c++
+//                else c=0
+//                j++
+//            }
+//            println(str)
+//            writer.write(str.joinToString("  "))
+//            writer.newLine()
+//        }
+//
+//    }
+//    writer.close()
+//}
 
 /**
  * Средняя (14 баллов)
@@ -335,7 +339,14 @@ fun top20Words(inputName: String): Map<String, Int> = top20Words2(inputName)
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
 fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: String) {
-    TODO()
+    var list = readFile(inputName)
+    var work=list.toMutableList()
+    for (i in dictionary){
+        for (k in 0..work.size-1){
+            if (work[k]==i.key.toString()) work[k]=work[k].replace(work[k],i.value)
+        }
+    }
+    println(work.joinToString(" "))
 }
 
 /**
