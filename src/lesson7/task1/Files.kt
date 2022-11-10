@@ -227,9 +227,10 @@ fun alignFileByWidth(inputName: String, outputName: String) {
                 else c=0
                 j++
             }
-            writer.write(str.joinToString(" "))
-            writer.newLine()
+            println(str)
+            writer.write(str.joinToString("  "))
         }
+        writer.newLine()
     }
     writer.close()
 }
