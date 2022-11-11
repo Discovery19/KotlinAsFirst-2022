@@ -215,26 +215,33 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     val workText = text.map { it.trim().replace("  ", " ") }
     val m = workText.maxOfOrNull { it.length } ?: 0
     for (i in workText) {
-        if (i == " ") writer.newLine()
-        if (i.length == m && i != " ") {
-            writer.write(i)
+        if (i.isBlank()) {
+            writer.newLine()
+            continue
+        }
+        if (i.length == m && i.isNotBlank()) {
+            writer.write(i.trim())
             writer.newLine()}
         else {
             var j = i.count { it == ' ' }
             var str=i.split(" ").toMutableList()
-            //println(str)
+            println(str)
+            println(j)
+            println(m)
+            println(m-i.length)
+
+
             var c=0
-            while (j <= (m - i.length)) {
+            while (j <= (m - i.length-1)) {
                 str[c]+=" "
                 if (c<str.size-2) c++
                 else c=0
                 j++
             }
             println(str)
-            writer.write(str.joinToString("  "))
+            writer.write(str.joinToString("  ").trim())
             writer.newLine()
         }
-
     }
     writer.close()
 }
