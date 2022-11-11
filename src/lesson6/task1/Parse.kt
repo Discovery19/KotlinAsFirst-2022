@@ -315,6 +315,7 @@ fun fromRoman(roman: String): Int = TODO()
  * IllegalArgumentException должен бросаться даже если ошибочная команда не была достигнута в ходе выполнения.
  *
  */
+//!!!
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
     val check = listOf<Char>('>', '<', '[', ']', ' ')
     var i = cells / 2

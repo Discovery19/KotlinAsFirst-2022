@@ -208,6 +208,7 @@ fun centerFile(inputName: String, outputName: String) {
  * 7) В самой длинной строке каждая пара соседних слов должна быть отделена В ТОЧНОСТИ одним пробелом
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
+//!!!
 fun alignFileByWidth(inputName: String, outputName: String) {
     val text = readFile(inputName)
     val writer = File(outputName).bufferedWriter()
@@ -337,6 +338,7 @@ fun top20Words(inputName: String): Map<String, Int> = top20Words2(inputName)
  *
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
+//!!!
 fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: String) {
     var list = readFile(inputName)
     var counter = 0
@@ -670,82 +672,83 @@ writer.write(line)
 writer.close()
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    val digits = lhv.toString().split("").toMutableList()
-    val writer = File(outputName).bufferedWriter()
-    val delit = mutableListOf<Int>()
-    val ost = mutableListOf<Int>()
-    var k = 0
-    var con = 0
-    println(digits)
-    digits.removeIf{it!!.isBlank()}
-    for (i in 0..digits.size - 1) {
-        con = con * 10 + digits[i].toInt()
-        println(digits[i])
-        println(con)
-        k = i
-        if (con / rhv > 0) {
-//            delit.add((con / rhv) * rhv)
-//            ost.add(con - (con / rhv) * rhv)
-            break
-        }
-    }
-    println("pizda "+k)
-    println("suka "+delit)
-    println("blyat "+ ost)
-    con = con - con / rhv * rhv
-    for (i in k..digits.size - 1) {
-        while (digits[i] != digits.last()) {
-            con = con * 10 + digits[i].toInt()
-            k = i
-            delit.add(con / rhv * rhv)
-            ost.add(con - con / rhv * rhv)
-            if (con / rhv > 0) {
-                con = con - con / rhv * rhv
-                break
-            }
-        }
-    }
-
-    if (delit[0]==0) {
-        delit.removeAt(0)
-        ost.removeAt(0)
-    }
-    println("eb "+digits)
-    println("a "+delit)
-    println("t "+ost)
-    // первые две строки
-    val otv=lhv/rhv
-    writer.write(" "+lhv+" | "+rhv)
-    writer.newLine()
-    var line = "-" + delit[0].toString()
-    writer.write(line + "     " + "$otv")
-    writer.newLine()
-    writer.write("-".repeat(line.length))
-    k = line.length-1
-    writer.newLine()
-
-    for (i in 0..ost.size-2){
-        val snos=digits[k]
-        val tpc=ost[i]
-        val dlc=delit[i+1]
-        line=" ".repeat(k)+"-"+"$dlc"
-        if (delit[i]<rhv) writer.write(" ".repeat(k)+"$tpc"+"$snos")
-        else writer.write(" ".repeat(k)+"$tpc"+"$snos")
-        writer.newLine()
-        if (("$tpc"+"$snos").length>"$dlc".length)  {
-            writer.write(" ".repeat(k)+"-"+"$dlc")
-            writer.newLine()
-            writer.write(" ".repeat(k)+"-".repeat(line.length-k))
-        }
-        else {
-            writer.write(" ".repeat(k-1)+"-"+"$dlc")
-            writer.newLine()
-            writer.write(" ".repeat(k-1)+"-".repeat(line.length-k))
-        }
-        writer.newLine()
-        k = line.length-1
-    }
-    writer.close()
-}
+    TODO()}
+//    val digits = lhv.toString().split("").toMutableList()
+//    val writer = File(outputName).bufferedWriter()
+//    val delit = mutableListOf<Int>()
+//    val ost = mutableListOf<Int>()
+//    var k = 0
+//    var con = 0
+//    println(digits)
+//    digits.removeIf{it!!.isBlank()}
+//    for (i in 0..digits.size - 1) {
+//        con = con * 10 + digits[i].toInt()
+//        println(digits[i])
+//        println(con)
+//        k = i
+//        if (con / rhv > 0) {
+////            delit.add((con / rhv) * rhv)
+////            ost.add(con - (con / rhv) * rhv)
+//            break
+//        }
+//    }
+//    println("pizda "+k)
+//    println("suka "+delit)
+//    println("blyat "+ ost)
+//    con = con - con / rhv * rhv
+//    for (i in k..digits.size - 1) {
+//        while (digits[i] != digits.last()) {
+//            con = con * 10 + digits[i].toInt()
+//            k = i
+//            delit.add(con / rhv * rhv)
+//            ost.add(con - con / rhv * rhv)
+//            if (con / rhv > 0) {
+//                con = con - con / rhv * rhv
+//                break
+//            }
+//        }
+//    }
+//
+//    if (delit[0]==0) {
+//        delit.removeAt(0)
+//        ost.removeAt(0)
+//    }
+//    println("eb "+digits)
+//    println("a "+delit)
+//    println("t "+ost)
+//    // первые две строки
+//    val otv=lhv/rhv
+//    writer.write(" "+lhv+" | "+rhv)
+//    writer.newLine()
+//    var line = "-" + delit[0].toString()
+//    writer.write(line + "     " + "$otv")
+//    writer.newLine()
+//    writer.write("-".repeat(line.length))
+//    k = line.length-1
+//    writer.newLine()
+//
+//    for (i in 0..ost.size-2){
+//        val snos=digits[k]
+//        val tpc=ost[i]
+//        val dlc=delit[i+1]
+//        line=" ".repeat(k)+"-"+"$dlc"
+//        if (delit[i]<rhv) writer.write(" ".repeat(k)+"$tpc"+"$snos")
+//        else writer.write(" ".repeat(k)+"$tpc"+"$snos")
+//        writer.newLine()
+//        if (("$tpc"+"$snos").length>"$dlc".length)  {
+//            writer.write(" ".repeat(k)+"-"+"$dlc")
+//            writer.newLine()
+//            writer.write(" ".repeat(k)+"-".repeat(line.length-k))
+//        }
+//        else {
+//            writer.write(" ".repeat(k-1)+"-"+"$dlc")
+//            writer.newLine()
+//            writer.write(" ".repeat(k-1)+"-".repeat(line.length-k))
+//        }
+//        writer.newLine()
+//        k = line.length-1
+//    }
+//    writer.close()
+//}
 
 
