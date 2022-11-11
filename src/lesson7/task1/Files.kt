@@ -728,13 +728,22 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         val snos=digits[k]
         val tpc=ost[i]
         val dlc=delit[i+1]
-        writer.write(" ".repeat(k)+"$tpc"+"$snos")
-        writer.newLine()
-        writer.write(" ".repeat(k)+"-"+"$dlc")
         line=" ".repeat(k)+"-"+"$dlc"
+        if (delit[i]<rhv) writer.write(" ".repeat(k)+"$tpc"+"$snos")
+        else writer.write(" ".repeat(k)+"$tpc"+"$snos")
         writer.newLine()
-        writer.write(" ".repeat(k)+"-".repeat(line.length))
+        if (("$tpc"+"$snos").length>"$dlc".length)  {
+            writer.write(" ".repeat(k)+"-"+"$dlc")
+            writer.newLine()
+            writer.write(" ".repeat(k)+"-".repeat(line.length-k))
+        }
+        else {
+            writer.write(" ".repeat(k-1)+"-"+"$dlc")
+            writer.newLine()
+            writer.write(" ".repeat(k-1)+"-".repeat(line.length-k))
+        }
         writer.newLine()
+        k = line.length-1
     }
     writer.close()
 }
