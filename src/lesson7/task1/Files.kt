@@ -362,7 +362,7 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
         counter++
         work.removeIf { it!!.isBlank() }
         work = work.joinToString("").split(" ").toMutableList()
-        if (counter <= 1 && dictionary.size > 0) work[0] = work[0].capitalize()
+        if (counter <= 1 && dictionary.size > 0 && work[0].toLowerCase() in dictionary.keys.toString()) work[0] = work[0].capitalize()
         for (i in work) {
             writer.write(i)
             writer.newLine()
