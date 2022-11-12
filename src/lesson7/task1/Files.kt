@@ -221,21 +221,21 @@ fun alignFileByWidth(inputName: String, outputName: String) {
         }
         if (i.length == m && i.isNotBlank()) {
             writer.write(i.trim())
-            writer.newLine()}
-        else {
+            writer.newLine()
+        } else {
             var j = i.count { it == ' ' }
-            var str=i.split(" ").toMutableList()
+            var str = i.split(" ").toMutableList()
             println(str)
             println(j)
             println(m)
-            println(m-i.length)
+            println(m - i.length)
 
 
-            var c=0
-            while (j <= (m - i.length-1)) {
-                str[c]+=" "
-                if (c<str.size-2) c++
-                else c=0
+            var c = 0
+            while (j <= (m - i.length - 1)) {
+                str[c] += " "
+                if (c < str.size - 2) c++
+                else c = 0
                 j++
             }
             println(str)
@@ -362,7 +362,7 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
         counter++
         work.removeIf { it!!.isBlank() }
         work = work.joinToString("").split(" ").toMutableList()
-        if (counter <= 1) work[0] = work[0].capitalize()
+        if (counter <= 1 && dictionary.size > 0) work[0] = work[0].capitalize()
         for (i in work) {
             writer.write(i)
             writer.newLine()
@@ -679,7 +679,8 @@ writer.write(line)
 writer.close()
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()}
+    TODO()
+}
 //    val digits = lhv.toString().split("").toMutableList()
 //    val writer = File(outputName).bufferedWriter()
 //    val delit = mutableListOf<Int>()

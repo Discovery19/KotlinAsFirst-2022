@@ -317,23 +317,46 @@ fun fromRoman(roman: String): Int = TODO()
  */
 //!!!
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
-    val check = listOf<Char>('>', '<', '[', ']', ' ')
-    var i = cells / 2
-    var counter = 0
-    val list = MutableList(cells) { 0 }
-    for (counter in 0..commands.length-1) {
-        if (commands[counter].toChar() !in check) throw Exception("IllegalArgumentException")
-    }
-    if ('[' in commands && ']' !in commands || '[' !in commands && ']' in commands) throw Exception("IllegalArgumentException")
-    while (counter <= commands.length || counter != limit) {
-        when {
-            commands[counter] == '>' -> i++
-            commands[counter] == '<' -> i--
-            commands[counter] == '+' -> list[i] = list[i] + 1
-            commands[counter] == '-' -> list[i] = list[i] - 1
-        }
-
-    }
-    return list
+    TODO()
 }
-
+//    val check = listOf<Char>('>', '<', '[', ']', ' ')
+//    var i = cells / 2
+//    var counter = 0
+//    val list = MutableList(cells) { 0 }
+//    for (counter in 0..commands.length - 1) {
+//        if (commands[counter].toChar() !in check)
+//            throw Exception("IllegalArgumentException")
+//    }
+//    if ('[' in commands && ']' !in commands || '[' !in commands && ']' in commands)
+//        throw Exception("IllegalArgumentException")
+//    while (counter <= commands.length || counter != limit) {
+//        when {
+//            commands[counter] == '>' -> i++
+//            commands[counter] == '<' -> i--
+//            commands[counter] == '+' -> list[i] = list[i] + 1
+//            commands[counter] == '-' -> list[i] = list[i] - 1
+//            commands[counter] == ' ' -> list[i] = list[i]
+//        }
+//        counter++
+//        var index=0
+//        if (commands[counter] == '[') {
+//            val k = i
+//            val j = commands.subSequence(commands.lastIndexOf(']')-index-1,
+//                commands.lastIndexOf(']')-index)
+//            while (list[k] != 0 && list[j] == 0) {
+//                when {
+//                    commands[counter] == '>' -> i++
+//                    commands[counter] == '<' -> i--
+//                    commands[counter] == '+' -> list[i] = list[i] + 1
+//                    commands[counter] == '-' -> list[i] = list[i] - 1
+//                    commands[counter] == ' ' -> list[i] = list[i]
+//                }
+//            }
+//            index++
+//        }
+//
+//
+//    }
+//    return list
+//}
+//
