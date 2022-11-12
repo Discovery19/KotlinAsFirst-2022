@@ -19,16 +19,15 @@ import kotlin.math.sqrt
  *
  * Найти все корни уравнения x^2 = y
  */
-fun sqRoots(y: Double) =
-    when {
-        y < 0 -> listOf()
-        y == 0.0 -> listOf(0.0)
-        else -> {
-            val root = sqrt(y)
-            // Результат!
-            listOf(-root, root)
-        }
+fun sqRoots(y: Double) = when {
+    y < 0 -> listOf()
+    y == 0.0 -> listOf(0.0)
+    else -> {
+        val root = sqrt(y)
+        // Результат!
+        listOf(-root, root)
     }
+}
 
 /**
  * Пример
@@ -155,10 +154,9 @@ fun mean(list: List<Double>): Double = ari(list)
  */
 fun izmena(list: MutableList<Double>): MutableList<Double> {
     val s = list.sum() / list.size
-    if (list.size == 0) return list else
-        for (i in 0..list.size - 1) {
-            list[i] = list[i] - s
-        }
+    if (list.size == 0) return list else for (i in 0..list.size - 1) {
+        list[i] = list[i] - s
+    }
     return list
 }
 
@@ -381,9 +379,9 @@ fun decimalFromString(str: String, base: Int): Int = stroka(str, base)
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun rome(n: Int): String {
-    val numblist = listOf<Int>(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
-    val romelist = listOf<String>("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+val numblist = listOf<Int>(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+val romelist = listOf<String>("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+fun roman(n: Int): String {
     var result = ""
     var num = n
     for (d in 0..numblist.size - 1) {
@@ -396,8 +394,6 @@ fun rome(n: Int): String {
     }
     return result
 }
-
-fun roman(n: Int): String = rome(n)
 
 /**
  * Очень сложная (7 баллов)
@@ -415,16 +411,22 @@ fun russian(n: Int): String {
         "", "одна", "две", "три", "четыре"
     )
     val dig10 = arrayOf(
-        "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
-        "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
+        "десять",
+        "одиннадцать",
+        "двенадцать",
+        "тринадцать",
+        "четырнадцать",
+        "пятнадцать",
+        "шестнадцать",
+        "семнадцать",
+        "восемнадцать",
+        "девятнадцать"
     )
     val dig20 = arrayOf(
-        "", "", "двадцать", "тридцать", "сорок", "пятьдесят",
-        "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
+        "", "", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
     )
     val dig100 = arrayOf(
-        "", "сто", "двести", "триста", "четыреста", "пятьсот",
-        "шестьсот", "семьсот", "восемьсот", "девятьсот"
+        "", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"
     )
     val leword = arrayOf(
         "тысяча", "тысячи", "тысяч"
@@ -448,9 +450,9 @@ fun russian(n: Int): String {
             res = dig10[i % 10] + " " + leword[2] + " " + res
             i /= 10
         } else {
-            if (i % 10 == 1) res = dig01[i % 10] + " " + leword[0] + " " + res else
-                if (i % 10 in 2..4) res = dig01[i % 10] + " " + leword[1] + " " + res else
-                    if (len >= 4) res = dig1[i % 10] + " " + leword[2] + " " + res
+            if (i % 10 == 1) res = dig01[i % 10] + " " + leword[0] + " " + res else if (i % 10 in 2..4) res =
+                dig01[i % 10] + " " + leword[1] + " " + res else if (len >= 4) res =
+                dig1[i % 10] + " " + leword[2] + " " + res
 
             i /= 10
         }

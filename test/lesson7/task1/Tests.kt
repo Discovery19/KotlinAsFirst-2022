@@ -134,6 +134,12 @@ Basic, Ruby, Swift.
     @Test
     @Tag("20")
     fun alignFileByWidth() {
+        alignFileByWidth("input/width_in2.txt", "temp.txt")
+        assertFileContent("temp.txt","""2) Пустые строки или строки из пробелов во входном файле должны превратиться в пустые строки в выходном файле.
+1)  Число  пробелов  между  каждыми  двумя  парами  соседних  слов  не  должно  отличаться  более,  чем  на 1.
+2)  Число  пробелов  между  более  левой  парой  соседних  слов  должно  быть  больше или равно числу пробелов"""
+        )
+        File("temp.txt").delete()
         alignFileByWidth("input/width_in1.txt", "temp.txt")
         assertFileContent(
             "temp.txt",

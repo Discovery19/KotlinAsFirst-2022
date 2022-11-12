@@ -223,23 +223,23 @@ fun alignFileByWidth(inputName: String, outputName: String) {
             writer.write(i.trim())
             writer.newLine()
         } else {
-            var j = i.count { it == ' ' }
+            var j = m-i.trim().length
             var str = i.split(" ").toMutableList()
             println(str)
             println(j)
             println(m)
-            println(m - i.length)
+            println(m - i.trim().length)
 
 
             var c = 0
-            while (j <= (m - i.length - 1)) {
+            while (j >0) {
                 str[c] += " "
                 if (c < str.size - 2) c++
                 else c = 0
-                j++
+                j--
             }
             println(str)
-            writer.write(str.joinToString("  ").trim())
+            writer.write(str.joinToString(" ").trim())
             writer.newLine()
         }
     }
