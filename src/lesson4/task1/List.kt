@@ -123,26 +123,15 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun vector(list: List<Double>): Double {
-    var s = 0.0
-    for (element in list) {
-        s += element * element
-    }
-    return sqrt(s)
-}
-
-fun abs(v: List<Double>): Double = vector(v)
+fun abs(v: List<Double>): Double = sqrt(v.sumBy { (it * it).toInt() }.toDouble())
 
 /**
  * Простая (2 балла)
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun ari(list: List<Double>): Double {
-    return if (list.size == 0) 0.0 else list.sum() / list.size
-}
 
-fun mean(list: List<Double>): Double = ari(list)
+fun mean(list: List<Double>): Double = if (list.isEmpty()) 0.0 else list.sum() / list.size
 
 /**
  * Средняя (3 балла)
@@ -152,15 +141,14 @@ fun mean(list: List<Double>): Double = ari(list)
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun izmena(list: MutableList<Double>): MutableList<Double> {
-    val s = list.sum() / list.size
-    if (list.size == 0) return list else for (i in 0..list.size - 1) {
+
+fun center(list: MutableList<Double>): MutableList<Double> {
+    val s = mean(list)
+    for (i in 0..list.size - 1) {
         list[i] = list[i] - s
     }
     return list
 }
-
-fun center(list: MutableList<Double>): MutableList<Double> = izmena(list)
 
 /**
  * Средняя (3 балла)
@@ -222,25 +210,18 @@ fun factorize(n: Int): List<Int> = TODO()
 /** Есть два варианта и ни один не проходит по времени. Не знаю как оптимизировать */
 fun easynumber(n: Int): String {
     var list = mutableListOf<Int>()
-    var k = 0
-    k = n
+    var k = n
     var i = 2
     while (i * i <= k) {
-        while (n % i == 0) {
+        while (k % i == 0) {
             list.add(i)
             k = k / i
         }
         i += 1
     }
-    if (n > 1) list.add(k)
-
-    print(list)
-    var string = ""
-    //if (list[list.last()]!=list[list.last()-1])
-    for (s in list - 1) {
-        string = string + s + "*"
-    }
-    return string.substring(0, string.length - 1)
+    if (k > 1) list.add(k)
+    var string = list.joinToString("*")
+    return string
 }
 
 fun easynumber2(n: Int): String {
@@ -263,7 +244,7 @@ fun easynumber2(n: Int): String {
     return string.substring(0, string.length - 1)
 }
 
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String = easynumber(n)
 
 /**
  * Средняя (3 балла)
