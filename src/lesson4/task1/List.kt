@@ -208,43 +208,21 @@ fun factorize(n: Int): List<Int> = TODO()
 
 
 /** Есть два варианта и ни один не проходит по времени. Не знаю как оптимизировать */
-fun easynumber(n: Int): String {
+
+fun factorizeToString(n: Int): String {
     var list = mutableListOf<Int>()
     var k = n
     var i = 2
     while (i * i <= k) {
         while (k % i == 0) {
             list.add(i)
-            k = k / i
+            k /= i
         }
         i += 1
     }
     if (k > 1) list.add(k)
-    var string = list.joinToString("*")
-    return string
+    return list.joinToString("*")
 }
-
-fun easynumber2(n: Int): String {
-    var list = mutableListOf<Int>()
-    var k = 0
-    k = n
-    while (k > 0) {
-        for (i in 2..sqrt(n.toDouble()).toInt()) {
-            if (k % i == 0) list.add(i)
-            if (k % i == 0) k = k / i
-        }
-        if (list.size == 0) list.add(n)
-    }
-    print(list)
-    var string = ""
-
-    for (s in list - 1) {
-        string = string + s + "*"
-    }
-    return string.substring(0, string.length - 1)
-}
-
-fun factorizeToString(n: Int): String = easynumber(n)
 
 /**
  * Средняя (3 балла)
@@ -275,17 +253,10 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun chislo(digits: List<Int>, base: Int): Int {
-    var k = 0
+fun decimal(digits: List<Int>, base: Int): Int {
     var l = 0
     var s = 0.0
-    var i = 0
-    if (digits.size == 1 && base == 2 && digits[0] == 1) return 1 else if (digits.size == 1 && base == 2 && digits[0] == 0) return 0
-    for (i in digits) {
-        println(digits[k])
-        k += 1
-    }
-    i = k
+    var i = digits.size
     while (i != 0) {
         s += digits[l].toDouble() * (base.toDouble()).pow(i - 1)
         l += 1
@@ -294,8 +265,6 @@ fun chislo(digits: List<Int>, base: Int): Int {
 
     return s.toInt()
 }
-
-fun decimal(digits: List<Int>, base: Int): Int = chislo(digits, base)
 
 /**
  * Сложная (4 балла)
@@ -309,43 +278,29 @@ fun decimal(digits: List<Int>, base: Int): Int = chislo(digits, base)
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun findIndex(values: List<Char>, item: Char): Int {
-    for (i in values.indices) {
-        if (values[i] == item) {
-            return i
-        }
-    }
-    return -1
-}
+fun findIndex(values: List<Char>, item: Char): Int = values.indexOf(item)
 
 fun stroka(str: String, base: Int): Int {
     var chars = str.toList()
     var s = 0.0
-    var k = 0
-    var i = 0
     var l = 0
-    var h = 0.0
     println(chars)
     var alphabet = mutableListOf<Char>()
-    if (chars.size == 1 && base == 2 && chars[0] == '1') return 1 else if (chars.size == 1 && base == 2 && chars[0] == '0') return 0
+    //if (chars.size == 1 && base == 2 && chars[0] == '1') return 1 else if (chars.size == 1 && base == 2 && chars[0] == '0') return 0
     for (p in '0'..'9') {
         alphabet.add(p)
     }
     for (p in 'a'..'z') {
         alphabet.add(p)
     }
-    for (p in chars) {
-        k += 1
-    }
-    i = k
+    var i = chars.size
     while (i != 0) {
-        println("chislo chislo")
-        h = findIndex(alphabet, chars[l]).toDouble()
-        s += (h) * (base.toDouble()).pow(i - 1)
+        val h = findIndex(alphabet, chars[l]).toDouble()
+        s += h * (base.toDouble()).pow(i - 1)
         l += 1
         i -= 1
     }
-    if (chars.size == 1 && base == 2) s = 1.0 else if (chars.size == 1 && base == 2) s = 0.0
+    //if (chars.size == 1 && base == 2) s = 1.0 else if (chars.size == 1 && base == 2) s = 0.0
     return s.toInt()
 }
 
@@ -365,12 +320,10 @@ val romelist = listOf<String>("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "
 fun roman(n: Int): String {
     var result = ""
     var num = n
-    for (d in 0..numblist.size - 1) {
-        for (k in d..romelist.size - 1) {
-            while (num >= numblist[d]) {
-                result += romelist[k]
-                num -= numblist[d]
-            }
+    for (d in numblist.indices) {
+        while (num >= numblist[d]) {
+            result += romelist[d]
+            num -= numblist[d]
         }
     }
     return result
