@@ -99,7 +99,7 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun grade(grades: Map<String, Int>): Map<Int, List<String>> {
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
     val gradeMap = mutableMapOf<Int, MutableList<String>>()
     for ((name, num) in grades) {
         if (num !in gradeMap.keys) {
@@ -110,8 +110,6 @@ fun grade(grades: Map<String, Int>): Map<Int, List<String>> {
     }
     return gradeMap
 }
-
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = grade(grades)
 
 /**
  * Простая (2 балла)
@@ -163,16 +161,16 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
  * В выходном списке не должно быть повторяющихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
-fun who(a: List<String>, b: List<String>): List<String> {
-    var list = mutableListOf<String>()
-
-    for (name in a) {
-        for (name2 in b) {
-            if (name == name2) list.add(name)
-        }
-    }
-    return list.distinct()
-}
+//fun who(a: List<String>, b: List<String>): List<String> {
+//    var list = mutableListOf<String>()
+//
+//    for (name in a) {
+//        for (name2 in b) {
+//            if (name == name2) list.add(name)
+//        }
+//    }
+//    return list.distinct()
+//}
 
 //надеюсь вы это имели в виду
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = a.intersect(b).toList()
@@ -196,12 +194,13 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = a.intersect(b
  */
 
 //делал по примеру из интернета, пожалуйста не бейте
-fun phonebook(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
+
+
+fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
     val phone = (mapA.asSequence() + mapB.asSequence()).distinct().groupBy({ it.key }, { it.value })
         .mapValues { (_, names) -> names.joinToString(", ") }
     return phone
 }
-fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> = phonebook(mapA, mapB)
 
 /**
  * Средняя (4 балла)
@@ -213,7 +212,8 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun price(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
+
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
     val middle = mutableMapOf<String, Double>()
     val xy = mutableMapOf<String, Int>()
     for (name in stockPrices) {
@@ -239,8 +239,6 @@ fun price(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
     return middle
 }
 
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = price(stockPrices)
-
 /**
  * Средняя (4 балла)
  *
@@ -256,12 +254,32 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun shop(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+
+//fun shop2(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+//    var min = 0.0
+//    var res: String? = ""
+//    val stuff2 = stuff.toMutableMap()
+//    min = 9999.0
+//
+//    for (name in stuff2.values) {
+//        if (name.second < min && name.first == kind) {
+//            min = name.second
+//
+//            res = stuff2.filter { min == name.second }!!.keys.first()
+//        }
+//        if (name.second < min && name.first != kind) {
+//            res = null
+//        }
+//    }
+//    return res
+//}
+
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
     //просто большое число, minof из пары не берется minOf(stuff.values.second)
     var min = 999999.0
     var res: String? = ""
 
-    for ((name,para) in stuff) {
+    for ((name, para) in stuff) {
         if (para.second < min && para.first == kind) {
             min = para.second
             res = name
@@ -270,25 +288,6 @@ fun shop(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
     }
     return res
 }
-fun shop2(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    var min = 0.0
-    var res: String? = ""
-    val stuff2 = stuff.toMutableMap()
-    min = 9999.0
-
-    for (name in stuff2.values) {
-        if (name.second < min && name.first == kind) {
-            min = name.second
-
-            res = stuff2.filter { min == name.second }!!.keys.first()
-        }
-        if (name.second < min && name.first != kind) {
-            res = null
-        }
-    }
-    return res
-}
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = shop(stuff, kind)
 
 /**
  * Средняя (3 балла)
@@ -385,10 +384,9 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  */
 
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    for (numb in 0..list.size - 2) {
-        for (i in numb + 1..list.size - 1) {
-            if (list[numb] + list[i] == number && numb != i) return Pair(numb, i)
-        }
+    for (numb in list.indices) {
+        val s = number - list[numb]
+        if (number - list[numb] == s && s in list && list.indexOf(s) != numb) return Pair(numb, list.indexOf(s))
     }
     return Pair(-1, -1)
 }

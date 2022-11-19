@@ -5,6 +5,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson5.task1.removeFillerWords
+import java.lang.StringBuilder
 //import ru.spbstu.wheels.NullableMonad.filter
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -157,15 +158,14 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun scal(a: List<Int>, b: List<Int>): Int {
+
+fun times(a: List<Int>, b: List<Int>): Int {
     var s = 0
-    for (i in 0..a.size - 1) {
+    for (i in a.indices) {
         s += a[i] * b[i]
     }
     return s
 }
-
-fun times(a: List<Int>, b: List<Int>): Int = scal(a, b)
 
 /**
  * Средняя (3 балла)
@@ -262,7 +262,6 @@ fun decimal(digits: List<Int>, base: Int): Int {
         l += 1
         i -= 1
     }
-
     return s.toInt()
 }
 
@@ -317,16 +316,17 @@ fun decimalFromString(str: String, base: Int): Int = stroka(str, base)
  */
 val numblist = listOf<Int>(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
 val romelist = listOf<String>("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+//понял зачем StringBuilder
 fun roman(n: Int): String {
-    var result = ""
+    var result = StringBuilder()
     var num = n
     for (d in numblist.indices) {
         while (num >= numblist[d]) {
-            result += romelist[d]
+            result.append(romelist[d])
             num -= numblist[d]
         }
     }
-    return result
+    return result.toString()
 }
 
 /**
