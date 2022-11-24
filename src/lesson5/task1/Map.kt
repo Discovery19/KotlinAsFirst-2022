@@ -391,7 +391,19 @@ fun sumtwo(list: List<Int>, number: Int): Pair<Int, Int> {
     return map.get(number)!!
 }
 
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = sumtwo(list, number)
+fun sumtwo2(list: List<Int>, number: Int): Pair<Int, Int> {
+    val map = mutableMapOf<Int, Int>()
+    for (i in list.indices) {
+        map[list[i]] = i
+    }
+    for ((key, value) in map) {
+        if (map.contains(number - key) && map.keys.indexOf(number - key) != map.keys.indexOf(key))
+            return Pair(value, map[number - key]!!)
+    }
+    return Pair(-1, -1)
+}
+
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = sumtwo2(list, number)
 //    for (numb in list.indices) {
 //        val s = number - list[numb]
 //        if (number - list[numb] == s && s in list && list.indexOf(s) != numb) return Pair(numb, list.indexOf(s))
