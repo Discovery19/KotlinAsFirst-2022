@@ -197,7 +197,20 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    var list = mutableListOf<Int>()
+    var k = n
+    var i = 2
+    while (i * i <= k) {
+        while (k % i == 0) {
+            list.add(i)
+            k /= i
+        }
+        i += 1
+    }
+    if (k > 1) list.add(k)
+    return list
+}
 
 /**
  * Сложная (4 балла)
@@ -210,20 +223,8 @@ fun factorize(n: Int): List<Int> = TODO()
 
 /** Есть два варианта и ни один не проходит по времени. Не знаю как оптимизировать */
 
-fun factorizeToString(n: Int): String {
-    var list = mutableListOf<Int>()
-    var k = n
-    var i = 2
-    while (i * i <= k) {
-        while (k % i == 0) {
-            list.add(i)
-            k /= i
-        }
-        i += 1
-    }
-    if (k > 1) list.add(k)
-    return list.joinToString("*")
-}
+fun factorizeToString(n: Int): String = factorize(n).joinToString("*")
+
 
 /**
  * Средняя (3 балла)
@@ -278,15 +279,13 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun findIndex(values: List<Char>, item: Char): Int = values.indexOf(item)
+
 
 fun stroka(str: String, base: Int): Int {
     val chars = str.toList()
     var s = 0.0
     var l = 0
-    println(chars)
     var alphabet = mutableListOf<Char>()
-    //if (chars.size == 1 && base == 2 && chars[0] == '1') return 1 else if (chars.size == 1 && base == 2 && chars[0] == '0') return 0
     for (p in '0'..'9') {
         alphabet.add(p)
     }
@@ -295,12 +294,11 @@ fun stroka(str: String, base: Int): Int {
     }
     var i = chars.size
     while (i != 0) {
-        val h = findIndex(alphabet, chars[l]).toDouble()
+        val h = alphabet.indexOf(chars[l])
         s += h * (base.toDouble()).pow(i - 1)
         l += 1
         i -= 1
     }
-    //if (chars.size == 1 && base == 2) s = 1.0 else if (chars.size == 1 && base == 2) s = 0.0
     return s.toInt()
 }
 
@@ -403,10 +401,10 @@ fun russian(n: Int): String {
     for (i in leword) {
         if (i in res3) {
             val a = res3.indexOf(i)
-            res3[a-1] = res3[a].also { res3[a] = res3[a - 1] }
+            res3[a - 1] = res3[a].also { res3[a] = res3[a - 1] }
             break
         }
     }
-    return res3.reversed().joinToString(" ").replace("  "," ").trim()
+    return res3.reversed().joinToString(" ").replace("  ", " ").trim()
 
 }

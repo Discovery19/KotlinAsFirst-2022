@@ -2,6 +2,7 @@
 
 package lesson5.task1
 
+import java.lang.StringBuilder
 import kotlin.math.pow
 
 
@@ -123,11 +124,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  */
 
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
-    for ((key1, value1) in a) {
-        if (key1 in b) {
-            if (value1 == b[key1]) return true
-        }
-    }
+    for ((key1, value1) in a) if (key1 in b && value1 == b[key1]) return true
     return false
 }
 
@@ -221,12 +218,10 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
             middle[name.first] = name.second
             xy.put(name.first, 1)
         } else {
-            val x = middle[name.first]
-            val y = xy[name.first]
-            if (x != null && y != null) {
-                middle[name.first] = x + name.second
-                xy[name.first] = y + 1
-            }
+            val x = middle.getValue(name.first)
+            val y = xy.getValue(name.first)
+            middle[name.first] = x + name.second
+            xy[name.first] = y + 1
         }
     }
     for (name in middle) {
@@ -275,18 +270,22 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
 //}
 
 fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    //просто большое число, minof из пары не берется minOf(stuff.values.second)
-    var min = 999999.0
-    var res: String? = ""
-
+    var min = stuff.values.maxBy { it.second }.second
+    var res = StringBuilder()
+    var check = StringBuilder()
+    for ((first) in stuff.values) {
+        check.append("$first ")
+    }
+    if (kind !in check) return null
     for ((name, para) in stuff) {
+        if (kind !in para.first) return null
         if (para.second < min && para.first == kind) {
             min = para.second
-            res = name
+            res.clear()
+            res.append(name)
         }
-        if (kind !in para.first) return null
     }
-    return res
+    return res.toString()
 }
 
 /**
@@ -382,14 +381,23 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    for (numb in list.indices) {
-        val s = number - list[numb]
-        if (number - list[numb] == s && s in list && list.indexOf(s) != numb) return Pair(numb, list.indexOf(s))
+fun sumtwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    var map = mutableMapOf<Int, Pair<Int, Int>>()
+    var k = 0
+    for (i in 1 until list.size) {
+        map.put(list[k] + list[i], (Pair(k, i)))
     }
-    return Pair(-1, -1)
+    if (map.get(number) == null) return Pair(-1, -1)
+    return map.get(number)!!
 }
+
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = sumtwo(list, number)
+//    for (numb in list.indices) {
+//        val s = number - list[numb]
+//        if (number - list[numb] == s && s in list && list.indexOf(s) != numb) return Pair(numb, list.indexOf(s))
+//    }
+//    return Pair(-1, -1)
+
 
 /**
  * Очень сложная (8 баллов)
