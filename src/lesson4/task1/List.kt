@@ -368,7 +368,7 @@ fun russian(n: Int): String {
     val len = n.toString().length
     while (i > 0) {
         if (i % 100 in 10..19) {
-            res.append(dig10[i % 10])
+            res.append(dig10[i % 10]+" ")
             i /= 100
         } else {
             res.append(dig1[i % 10] + " ")
