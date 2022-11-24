@@ -380,12 +380,12 @@ fun russian(n: Int): String {
         println(res)
         i /= 10
         if (i % 100 in 10..19) {
-            res.append(dig10[i % 10] + " " + leword[2] + " ")
+            res.append(leword[2] + " " + dig10[i % 10] + " ")
             i /= 10
         } else {
-            if (i % 10 == 1) res.append(dig01[i % 10] + " " + leword[0] + " ")
-            else if (i % 10 in 2..4) res.append(dig01[i % 10] + " " + leword[1] + " ")
-            else if (len >= 4) res.append(dig1[i % 10] + " " + leword[2] + " ")
+            if (i % 10 == 1) res.append(leword[0] + " " + dig01[i % 10] + " ")
+            else if (i % 10 in 2..4) res.append(leword[1] + " " +  dig01[i % 10]+ " ")
+            else if (len >= 4) res.append(leword[2] + " " + dig1[i % 10] + " ")
             i /= 10
         }
         if (len >= 5) {
@@ -397,14 +397,14 @@ fun russian(n: Int): String {
         break
     }
     var res3 = res.toString().replace("  ", " ").split(" ").toMutableList()
-
-    for (i in leword) {
-        if (i in res3) {
-            val a = res3.indexOf(i)
-            res3[a - 1] = res3[a].also { res3[a] = res3[a - 1] }
-            break
-        }
-    }
+    println(res3)
+//    for (i in leword) {
+//        if (i in res3) {
+//            val a = res3.indexOf(i)
+//            res3[a - 1] = res3[a].also { res3[a] = res3[a - 1] }
+//            break
+//        }
+//    }
     return res3.reversed().joinToString(" ").replace("  ", " ").trim()
 
 }

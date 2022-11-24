@@ -394,11 +394,12 @@ fun sumtwo(list: List<Int>, number: Int): Pair<Int, Int> {
 fun sumtwo2(list: List<Int>, number: Int): Pair<Int, Int> {
     val map = mutableMapOf<Int, Int>()
     for (i in list.indices) {
-        map[list[i]] = i
+        map[i] = list[i]
     }
+    println(map)
     for ((key, value) in map) {
-        if (map.contains(number - key) && map[number - key] != map[key])
-            return Pair(value, map[number - key]!!)
+        if (map.contains(number - value) && number - value != key)
+            return Pair(map[number - value]!!, key)
     }
     return Pair(-1, -1)
 }
