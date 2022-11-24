@@ -397,7 +397,7 @@ fun sumtwo2(list: List<Int>, number: Int): Pair<Int, Int> {
         map[list[i]] = i
     }
     for ((key, value) in map) {
-        if (map.contains(number - key) && map.keys.indexOf(number - key) != map.keys.indexOf(key))
+        if (map.contains(number - key) && map[number - key] != map[key])
             return Pair(value, map[number - key]!!)
     }
     return Pair(-1, -1)
