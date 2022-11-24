@@ -4,11 +4,12 @@ package lesson4.task1
 
 
 import lesson1.task1.discriminant
-import lesson5.task1.removeFillerWords
+//import lesson5.task1.removeFillerWords
 import java.lang.StringBuilder
 //import ru.spbstu.wheels.NullableMonad.filter
 import kotlin.math.pow
 import kotlin.math.sqrt
+
 
 // Урок 4: списки
 // Максимальное количество баллов = 12
@@ -258,7 +259,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
     var s = 0.0
     var i = digits.size
     while (i != 0) {
-        s += digits[l].toDouble() * (base.toDouble()).pow(i - 1)
+        s += digits[l] * (base.toDouble()).pow(i - 1)
         l += 1
         i -= 1
     }
@@ -280,7 +281,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
 fun findIndex(values: List<Char>, item: Char): Int = values.indexOf(item)
 
 fun stroka(str: String, base: Int): Int {
-    var chars = str.toList()
+    val chars = str.toList()
     var s = 0.0
     var l = 0
     println(chars)
@@ -316,7 +317,6 @@ fun decimalFromString(str: String, base: Int): Int = stroka(str, base)
  */
 val numblist = listOf<Int>(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
 val romelist = listOf<String>("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
-//понял зачем StringBuilder
 fun roman(n: Int): String {
     var result = StringBuilder()
     var num = n
@@ -366,45 +366,47 @@ fun russian(n: Int): String {
         "тысяча", "тысячи", "тысяч"
     )
     var i = n
-    var res = ""
+    var res = StringBuilder()
     val len = n.toString().length
     while (i > 0) {
         if (i % 100 in 10..19) {
-            res = dig10[i % 10] + res
+            res.append(dig10[i % 10])
             i /= 100
         } else {
-            res = dig1[i % 10] + res
+            res.append(dig1[i % 10] + " ")
             i /= 10
-            res = dig20[i % 10] + " " + res
+            res.append(dig20[i % 10] + " ")
             i /= 10
         }
-        res = dig100[i % 10] + " " + res
+        res.append(dig100[i % 10] + " ")
+        println(res)
         i /= 10
         if (i % 100 in 10..19) {
-            res = dig10[i % 10] + " " + leword[2] + " " + res
+            res.append(dig10[i % 10] + " " + leword[2] + " ")
             i /= 10
         } else {
-            if (i % 10 == 1) res = dig01[i % 10] + " " + leword[0] + " " + res else if (i % 10 in 2..4) res =
-                dig01[i % 10] + " " + leword[1] + " " + res else if (len >= 4) res =
-                dig1[i % 10] + " " + leword[2] + " " + res
-
+            if (i % 10 == 1) res.append(dig01[i % 10] + " " + leword[0] + " ")
+            else if (i % 10 in 2..4) res.append(dig01[i % 10] + " " + leword[1] + " ")
+            else if (len >= 4) res.append(dig1[i % 10] + " " + leword[2] + " ")
             i /= 10
         }
         if (len >= 5) {
             println(i)
-            res = dig20[i % 10] + " " + res
-            println(i)
+            res.append(dig20[i % 10] + " ")
             i /= 10
         }
-
-        println(i)
-        println(i % 10)
-        if (len == 6) res = dig100[i % 10] + " " + res
+        if (len == 6) res.append(dig100[i % 10] + " ")
         break
     }
-    while ("  " in res) {
-        res = res.replace("  ", " ")
+    var res3 = res.toString().replace("  ", " ").split(" ").toMutableList()
+
+    for (i in leword) {
+        if (i in res3) {
+            val a = res3.indexOf(i)
+            res3[a-1] = res3[a].also { res3[a] = res3[a - 1] }
+            break
+        }
     }
-    return res.trimEnd().trimStart()
+    return res3.reversed().joinToString(" ").replace("  "," ").trim()
 
 }
