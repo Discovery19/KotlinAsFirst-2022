@@ -285,7 +285,7 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
             res.append(name)
         }
     }
-    if (res.isEmpty()) return null
+    if (res.isEmpty() && kind != "") return null
     return res.toString()
 }
 
