@@ -190,31 +190,47 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun throwExample() {
-    throw IllegalArgumentException()
-}
+
 
 fun number(expression: String): Int {
 
     val list = expression.split(" ")
     var count = 0
     if (list.size == 1 && list[0].all { it.isDigit() }) return list[0].toInt()
-    else
-        for (i in 0..list.size - 1 step 2) {
+    for (i in 0..list.size - 1 step 2) {
 
-            if (i == 0 && list[0].all { it.isDigit() }) count += list[0].toInt()
-            else
-                if (i > 0 && (list[i - 1] == "+" || list[i - 1] == "-")
-                    && list[i].all { it.isDigit() }
-                ) {
-                    if (list[i - 1] == "+") count += list[i].toInt()
-                    else count -= list[i].toInt()
-                } else throwExample()
-        }
+        if (i == 0 && list[0].all { it.isDigit() }) count += list[0].toInt()
+        else
+            if (i > 0 && (list[i - 1] == "+" || list[i - 1] == "-")
+                && list[i].all { it.isDigit() }
+            ) {
+                if (list[i - 1] == "+") count += list[i].toInt()
+                else count -= list[i].toInt()
+            } else throw IllegalArgumentException()
+    }
     return count
 }
 
-fun plusMinus(expression: String): Int = number(expression)
+fun pm(expression: String): Int {
+    val str = expression.split(" ")
+    println(str)
+    val regex = "-?[0-9]+(\\.[0-9]+)?".toRegex()
+    //.matches(regex)
+    var res = 0
+    if (str[0].matches(regex)) res = str[0].toInt()
+    else throw IllegalArgumentException()
+    for (i in 1..str.size - 1) {
+        if (!str[i].matches(regex) && (str[i] != "+" || str[i] != "-")) throw IllegalArgumentException()
+    }
+    for (i in 2..str.size - 1 step 2) {
+        if (str[i - 1] == " +") res += str[i].toInt()
+        else res -= str[i].toInt()
+    }
+    return res
+
+}
+
+fun plusMinus(expression: String): Int = pm(expression)
 
 /**
  * Сложная (6 баллов)
