@@ -198,7 +198,7 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Множители в списке должны располагаться по возрастанию.
  */
 fun factorize(n: Int): List<Int> {
-    var list = mutableListOf<Int>()
+    val list = mutableListOf<Int>()
     var k = n
     var i = 2
     while (i * i <= k) {

@@ -146,9 +146,9 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
  */
 
 fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
-    for ((buk1, buk2) in b) {
-        if (buk1 in a.keys) {
-            if (a[buk1] == buk2) a.remove(buk1)
+    for ((key, value) in b) {
+        if (key in a.keys) {
+            if (a[key] == value) a.remove(key)
         }
     }
 }
@@ -405,40 +405,40 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun sumtwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    var map = mutableMapOf<Int, Pair<Int, Int>>()
-    var k = 0
-    for (i in 1 until list.size) {
-        map.put(list[k] + list[i], (Pair(k, i)))
-    }
-    if (map.get(number) == null) return Pair(-1, -1)
-    return map.get(number)!!
-}
-
-fun sumtwo2(list: List<Int>, number: Int): Pair<Int, Int> {
-    val map = mutableMapOf<Int, Int>()
-    for (i in list.indices) {
-        map[i] = list[i]
-    }
-    println(map)
-    for ((key, value) in map) {
-        if (map.contains(number - value) && number - value != key)
-            return Pair(map[number - value]!!, key)
-    }
-    return Pair(-1, -1)
-}
-
-fun sumtwo3(list: List<Int>, number: Int): Pair<Int, Int> {
-    val map = mutableMapOf<Int, Int>()
-    for (i in list.indices) {
-        map[list[i]] = i
-    }
-    for ((key, value) in map) {
-        if (map.contains(number - key) && map[number - key] != map[key])
-            return Pair(value, map[number - key]!!)
-    }
-    return Pair(-1, -1)
-}
+//fun sumtwo(list: List<Int>, number: Int): Pair<Int, Int> {
+//    var map = mutableMapOf<Int, Pair<Int, Int>>()
+//    var k = 0
+//    for (i in 1 until list.size) {
+//        map.put(list[k] + list[i], (Pair(k, i)))
+//    }
+//    if (map.get(number) == null) return Pair(-1, -1)
+//    return map.get(number)!!
+//}
+//
+//fun sumtwo2(list: List<Int>, number: Int): Pair<Int, Int> {
+//    val map = mutableMapOf<Int, Int>()
+//    for (i in list.indices) {
+//        map[i] = list[i]
+//    }
+//    println(map)
+//    for ((key, value) in map) {
+//        if (map.contains(number - value) && number - value != key)
+//            return Pair(map[number - value]!!, key)
+//    }
+//    return Pair(-1, -1)
+//}
+//
+//fun sumtwo3(list: List<Int>, number: Int): Pair<Int, Int> {
+//    val map = mutableMapOf<Int, Int>()
+//    for (i in list.indices) {
+//        map[list[i]] = i
+//    }
+//    for ((key, value) in map) {
+//        if (map.contains(number - key) && map[number - key] != map[key])
+//            return Pair(value, map[number - key]!!)
+//    }
+//    return Pair(-1, -1)
+//}
 
 fun sum(list: List<Int>, number: Int): Pair<Int, Int> {
     val map = mutableMapOf<Int, Int>()
