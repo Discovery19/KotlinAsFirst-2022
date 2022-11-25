@@ -218,8 +218,15 @@ class Tests {
         assertEquals(
             "a",
             findCheapestStuff(
+                mapOf("a" to ("" to 0.0)),
+                ""
+            )
+        )
+        assertEquals(
+            "",
+            findCheapestStuff(
                 mapOf("" to ("a" to 0.0), "Орео" to ("печенье" to 100.0)),
-                "печенье"
+                "a"
             )
         )
         assertNull(

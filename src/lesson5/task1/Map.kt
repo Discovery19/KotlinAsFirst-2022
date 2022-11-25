@@ -124,10 +124,11 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  */
 //(key1 in b) &&
 
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
-    for ((key1, value1) in a) if (value1 == b[key1]) return true
-    return false
-}
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
+//{
+//    for ((key1, value1) in a) if (value1 == b[key1]) return true
+//    return false
+//}
 
 /**
  * Простая (2 балла)
@@ -272,7 +273,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
 fun find(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
     var min = stuff.values.maxBy { it.second }.second
     var res: String? = ""
-    var check= mutableListOf<String>()
+    var check = mutableListOf<String>()
     for ((first) in stuff.values) {
         check.add("$first")
     }
@@ -282,11 +283,13 @@ fun find(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
         if (para.second < min && para.first == kind) {
             min = para.second
             res = name
-        }
 
+        }
+        if (para.second == 0.0) return name
     }
     return res
 }
+
 fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = find(stuff, kind)
 //{
 //    var min = stuff.values.maxBy { it.second }.second
