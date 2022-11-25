@@ -269,25 +269,45 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
 //    return res
 //}
 
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+fun find(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
     var min = stuff.values.maxBy { it.second }.second
-    var res = StringBuilder()
-    var check = StringBuilder()
+    var res: String? = ""
+    var check= mutableListOf<String>()
     for ((first) in stuff.values) {
-        check.append("$first ")
+        check.add("$first")
     }
+    println(check)
     if (kind !in check) return null
     for ((name, para) in stuff) {
-        if (kind !in para.first) return null
         if (para.second < min && para.first == kind) {
             min = para.second
-            res.clear()
-            res.append(name)
+            res = name
         }
+
     }
-    if (res.isEmpty() && kind != "") return null
-    return res.toString()
+    return res
 }
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = find(stuff, kind)
+//{
+//    var min = stuff.values.maxBy { it.second }.second
+//    var res = StringBuilder()
+//    var check = StringBuilder()
+//    for ((first) in stuff.values) {
+//        check.append("$first ")
+//    }
+//    println(check)
+//    if (kind !in check.split(" ")) return null
+//    for ((name, para) in stuff) {
+//        if (kind !in para.first) return null
+//        if (para.second < min && para.first == kind) {
+//            min = para.second
+//            res.clear()
+//            res.append(name)
+//        }
+//    }
+//    if (res.isEmpty() && kind != "") return null
+//    return res.toString()
+//}
 
 /**
  * Средняя (3 балла)
