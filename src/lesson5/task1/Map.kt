@@ -279,13 +279,13 @@ fun find(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
     }
     println(check)
     if (kind !in check) return null
+    if (stuff.size == 1) return stuff.keys.joinToString()
     for ((name, para) in stuff) {
         if (para.second < min && para.first == kind) {
             min = para.second
             res = name
 
         }
-        if (para.second == 0.0) return name
     }
     return res
 }
