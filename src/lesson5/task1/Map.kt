@@ -122,9 +122,10 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
+//(key1 in b) &&
 
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
-    for ((key1, value1) in a) if ((key1 in b) && value1 == b[key1]) return true
+    for ((key1, value1) in a) if (value1 == b[key1]) return true
     return false
 }
 
@@ -190,14 +191,13 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = a.intersect(b
  *   ) -> mapOf("Emergency" to "112, 911", "Police" to "02")
  */
 
-//делал по примеру из интернета, пожалуйста не бейте
-
-
-fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
-    val phone = (mapA.asSequence() + mapB.asSequence()).distinct().groupBy({ it.key }, { it.value })
-        .mapValues { (_, names) -> names.joinToString(", ") }
-    return phone
-}
+fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> = TODO()
+//обсудил, потом перепишу
+//{
+//    val phone = (mapA.asSequence() + mapB.asSequence()).distinct().groupBy({ it.key }, { it.value })
+//        .mapValues { (_, names) -> names.joinToString(", ") }
+//    return phone
+//}
 
 /**
  * Средняя (4 балла)

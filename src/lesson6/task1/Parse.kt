@@ -99,9 +99,7 @@ fun date(str: String): String {
         when {
             (list.size < 3) -> return ""
             (list[2].toInt() % 4 == 0 && list[1] == "февраля" && list[0] == "28") -> return ""
-            (list[2].toInt() % 4 == 0 && (list[2].toInt() % 100 != 0 ||
-                    list[2].toInt() % 400 == 0) && list[1] == "февраля" && list[0] == "29")
-            -> return "29.02." + list[2]
+            (list[2].toInt() % 4 == 0 && (list[2].toInt() % 100 != 0 || list[2].toInt() % 400 == 0) && list[1] == "февраля" && list[0] == "29") -> return "29.02." + list[2]
         }
 
         for (i in 0..year.size - 1) {
@@ -192,45 +190,37 @@ fun bestHighJump(jumps: String): Int = TODO()
  */
 
 
-fun number(expression: String): Int {
+//fun number(expression: String): Int {
+//
+//    val list = expression.split(" ")
+//    var count = 0
+//    if (list.size == 1 && list[0].all { it.isDigit() }) return list[0].toInt()
+//    for (i in 0..list.size - 1 step 2) {
+//
+//        if (i == 0 && list[0].all { it.isDigit() }) count += list[0].toInt()
+//        else if (i > 0 && (list[i - 1] == "+" || list[i - 1] == "-") && list[i].all { it.isDigit() }) {
+//            if (list[i - 1] == "+") count += list[i].toInt()
+//            else count -= list[i].toInt()
+//        } else throw IllegalArgumentException()
+//    }
+//    return count
+//}
 
-    val list = expression.split(" ")
-    var count = 0
-    if (list.size == 1 && list[0].all { it.isDigit() }) return list[0].toInt()
-    for (i in 0..list.size - 1 step 2) {
-
-        if (i == 0 && list[0].all { it.isDigit() }) count += list[0].toInt()
-        else
-            if (i > 0 && (list[i - 1] == "+" || list[i - 1] == "-")
-                && list[i].all { it.isDigit() }
-            ) {
-                if (list[i - 1] == "+") count += list[i].toInt()
-                else count -= list[i].toInt()
-            } else throw IllegalArgumentException()
-    }
-    return count
-}
-
-fun pm(expression: String): Int {
+fun plusMinus(expression: String): Int {
     val str = expression.split(" ")
-    println(str)
-    val regex = "-?[0-9]+(\\.[0-9]+)?".toRegex()
-    //.matches(regex)
     var res = 0
-    if (str[0].matches(regex)) res = str[0].toInt()
+    if (str[0].all { it.isDigit() }) res = str[0].toInt()
     else throw IllegalArgumentException()
-    for (i in 1..str.size - 1) {
-        if (!str[i].matches(regex) && (str[i] != "+" || str[i] != "-")) throw IllegalArgumentException()
+    for (i in 1 until str.size) {
+        if (!str[i].all { it.isDigit() } && (str[i] != "+" && str[i] != "-")) throw IllegalArgumentException()
     }
-    for (i in 2..str.size - 1 step 2) {
-        if (str[i - 1] == " +") res += str[i].toInt()
+    for (i in 2 until str.size step 2) {
+        if (str[i - 1] == "+") res += str[i].toInt()
         else res -= str[i].toInt()
     }
     return res
-
 }
 
-fun plusMinus(expression: String): Int = pm(expression)
 
 /**
  * Сложная (6 баллов)
