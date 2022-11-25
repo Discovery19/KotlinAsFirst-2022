@@ -271,7 +271,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
 //}
 
 fun find(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    var min = stuff.values.maxBy { it.second }.second
+    var min = stuff.values.maxBy { it.second }.second+1
     var res: String? = ""
     var check = mutableListOf<String>()
     for ((first) in stuff.values) {
