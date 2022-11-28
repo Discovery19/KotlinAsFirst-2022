@@ -99,10 +99,12 @@ fun date(str: String): String {
         when {
             (list.size < 3) -> return ""
             (list[2].toInt() % 4 == 0 && list[1] == "февраля" && list[0] == "28") -> return ""
-            (list[2].toInt() % 4 == 0 && (list[2].toInt() % 100 != 0 || list[2].toInt() % 400 == 0) && list[1] == "февраля" && list[0] == "29") -> return "29.02." + list[2]
+            (list[2].toInt() % 4 == 0 &&
+                    (list[2].toInt() % 100 != 0 || list[2].toInt() % 400 == 0)
+                    && list[1] == "февраля" && list[0] == "29") -> return "29.02." + list[2]
         }
 
-        for (i in 0..year.size - 1) {
+        for (i in year.indices) {
             if (list[1] == year[i]) {
                 m = i + 1
             }
