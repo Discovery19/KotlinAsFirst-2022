@@ -122,7 +122,7 @@ class Tests {
     @Test
     @Tag("2")
     fun containsIn() {
-        assertTrue(containsIn(mapOf(), mapOf()))
+        assertTrue(containsIn(mapOf(), mapOf( )))
         assertTrue(containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")))
         assertFalse(containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")))
     }
