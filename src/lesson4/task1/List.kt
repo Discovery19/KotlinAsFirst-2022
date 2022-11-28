@@ -281,29 +281,43 @@ fun decimal(digits: List<Int>, base: Int): Int {
  */
 
 
-fun stroka(str: String, base: Int): Int {
+//fun stroka(str: String, base: Int): Int {
+//    val chars = str.toList()
+//    var s = 0.0
+//    var l = 0
+//    var alphabet = mutableListOf<Char>()
+//    for (p in '0'..'9') {
+//        alphabet.add(p)
+//    }
+//    for (p in 'a'..'z') {
+//        alphabet.add(p)
+//    }
+//    var i = chars.size
+//    while (i != 0) {
+//        val h = alphabet.indexOf(chars[l])
+//        s += h * (base.toDouble()).pow(i - 1)
+//        l += 1
+//        i -= 1
+//    }
+//    return s.toInt()
+//}
+
+fun string(str: String, base: Int): Int {
     val chars = str.toList()
-    var s = 0.0
+    var s = mutableListOf<Int>()
     var l = 0
-    var alphabet = mutableListOf<Char>()
-    for (p in '0'..'9') {
-        alphabet.add(p)
-    }
-    for (p in 'a'..'z') {
-        alphabet.add(p)
-    }
     var i = chars.size
     while (i != 0) {
-        val h = alphabet.indexOf(chars[l])
-        s += h * (base.toDouble()).pow(i - 1)
+        var h = chars[l]
+        if (h in '0'..'9') s.add(chars[l] - '0')
+        else s.add(chars[l] - 'a' + 10)
         l += 1
         i -= 1
     }
-    return s.toInt()
+    return decimal(s, base)
 }
 
-
-fun decimalFromString(str: String, base: Int): Int = stroka(str, base)
+fun decimalFromString(str: String, base: Int): Int = string(str, base)
 
 /**
  * Сложная (5 баллов)
@@ -368,7 +382,7 @@ fun russian(n: Int): String {
     val len = n.toString().length
     while (i > 0) {
         if (i % 100 in 10..19) {
-            res.append(dig10[i % 10]+" ")
+            res.append(dig10[i % 10] + " ")
             i /= 100
         } else {
             res.append(dig1[i % 10] + " ")
@@ -384,7 +398,7 @@ fun russian(n: Int): String {
             i /= 10
         } else {
             if (i % 10 == 1) res.append(leword[0] + " " + dig01[i % 10] + " ")
-            else if (i % 10 in 2..4) res.append(leword[1] + " " +  dig01[i % 10]+ " ")
+            else if (i % 10 in 2..4) res.append(leword[1] + " " + dig01[i % 10] + " ")
             else if (len >= 4) res.append(leword[2] + " " + dig1[i % 10] + " ")
             i /= 10
         }

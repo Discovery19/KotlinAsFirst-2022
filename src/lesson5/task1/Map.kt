@@ -124,11 +124,11 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  */
 //(key1 in b) &&
 
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
-//{
-//    for ((key1, value1) in a) if (value1 == b[key1]) return true
-//    return false
-//}
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean
+{
+    for ((key1) in a) if (a.getValue(key1) == b.getValue(key1)) return true
+    return false
+}
 
 /**
  * Простая (2 балла)
@@ -214,23 +214,21 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
     val middle = mutableMapOf<String, Double>()
     val xy = mutableMapOf<String, Int>()
-    for (name in stockPrices) {
-        if (name.first !in middle.keys) {
-            middle[name.first] = name.second
-            xy.put(name.first, 1)
+    for ((first, second) in stockPrices) {
+        if (first !in middle.keys) {
+            middle[first] = second
+            xy[first] = 1
         } else {
-            val x = middle.getValue(name.first)
-            val y = xy.getValue(name.first)
-            middle[name.first] = x + name.second
-            xy[name.first] = y + 1
+            val x = middle.getValue(first)
+            val y = xy.getValue(first)
+            middle[first] = x + second
+            xy[first] = y + 1
         }
     }
-    for (name in middle) {
-        val x2 = middle[name.key]
-        val y2 = xy[name.key]
-        if (x2 != null && y2 != null) {
-            middle[name.key] = x2 / y2
-        }
+    for ((key) in middle) {
+        val x2 = middle[key]!!
+        val y2 = xy[key]!!
+        middle[key] = x2 / y2
     }
     return middle
 }
@@ -271,20 +269,19 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
 //}
 
 fun find(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    var min = stuff.values.maxBy { it.second }.second+1
-    var res: String? = ""
+    var min = Double.POSITIVE_INFINITY
+    var res: String? = null
     var check = mutableListOf<String>()
     for ((first) in stuff.values) {
         check.add("$first")
     }
-    println(check)
-    if (kind !in check) return null
-    if (stuff.size == 1) return stuff.keys.joinToString()
+    //println(check)
+    //if (kind !in check) return null
+    //if (stuff.size == 1) return stuff.keys.joinToString()
     for ((name, para) in stuff) {
         if (para.second < min && para.first == kind) {
             min = para.second
             res = name
-
         }
     }
     return res
