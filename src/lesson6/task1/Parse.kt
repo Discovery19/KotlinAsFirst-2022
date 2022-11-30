@@ -169,8 +169,9 @@ fun flattenPhoneNumber(phone: String): String = TODO()
 fun jump(jumps: String): Int {
     var max = -1
     val regex = Regex("""[0-9\-%\s]+""")
+    val reg = Regex("""[ ]+""")
     if (!jumps.matches(regex)) return -1
-    for (i in jumps.replace("  ", " ").split(" ")) {
+    for (i in jumps.replace(reg, " ").split(" ")) {
         if (i.all { it.isDigit() } && i.toInt() > max) max = i.toInt()
     }
     return max
