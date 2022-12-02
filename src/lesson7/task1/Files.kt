@@ -155,15 +155,14 @@ fun sibilants(inputName: String, outputName: String) {
 fun centerFile(inputName: String, outputName: String) {
     val file = readFile(inputName).toList()
     val filework = file.map { it.trimStart().trimEnd() }
-    val writer = File(outputName).bufferedWriter()
     val max = filework.maxOfOrNull { it.length } ?: 0
-    println(max)
-    for (i in filework) {
-        val n = (max - i.length) / 2
-        writer.write(" ".repeat(n) + i)
-        writer.newLine()
+    File(outputName).bufferedWriter().use { writer ->
+        for (i in filework) {
+            val n = (max - i.length) / 2
+            writer.write(" ".repeat(n) + i)
+            writer.newLine()
+        }
     }
-    writer.close()
 }
 
 
@@ -219,11 +218,11 @@ fun alignFileByWidth(inputName: String, outputName: String) {
             writer.newLine()
             continue
         }
-        if (i.length == m && i.isNotBlank()) {
+        if (i.length == m) {
             writer.write(i.trim())
             writer.newLine()
         } else {
-            var j = m-i.trim().length
+            var j = m - i.trim().length
             var str = i.split(" ").toMutableList()
             println(str)
             println(j)
@@ -232,7 +231,8 @@ fun alignFileByWidth(inputName: String, outputName: String) {
 
 
             var c = 0
-            while (j >0) {
+            //почситиать и достваитьcent
+            while (j > 0) {
                 str[c] += " "
                 if (c < str.size - 2) c++
                 else c = 0
@@ -347,29 +347,33 @@ fun top20Words(inputName: String): Map<String, Int> = top20Words2(inputName)
  */
 //!!!
 fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: String) {
-    var list = readFile(inputName)
-    var counter = 0
-    val writer = File(outputName).bufferedWriter()
-    var work = mutableListOf<String>()
-    for (c in list) {
-        work = c.split("").toMutableList()
-        for (i in dictionary) {
-            for (k in 0..work.size - 1) {
-                if (work[k].toLowerCase() == i.key.toLowerCase().toString())
-                    work[k] = work[k].replace(work[k], i.value.toLowerCase())
-            }
-        }
-        counter++
-        work.removeIf { it!!.isBlank() }
-        work = work.joinToString("").split(" ").toMutableList()
-        if (counter <= 1 && dictionary.size > 0 && work[0].toLowerCase() in dictionary.keys.toString()) work[0] = work[0].capitalize()
-        for (i in work) {
-            writer.write(i)
-            writer.newLine()
-        }
-    }
-    writer.close()
+    TODO()
 }
+//{
+//    var list = readFile(inputName)
+//    var counter = 0
+//    val writer = File(outputName).bufferedWriter()
+//    var work = mutableListOf<String>()
+//    for (c in list) {
+//        work = c.split("").toMutableList()
+//        for (i in dictionary) {
+//            for (k in 0..work.size - 1) {
+//                if (work[k].toLowerCase() == i.key.toLowerCase().toString()) work[k] =
+//                    work[k].replace(work[k], i.value.toLowerCase())
+//            }
+//        }
+//        counter++
+//        work.removeIf { it!!.isBlank() }
+//        work = work.joinToString("").split(" ").toMutableList()
+//        if (counter <= 1 && dictionary.size > 0 && work[0].toLowerCase() in dictionary.keys.toString()) work[0] =
+//            work[0].capitalize()
+//        for (i in work) {
+//            writer.write(i)
+//            writer.newLine()
+//        }
+//    }
+//    writer.close()
+//}
 
 /**
  * Средняя (12 баллов)

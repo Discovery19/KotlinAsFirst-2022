@@ -195,8 +195,9 @@ fun best(jumps: String): Int {
     var res = -1
     if (!jumps.matches(regex)) return res
     val reg = Regex(""""[ ]+"""")
-    for (i in jumps.replace(reg, " ").split(" ")) {
-        if (i.all { it.isDigit() } && i.toInt() > res) res = i.toInt()
+    val work=jumps.replace(reg, " ").split(" ")
+    for (i in work.indices) {
+        if (work[i].all { it.isDigit() } && work[i].toInt() > res && work[i+1].contains("+")) res = work[i].toInt()
     }
     return res
 }
@@ -237,6 +238,7 @@ fun plusMinus(expression: String): Int {
     else throw IllegalArgumentException()
     for (i in 1 until str.size) {
         if (!str[i].all { it.isDigit() } && (str[i] != "+" && str[i] != "-")) throw IllegalArgumentException()
+        if (!str[i].all { it.isDigit() } && (str[i] != "+" && str[i] != "-")) throw IllegalArgumentException()
     }
     for (i in 2 until str.size step 2) {
         if (str[i - 1] == "+") res += str[i].toInt()
@@ -259,8 +261,8 @@ fun words(str: String): Int {
     var s = -1
     var p = ""
     val listfirst = str.split(" ")
-
     var list = mutableListOf<String>()
+
     for (k in 0..listfirst.size - 1) {
         list.add(listfirst[k])
         list.add(" ")
@@ -269,8 +271,8 @@ fun words(str: String): Int {
     var i = 0
     while (i in 0..list.size - 3) {
         p = list[i]
-        println(p)
-        println(p.length)
+//        println(p)
+//        println(p.length)
         if (list[i].toLowerCase() == list[i + 2].toLowerCase()) {
             return s + 1
         }
