@@ -224,14 +224,52 @@ fun alignFileByWidth(inputName: String, outputName: String) {
         } else {
             var j = m - i.trim().length
             var str = i.split(" ").toMutableList()
+
             println(str)
             println(j)
             println(m)
             println(m - i.trim().length)
 
+//            var max = 0
+//            var min = 0
+//            for (n in 0..Int.MAX_VALUE) {
+//                if (j < n * (str.size - 1)) {
+//                    max = n
+//                    min = n - 1
+//                    break
+//                }
+//            }
+//            println("bljqhwq")
+//            println(max)
+//            println(min)
+//            println(str.size - max * (str.size - 1) + j)
+//            for (i in 0..(str.size - max * (str.size - 1) + j)-2) {
+//                str[i] += " ".repeat(max)
+//            }
+//            for (i in (str.size - 1 - (max * str.size - 1) + j)..str.size - 2) {
+//                str[i] += " ".repeat(min)
+//            }
 
+//            val space = j / (str.size - 1)
+//            val ostSpace = j % (str.size - 1)
+//            println("space")
+//            println(space)
+//            println(ostSpace)
+//            //почситиать и достваитьcent
+//            var k = 0
+//            var c = 0
+//            while (j > 0 && c < str.size - 1) {
+//                j -= space
+//                str[c] += " ".repeat(space)
+//                c += 1
+//            }
+//            j += space
+//            while (j > 0) {
+//                j -= ostSpace
+//                str[c] += " ".repeat(ostSpace)
+//                c += 1
+//            }
             var c = 0
-            //почситиать и достваитьcent
             while (j > 0) {
                 str[c] += " "
                 if (c < str.size - 2) c++

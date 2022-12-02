@@ -190,19 +190,20 @@ fun bestLongJump(jumps: String): Int = jump(jumps)
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun best(jumps: String): Int {
+
+fun bestHighJump(jumps: String): Int {
     val regex = Regex("""[0-9\s%\-+]+""")
     var res = -1
     if (!jumps.matches(regex)) return res
     val reg = Regex(""""[ ]+"""")
-    val work=jumps.replace(reg, " ").split(" ")
+    val work = jumps.replace(reg, " ").split(" ")
     for (i in work.indices) {
-        if (work[i].all { it.isDigit() } && work[i].toInt() > res && work[i+1].contains("+")) res = work[i].toInt()
+        if (work[i].all { it.isDigit() }
+            && work[i].toInt() > res
+            && work[i + 1].contains("+")) res = work[i].toInt()
     }
     return res
 }
-
-fun bestHighJump(jumps: String): Int = best(jumps)
 
 /**
  * Сложная (6 баллов)
@@ -238,8 +239,8 @@ fun plusMinus(expression: String): Int {
     else throw IllegalArgumentException()
     for (i in 1 until str.size) {
         if (!str[i].all { it.isDigit() } && (str[i] != "+" && str[i] != "-")) throw IllegalArgumentException()
-        if (!str[i].all { it.isDigit() } && (str[i] != "+" && str[i] != "-")) throw IllegalArgumentException()
     }
+
     for (i in 2 until str.size step 2) {
         if (str[i - 1] == "+") res += str[i].toInt()
         else res -= str[i].toInt()
