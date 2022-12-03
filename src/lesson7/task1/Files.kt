@@ -483,7 +483,7 @@ fun html(inputName: String, outputName: String) {
 //            p = true
 //            continue
 //        } else
-            if (k.isEmpty()) {
+        if (k.isEmpty()) {
             writer.write("</p>")
             writer.write("<p>")
             continue
@@ -493,42 +493,36 @@ fun html(inputName: String, outputName: String) {
         var list = k.split("").toMutableList()
         var f = false
         for (i in list.indices) {
-            if (list[i] == "~" && list[i+1] == "~" && !f) {
+            if (list[i] == "~" && list[i + 1] == "~" && !f) {
                 list[i] = "<s>"
-                list[i+1] = ""
+                list[i + 1] = ""
                 f = true
-                continue
-            } else if (list[i] == "~" && list[i+1] == "~" && f) {
+            } else if (list[i] == "~" && list[i + 1] == "~" && f) {
                 list[i] = "</s>"
-                list[i+1] = ""
+                list[i + 1] = ""
                 f = false
-                continue
             }
         }
         f = false
         for (i in list.indices) {
-            if (list[i] == "*" && list[i+1]=="*" && !f) {
+            if (list[i] == "*" && list[i + 1] == "*" && !f) {
                 list[i] = "<b>"
-                list[i+1] = ""
+                list[i + 1] = ""
                 f = true
-                continue
-            } else if (list[i] == "*" && list[i+1]=="*" && f) {
+            } else if (list[i] == "*" && list[i + 1] == "*" && f) {
                 list[i] = "</b>"
-                list[i+1] = ""
+                list[i + 1] = ""
                 f = false
-                continue
             }
         }
         f = false
         for (i in list.indices) {
-            if (list[i] == "*" && list[i+1]!="*" && !f) {
+            if (list[i] == "*" && list[i + 1] != "*" && !f) {
                 list[i] = "<i>"
                 f = true
-                continue
             } else if (list[i] == "*" && list[i + 1] != "*" && f) {
                 list[i] = "</i>"
                 f = false
-                continue
             }
         }
         writer.write(list.joinToString(""))
