@@ -490,20 +490,22 @@ fun html(inputName: String, outputName: String) {
     var s = false
     var b = false
     var j = false
-    for (k in file) {
+    for (k in 0..file.size - 1) {
 //        if (k.isEmpty() && p == false) {
 //            writer.write("<p>")
 //            p = true
 //            continue
 //        } else
-        if (k.isBlank()) {
-            writer.write("</p>")
-            writer.write("<p>")
-            continue
+        if (k <= file.size - 2) {
+            if (!file[k + 1].isEmpty() && file[k].isBlank()) {
+                writer.write("</p>")
+                writer.write("<p>")
+                continue
+            }
         }
 
 //        var str = replace(k)
-        var list = k.replace(Regex("[\\s\\n\\t]+"), " ").split("").toMutableList()
+        var list = file[k].replace(Regex("[\\s\\n\\t]+"), " ").split("").toMutableList()
 
         for (i in list.indices) {
             if (list[i] == "~" && list[i + 1] == "~" && !s) {
