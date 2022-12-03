@@ -490,7 +490,7 @@ fun html(inputName: String, outputName: String) {
         }
 
 //        var str = replace(k)
-        var list = k.split("").toMutableList()
+        var list = k.replace(Regex("[\\s\\n\\t]"), "").split("").toMutableList()
         var f = false
         for (i in list.indices) {
             if (list[i] == "~" && list[i + 1] == "~" && !f) {
@@ -530,7 +530,6 @@ fun html(inputName: String, outputName: String) {
     writer.write("</p></body></html>")
     writer.close()
 }
-
 //    var b=false
 //    var index=0
 //    for (j in str){
