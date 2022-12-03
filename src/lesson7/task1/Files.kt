@@ -475,7 +475,7 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
 fun html(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var file = File(inputName).readLines().toMutableList()
-    var q=0
+    var q=1
     while (q <= file.size-2){
         if (file[q].isEmpty() && file[q+1].isEmpty()) {
             file.removeAt(q)
