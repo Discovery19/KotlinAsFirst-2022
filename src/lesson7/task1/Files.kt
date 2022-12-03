@@ -549,7 +549,7 @@ fun html(inputName: String, outputName: String) {
 
 
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    html(inputName, outputName)
+    TODO()
 }
 
 /**
