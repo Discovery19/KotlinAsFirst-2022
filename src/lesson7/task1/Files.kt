@@ -466,11 +466,11 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  *
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
-fun replace(str: String): String {
-    var res = str.replace("**", "%")
-    res = res.replace("*", "/")
-    return res.replace("~~", "~")
-}
+//fun replace(str: String): String {
+//    var res = str.replace("**", "%")
+//    res = res.replace("*", "/")
+//    return res.replace("~~", "~")
+//}
 
 fun html(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
@@ -489,15 +489,15 @@ fun html(inputName: String, outputName: String) {
             continue
         }
 
-        var str = replace(k)
-        var list = str.split("").toMutableList()
+//        var str = replace(k)
+        var list = k.split("").toMutableList()
         var f = false
         for (i in list.indices) {
-            if (list[i] == "~" && f == false) {
+            if (list[i] == "~" && list[i+1] == "~" && !f) {
                 list[i] = "<s>"
                 f = true
                 continue
-            } else if (list[i] == "~" && f == true) {
+            } else if (list[i] == "~" && list[i+1] == "~" && f) {
                 list[i] = "</s>"
                 f = false
                 continue
@@ -505,11 +505,11 @@ fun html(inputName: String, outputName: String) {
         }
         f = false
         for (i in list.indices) {
-            if (list[i] == "%" && f == false) {
+            if (list[i] == "*" && list[i+1]=="*" && !f) {
                 list[i] = "<b>"
                 f = true
                 continue
-            } else if (list[i] == "%" && f == true) {
+            } else if (list[i] == "*" && list[i+1]=="*" && f) {
                 list[i] = "</b>"
                 f = false
                 continue
@@ -517,11 +517,11 @@ fun html(inputName: String, outputName: String) {
         }
         f = false
         for (i in list.indices) {
-            if (list[i] == "/" && f == false) {
+            if (list[i] == "*" && list[i+1]!="*" && !f) {
                 list[i] = "<i>"
                 f = true
                 continue
-            } else if (list[i] == "/" && f == true) {
+            } else if (list[i] == "*" && list[i + 1] != "*" && f) {
                 list[i] = "</i>"
                 f = false
                 continue
