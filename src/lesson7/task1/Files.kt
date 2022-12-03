@@ -496,7 +496,7 @@ fun html(inputName: String, outputName: String) {
 //            p = true
 //            continue
 //        } else
-        if (k.isEmpty()) {
+        if (k.isBlank()) {
             writer.write("</p>")
             writer.write("<p>")
             continue
