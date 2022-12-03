@@ -476,7 +476,10 @@ fun html(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var file = File(inputName).readLines()
     writer.write("<html><body><p>")
-    //var p = true
+    var p = true
+    var s = false
+    var b=false
+    var j=false
     for (k in file) {
 //        if (k.isEmpty() && p == false) {
 //            writer.write("<p>")
@@ -491,38 +494,36 @@ fun html(inputName: String, outputName: String) {
 
 //        var str = replace(k)
         var list = k.replace(Regex("[\\s\\n\\t]+"), " ").split("").toMutableList()
-        var f = false
+
         for (i in list.indices) {
-            if (list[i] == "~" && list[i + 1] == "~" && !f) {
+            if (list[i] == "~" && list[i + 1] == "~" && !s) {
                 list[i] = "<s>"
                 list[i + 1] = ""
-                f = true
-            } else if (list[i] == "~" && list[i + 1] == "~" && f) {
+                s = true
+            } else if (list[i] == "~" && list[i + 1] == "~" && s) {
                 list[i] = "</s>"
                 list[i + 1] = ""
-                f = false
+                s = false
             }
         }
-        f = false
         for (i in list.indices) {
-            if (list[i] == "*" && list[i + 1] == "*" && !f) {
+            if (list[i] == "*" && list[i + 1] == "*" && !b) {
                 list[i] = "<b>"
                 list[i + 1] = ""
-                f = true
-            } else if (list[i] == "*" && list[i + 1] == "*" && f) {
+                b = true
+            } else if (list[i] == "*" && list[i + 1] == "*" && b) {
                 list[i] = "</b>"
                 list[i + 1] = ""
-                f = false
+                b = false
             }
         }
-        f = false
         for (i in list.indices) {
-            if (list[i] == "*" && list[i + 1] != "*" && !f) {
+            if (list[i] == "*" && list[i + 1] != "*" && !j) {
                 list[i] = "<i>"
-                f = true
-            } else if (list[i] == "*" && list[i + 1] != "*" && f) {
+                j = true
+            } else if (list[i] == "*" && list[i + 1] != "*" && j) {
                 list[i] = "</i>"
-                f = false
+                j = false
             }
         }
         writer.write(list.joinToString(""))
