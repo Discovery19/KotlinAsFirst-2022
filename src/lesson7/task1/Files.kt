@@ -477,7 +477,10 @@ fun html(inputName: String, outputName: String) {
     var file = File(inputName).readLines().toMutableList()
     var q=0
     while (q <= file.size-2){
-        if (file[q].isEmpty() && file[q+1].isEmpty()) file.removeAt(q)
+        if (file[q].isEmpty() && file[q+1].isEmpty()) {
+            file.removeAt(q)
+            q-=1
+        }
         q+=1
     }
     writer.write("<html><body><p>")
