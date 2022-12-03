@@ -497,7 +497,7 @@ fun html(inputName: String, outputName: String) {
 //            continue
 //        } else
         if (k <= file.size - 2) {
-            if (file[k].isEmpty()) {
+            if (file[k].isBlank()) {
                 writer.write("</p>")
                 writer.write("<p>")
                 continue
