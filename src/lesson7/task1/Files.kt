@@ -478,8 +478,8 @@ fun html(inputName: String, outputName: String) {
 
     var q = 0
     while (q <= file.size - 2) {
-        if (file[0].isEmpty()) file.removeAt(0)
-        if (file[q].isEmpty() && file[q + 1].isEmpty()) {
+        if (file[0].isBlank()) file.removeAt(0)
+        if (file[q].isBlank() && file[q + 1].isBlank()) {
             file.removeAt(q)
             q -= 1
         }
@@ -497,7 +497,7 @@ fun html(inputName: String, outputName: String) {
 //            continue
 //        } else
         if (k <= file.size - 2) {
-            if (!file[k + 1].isEmpty() && file[k].isBlank()) {
+            if (file[k].isEmpty()) {
                 writer.write("</p>")
                 writer.write("<p>")
                 continue
