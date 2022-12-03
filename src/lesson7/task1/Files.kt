@@ -495,10 +495,12 @@ fun html(inputName: String, outputName: String) {
         for (i in list.indices) {
             if (list[i] == "~" && list[i+1] == "~" && !f) {
                 list[i] = "<s>"
+                list[i+1] = ""
                 f = true
                 continue
             } else if (list[i] == "~" && list[i+1] == "~" && f) {
                 list[i] = "</s>"
+                list[i+1] = ""
                 f = false
                 continue
             }
@@ -507,10 +509,12 @@ fun html(inputName: String, outputName: String) {
         for (i in list.indices) {
             if (list[i] == "*" && list[i+1]=="*" && !f) {
                 list[i] = "<b>"
+                list[i+1] = ""
                 f = true
                 continue
             } else if (list[i] == "*" && list[i+1]=="*" && f) {
                 list[i] = "</b>"
+                list[i+1] = ""
                 f = false
                 continue
             }
