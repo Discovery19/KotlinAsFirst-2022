@@ -496,13 +496,20 @@ fun html(inputName: String, outputName: String) {
 //            p = true
 //            continue
 //        } else
-        if (k <= file.size - 1 && !file[file.size - 1].isEmpty()) {
+        if (k <= file.size - 2 ) {
             if (file[k].isBlank()) {
                 writer.write("</p>")
                 writer.write("<p>")
                 continue
             }
         }
+        if (k==file.size-1 && !file[file.size - 1].isEmpty()){
+            if (file[k].isBlank()) {
+                writer.write("</p>")
+                writer.write("<p>")
+            }
+        }
+
 
 //        var str = replace(k)
         var list = file[k].replace(Regex("[\\s\\n\\t]+"), " ").split("").toMutableList()
