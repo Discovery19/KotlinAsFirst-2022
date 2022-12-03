@@ -412,13 +412,6 @@ fun russian(n: Int): String {
     }
     var res3 = res.toString().replace("  ", " ").split(" ").toMutableList()
     println(res3)
-//    for (i in leword) {
-//        if (i in res3) {
-//            val a = res3.indexOf(i)
-//            res3[a - 1] = res3[a].also { res3[a] = res3[a - 1] }
-//            break
-//        }
-//    }
     return res3.reversed().joinToString(" ").replace("  ", " ").trim()
 
 }

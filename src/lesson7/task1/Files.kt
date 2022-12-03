@@ -2,8 +2,10 @@
 
 package lesson7.task1
 
+import lesson4.task1.string
 import ru.spbstu.wheels.out
 import java.io.File
+import java.lang.StringBuilder
 import kotlin.collections.MutableMap.MutableEntry
 import kotlin.math.absoluteValue
 import kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.DeclaredMemberIndex.Empty
@@ -224,51 +226,6 @@ fun alignFileByWidth(inputName: String, outputName: String) {
         } else {
             var j = m - i.trim().length
             var str = i.split(" ").toMutableList()
-
-            println(str)
-            println(j)
-            println(m)
-            println(m - i.trim().length)
-
-//            var max = 0
-//            var min = 0
-//            for (n in 0..Int.MAX_VALUE) {
-//                if (j < n * (str.size - 1)) {
-//                    max = n
-//                    min = n - 1
-//                    break
-//                }
-//            }
-//            println("bljqhwq")
-//            println(max)
-//            println(min)
-//            println(str.size - max * (str.size - 1) + j)
-//            for (i in 0..(str.size - max * (str.size - 1) + j)-2) {
-//                str[i] += " ".repeat(max)
-//            }
-//            for (i in (str.size - 1 - (max * str.size - 1) + j)..str.size - 2) {
-//                str[i] += " ".repeat(min)
-//            }
-
-//            val space = j / (str.size - 1)
-//            val ostSpace = j % (str.size - 1)
-//            println("space")
-//            println(space)
-//            println(ostSpace)
-//            //почситиать и достваитьcent
-//            var k = 0
-//            var c = 0
-//            while (j > 0 && c < str.size - 1) {
-//                j -= space
-//                str[c] += " ".repeat(space)
-//                c += 1
-//            }
-//            j += space
-//            while (j > 0) {
-//                j -= ostSpace
-//                str[c] += " ".repeat(ostSpace)
-//                c += 1
-//            }
             var c = 0
             while (j > 0) {
                 str[c] += " "
@@ -509,8 +466,92 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  *
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
+fun replace(str: String): String {
+    var res = str.replace("**", "%")
+    res = res.replace("*", "/")
+    return res.replace("~~", "~")
+}
+
+fun html(inputName: String, outputName: String) {
+    val writer = File(outputName).bufferedWriter()
+    var file = File(inputName).readLines()
+    writer.write("<html><body><p>")
+    //var p = true
+    for (k in file) {
+//        if (k.isEmpty() && p == false) {
+//            writer.write("<p>")
+//            p = true
+//            continue
+//        } else
+            if (k.isEmpty()) {
+            writer.write("</p>")
+            writer.write("<p>")
+            continue
+        }
+
+        var str = replace(k)
+        var list = str.split("").toMutableList()
+        var f = false
+        for (i in list.indices) {
+            if (list[i] == "~" && f == false) {
+                list[i] = "<s>"
+                f = true
+                continue
+            } else if (list[i] == "~" && f == true) {
+                list[i] = "</s>"
+                f = false
+                continue
+            }
+        }
+        f = false
+        for (i in list.indices) {
+            if (list[i] == "%" && f == false) {
+                list[i] = "<b>"
+                f = true
+                continue
+            } else if (list[i] == "%" && f == true) {
+                list[i] = "</b>"
+                f = false
+                continue
+            }
+        }
+        f = false
+        for (i in list.indices) {
+            if (list[i] == "/" && f == false) {
+                list[i] = "<i>"
+                f = true
+                continue
+            } else if (list[i] == "/" && f == true) {
+                list[i] = "</i>"
+                f = false
+                continue
+            }
+        }
+        writer.write(list.joinToString(""))
+    }
+    writer.write("</p></body></html>")
+    writer.close()
+}
+
+//    var b=false
+//    var index=0
+//    for (j in str){
+//        if (j=='%' && b==false) {
+//            index=str.indexOf("%")
+//            StringBuilder(str).apply { insert(index, "<b>") }.toString()
+//            b=true
+//        }
+//        else if (j=='%' && b==true){
+//            index=str.indexOf("%")
+//            StringBuilder(str).apply { insert(index, "</b>") }.toString()
+//            b=false
+//        }
+//    }
+//    println(str)
+
+
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    TODO()
+    html(inputName, outputName)
 }
 
 /**
