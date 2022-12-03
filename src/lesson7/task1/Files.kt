@@ -475,19 +475,21 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
 fun html(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var file = File(inputName).readLines().toMutableList()
-    var q=1
-    while (q <= file.size-2){
-        if (file[q].isEmpty() && file[q+1].isEmpty()) {
+
+    var q = 0
+    while (q <= file.size - 2) {
+        if (file[0].isEmpty()) file.removeAt(0)
+        if (file[q].isEmpty() && file[q + 1].isEmpty()) {
             file.removeAt(q)
-            q-=1
+            q -= 1
         }
-        q+=1
+        q += 1
     }
     writer.write("<html><body><p>")
     var p = true
     var s = false
-    var b=false
-    var j=false
+    var b = false
+    var j = false
     for (k in file) {
 //        if (k.isEmpty() && p == false) {
 //            writer.write("<p>")
