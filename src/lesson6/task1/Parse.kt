@@ -98,26 +98,18 @@ fun date(str: String): String {
         var m = 0
         when {
             (list.size < 3) -> return ""
-            //(list[2].toInt() % 4 == 0 && list[1] == "февраля" && list[0] == "28") -> return ""
             (list[2].toInt() % 4 == 0 &&
                     (list[2].toInt() % 100 != 0 || list[2].toInt() % 400 == 0)
                     && list[1] == "февраля" && list[0] == "29") -> return "29.02." + list[2]
         }
-
         for (i in year.indices) {
             if (list[1] == year[i]) {
                 m = i + 1
             }
         }
         if (m == 0) return ""
-
-        println(mounthnumb[m - 1])
         if (list[0].toInt() > mounthnumb[m - 1]) return "" else {
-            if (n in 0..9) result += "0$n." else result += "$n."
-
-            if (m in 0..9) result += "0$m." else result += "$m."
-
-            result += list[2]
+            result += twoDigitStr(n) + "." + twoDigitStr(m) + "." + list[2]
         }
         return result
     } catch (e: NumberFormatException) {
@@ -168,11 +160,10 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  */
 fun jump(jumps: String): Int {
     var max = -1
-    val regex = Regex("""[0-9\-%\s]+""")
-    val reg = Regex("""[ ]+""")
+    val regex = Regex("""[1-9][0-9]*( ([-%]|([1-9][0-9]*)*))*""")
     if (!jumps.matches(regex)) return -1
-    for (i in jumps.replace(reg, " ").split(" ")) {
-        if (i.all { it.isDigit() } && i.toInt() > max) max = i.toInt()
+    for (i in jumps.split(Regex("""[\s\-%]"""))) {
+        if (i.isNotEmpty() && i.all { it.isDigit() } && i.toInt() > max) max = i.toInt()
     }
     return max
 }
@@ -192,13 +183,12 @@ fun bestLongJump(jumps: String): Int = jump(jumps)
  */
 
 fun bestHighJump(jumps: String): Int {
-    val regex = Regex("""[0-9\s%\-+]+""")
+    val regex = Regex("""([0-9]+\s+[+%-]+)(\s+[0-9]+ [+%-]+)*""")
+    if (!jumps.matches(regex)) return -1
     var res = -1
-    if (!jumps.matches(regex)) return res
-    val reg = Regex(""""[ ]+"""")
-    val work = jumps.replace(reg, " ").split(" ")
+    val work = jumps.split(Regex("""[ ]+"""))
     for (i in work.indices) {
-        if (work[i].all { it.isDigit() }
+        if (work[i].isNotEmpty() && work[i].all { it.isDigit() }
             && work[i].toInt() > res
             && work[i + 1].contains("+")) res = work[i].toInt()
     }
@@ -216,39 +206,32 @@ fun bestHighJump(jumps: String): Int {
  */
 
 
-//fun number(expression: String): Int {
-//
-//    val list = expression.split(" ")
-//    var count = 0
-//    if (list.size == 1 && list[0].all { it.isDigit() }) return list[0].toInt()
-//    for (i in 0..list.size - 1 step 2) {
-//
-//        if (i == 0 && list[0].all { it.isDigit() }) count += list[0].toInt()
-//        else if (i > 0 && (list[i - 1] == "+" || list[i - 1] == "-") && list[i].all { it.isDigit() }) {
-//            if (list[i - 1] == "+") count += list[i].toInt()
-//            else count -= list[i].toInt()
-//        } else throw IllegalArgumentException()
-//    }
-//    return count
-//}
-
 fun plusMinus(expression: String): Int {
-    val str = expression.split(" ")
-    var res = 0
-    if (str[0].all { it.isDigit() }) res = str[0].toInt()
-    else throw IllegalArgumentException()
-    for (i in 1 until str.size) {
-        if (!str[i].all { it.isDigit() } && (str[i] != "+" && str[i] != "-")) throw IllegalArgumentException()
-    }
-
-    for (i in 2 until str.size step 2) {
-        if (str[i - 1] == "+") res += str[i].toInt()
-        else res -= str[i].toInt()
+    val regex = Regex("""[0-9]*(\s+([+-]\s+[0-9]+))*""")
+    if (!expression.matches(regex)) throw IllegalArgumentException()
+    val list = expression.split(Regex("""\s+"""))
+    println(list)
+    var res = list[0].toInt()
+    for (i in 2 until list.size step 2) {
+        if (list[i - 1] == "+") res += list[i].toInt()
+        else res -= list[i].toInt()
     }
     return res
 }
 
-
+//    val str = expression.split(" ")
+//    var res = 0
+//    if (str[0].all { it.isDigit() }) res = str[0].toInt()
+//    else throw IllegalArgumentException()
+//    for (i in 1 until str.size) {
+//        if (!str[i].all { it.isDigit() } && (str[i] != "+" && str[i] != "-")) throw IllegalArgumentException()
+//    }
+//
+//    for (i in 2 until str.size step 2) {
+//        if (str[i - 1] == "+") res += str[i].toInt()
+//        else res -= str[i].toInt()
+//    }
+//    return res
 /**
  * Сложная (6 баллов)
  *
@@ -259,29 +242,23 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun words(str: String): Int {
-    var s = -1
-    var p = ""
-    val listfirst = str.split(" ")
-    var list = mutableListOf<String>()
-
-    for (k in 0..listfirst.size - 1) {
-        list.add(listfirst[k])
-        list.add(" ")
-    }
+    val regex = Regex("""[А-яё]+(\s[А-яё]+)*""")
+    if (!str.matches(regex)) return -1
+    var res = 0
+    val list = str.toLowerCase().split(" ")
+    println(list)
     if (list.size == 1) return -1
-    var i = 0
-    while (i in 0..list.size - 3) {
-        p = list[i]
-//        println(p)
-//        println(p.length)
-        if (list[i].toLowerCase() == list[i + 2].toLowerCase()) {
-            return s + 1
-        }
-        s += p.length + 1
-        i += 2
-
+    var word = ""
+    for (i in list) {
+        word = i
+        if (list.count { it == i } >= 2) break
     }
-    return -1
+    println(word)
+    for (i in list) {
+        if (i != word ) res += i.length + 1
+        else break
+    }
+    return res
 }
 
 fun firstDuplicateIndex(str: String): Int = words(str)
