@@ -242,21 +242,21 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun words(str: String): Int {
-    val regex = Regex("""[А-яё]+(\s[А-яё]+)*""")
+    val regex = Regex("""[A-zА-яё]+(\s[A-zА-яё]+)*""")
     if (!str.matches(regex)) return -1
     var res = 0
     val list = str.toLowerCase().split(" ")
     println(list)
     if (list.size == 1) return -1
-    var word = ""
-    for (i in list) {
-        word = i
-        if (list.count { it == i } >= 2) break
+    var word = 0
+    for (i in list.indices - 1) {
+        if (list[i] == list[i + 1]) {
+            word = i
+            break
+        }
     }
-    println(word)
-    for (i in list) {
-        if (i != word ) res += i.length + 1
-        else break
+    for (i in 0 until word) {
+        res += list[i].length + 1
     }
     return res
 }
