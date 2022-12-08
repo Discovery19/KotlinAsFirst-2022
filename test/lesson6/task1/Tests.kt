@@ -161,3 +161,7 @@ class Tests {
         assertThrows(IllegalStateException::class.java) { computeDeviceCells(20, ">>>>>>>>>>>>>", 12) }
     }
 }
+@Test
+fun myFun(): Unit {
+    assertEquals(listOf("pidr"," chmo", "guilo"), myFun(mapOf("saska" to 14),"chmo - saska - 100\npidr - qwe - 1000\nguilo - saska - 50"))
+}

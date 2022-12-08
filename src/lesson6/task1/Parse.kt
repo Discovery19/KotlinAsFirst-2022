@@ -370,3 +370,22 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
 //    return list
 //}
 //
+
+fun myFun(table: Map<String, Int>, taxes: String): List<String> {
+    var res = mutableMapOf<String, Double>()
+    val regex = Regex("""([A-z ]+)-([A-z ]+)-( \d+)""")
+    if (!taxes.matches(regex)) throw java.lang.IllegalArgumentException()
+    for (i in taxes.split("\n")) {
+        val str = i.split("-")
+        val name = str[0].trim()
+        val type = str[1].trim()
+        val cash = str[2].trim()
+        var nalog = 0.0
+        if (table.contains(type)) nalog = cash.toDouble() * table.getValue(type).toDouble() / 100
+        else nalog = cash.toDouble() * 0.13
+        res.put(name,nalog)
+    }
+    val  result= mutableListOf<String>()
+    for (i in res.toList().sortedBy { (key,value)->value }.toMap().keys) result.add(i)
+    return result
+}
