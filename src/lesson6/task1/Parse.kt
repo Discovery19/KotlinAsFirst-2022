@@ -374,18 +374,41 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
 fun myFun(table: Map<String, Int>, taxes: String): List<String> {
     var res = mutableMapOf<String, Double>()
     val regex = Regex("""([A-z ]+)-([A-z ]+)-( \d+)""")
-    if (!taxes.matches(regex)) throw java.lang.IllegalArgumentException()
+
     for (i in taxes.split("\n")) {
+        if (!i.matches(regex)) throw java.lang.IllegalArgumentException()
         val str = i.split("-")
         val name = str[0].trim()
         val type = str[1].trim()
         val cash = str[2].trim()
         var nalog = 0.0
-        if (table.contains(type)) nalog = cash.toDouble() * table.getValue(type).toDouble() / 100
-        else nalog = cash.toDouble() * 0.13
-        res.put(name,nalog)
+        var percent = 0.0
+        if (table.contains(type)) percent = table.getValue(type).toDouble() / 100
+        else percent = 0.13
+        if (res.containsKey(name)) res.put(name, nalog + cash.toDouble() * percent)
+        else res.put(name, cash.toDouble() * percent)
     }
-    val  result= mutableListOf<String>()
-    for (i in res.toList().sortedBy { (key,value)->value }.toMap().keys) result.add(i)
+    println(res)
+    val result = mutableListOf<String>()
+    for (i in res.toList().sortedByDescending { (key, value) -> value }.toMap().keys) result.add(i)
     return result
+}
+
+fun movePets(movers: List<String>, pets: List<String>, limit: Int): List<String> {
+    val regex = Regex("""([A-zА-я]+:)( [A-zА-я]+\s+-\s+\d+|;)*""")
+    var res = mutableListOf<String>()
+    for (i in movers) {
+        if (!i.matches(regex)) throw java.lang.IllegalArgumentException()
+        val str = i.replace(Regex("""[;:-]"""), "").split(Regex("""\s+"""))
+        var sumPet = 0
+        var counterPets = 0
+        for (k in str.indices) {
+            if (str[k] in pets) {
+                sumPet += str[k + 1].toInt()
+                counterPets += 1
+            }
+        }
+        if (sumPet <= limit && counterPets == pets.size) res.add(str[0])
+    }
+    return res
 }
