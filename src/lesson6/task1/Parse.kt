@@ -412,3 +412,18 @@ fun movePets(movers: List<String>, pets: List<String>, limit: Int): List<String>
     }
     return res
 }
+
+fun nalog2(taxes: String, money: Int): Int {
+    val regex = Regex("""(\d+ у\.е\. - \d+%; )*(else - \d+%)""")
+    if (!taxes.matches(regex)) throw java.lang.IllegalArgumentException()
+    val str = taxes.replace(Regex("""[у\-.е%;]"""), "").split(Regex("""\s+"""))
+    println(str)
+    var cash = money
+    var i = 0
+    var result = 0
+    for (i in 0..str.size-1 step 2){
+        if (str[i].toInt()<=cash)
+    }
+    return result
+
+}
