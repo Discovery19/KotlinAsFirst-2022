@@ -232,6 +232,7 @@ fun plusMinus(expression: String): Int {
  */
 fun words(str: String): Int {
     val regex = Regex("""[A-zА-яё]+(\s[A-zА-яё]+)*""")
+    if (str.isEmpty()) return -1
     if (!str.matches(regex)) return 0
     var res = 0
     val list = str.toLowerCase().split(" ")
