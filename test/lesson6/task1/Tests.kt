@@ -112,6 +112,7 @@ class Tests {
     @Test
     @Tag("6")
     fun firstDuplicateIndex() {
+        assertEquals(-1, firstDuplicateIndex("a u b"))
         assertEquals(0, firstDuplicateIndex("a a"))
         assertEquals(-1, firstDuplicateIndex("Привет"))
         assertEquals(9, firstDuplicateIndex("Он пошёл в в школу"))
@@ -139,6 +140,40 @@ class Tests {
     }
 
     @Test
+    fun my() {
+        assertEquals(
+            mapOf(
+                "Lada" to "Газпром",
+                "BMW" to "Лукойл",
+                "Niva" to "Shell",
+                "Копейка" to "Газпром",
+                "Трактор" to "Лукойл"
+            ),
+            my(
+                mapOf(
+                    "Lada" to "бензин 98",
+                    "BMW" to "бензин 95",
+                    "Niva" to "дизель",
+                    "Копейка" to "бензин 88",
+                    "Трактор" to "солярка"
+                ),
+                "Лукойл: бензин 95 - 44.66; дизель - 60.76; солярка - 10;\n" +
+                        "Газпром: бензин 98 - 50.00; бензин 88 - 34.30;\n" +
+                        "Shell: бензин 66 - 23.00; дизель - 55.50;"
+            )
+        )
+        assertThrows(IllegalArgumentException::class.java) {
+            my(
+                mapOf(
+                    "Lada" to "бензин 98",
+                    "BMW" to "бензин 95"
+                ),
+                "Лукойл: бензин 95 - 44.66; дизель - 60.76; солярка - 10;"
+            )
+        }
+    }
+
+    @Test
     @Tag("7")
     fun computeDeviceCells() {
         assertEquals(listOf(0, 0, 0, 0, 0, 1, 1, 1, 1, 1), computeDeviceCells(10, "+>+>+>+>+", 10000))
@@ -160,25 +195,21 @@ class Tests {
         assertThrows(IllegalArgumentException::class.java) { computeDeviceCells(10, "+>+>[+>", 3) }
         assertThrows(IllegalStateException::class.java) { computeDeviceCells(20, ">>>>>>>>>>>>>", 12) }
     }
-    @Test
-    fun myFun() {
-        assertEquals(listOf("chmo", "guilo"), myFun(mapOf("saska" to 14),"chmo - saska - 100\nchmo - qwe - 1000\nguilo - saska - 50"))
-        assertEquals(listOf("chmo", "guilo"), myFun(mapOf("saska" to 14),"chmo - saska  - 100\nchmo - qwe - 1000\nguilo - saska - 50"))
-        assertThrows(IllegalArgumentException::class.java) {myFun(mapOf("saska" to 14),"chmo - saska - 100\nchmo / qwe - 1000\nguilo - saska - 50")}
-        assertThrows(IllegalArgumentException::class.java) {myFun(mapOf("saska" to 14),"chmo - saska - 100\nchmo - 50000 - 1000\nguilo - saska - 50")}
-    }
 
     @Test
     fun movePets() {
         assertEquals(
-            listOf("Fast", "Lux" ), movePets(
-                listOf("Super: кот - 100000;","Fast: кот - 25000; собака - 30000; шиншилла - 5000;",
-                    "Lux: кот - 1000000; собака - 1000000; крыса - 1000000; корова - 1000000; бегемот - 10000000"),
-                listOf("кот", "собака"), 20000000)
+            listOf("Fast", "Lux"), movePets(
+                listOf(
+                    "Super: кот - 100000;", "Fast: кот - 25000; собака - 30000; шиншилла - 5000;",
+                    "Lux: кот - 1000000; собака - 1000000; крыса - 1000000; корова - 1000000; бегемот - 10000000"
+                ),
+                listOf("кот", "собака"), 20000000
+            )
         )
     }
-    @Test
-    fun nalog2() {
-        assertEquals((13000), nalog2("20000 у.е. - 0%; 40000 у.е. - 5%; 60000 у.е. - 10%; else - 25%", 100000))
-    }
+//    @Test
+//    fun nalog2() {
+//        assertEquals((13000), nalog2("20000 у.е. - 0%; 40000 у.е. - 5%; 60000 у.е. - 10%; else - 25%", 100000))
+//    }
 }

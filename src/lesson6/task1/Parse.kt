@@ -2,6 +2,10 @@
 
 package lesson6.task1
 
+import lesson2.task2.daysInMonth
+import ru.spbstu.wheels.PositiveInfinity
+import java.lang.IndexOutOfBoundsException
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -92,26 +96,11 @@ fun date(str: String): String {
             "ноября",
             "декабря"
         )
-        val mounthnumb = listOf<Int>(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
         val n = list[0].toInt()
-        var result = ""
-        var m = 0
-        when {
-            (list.size < 3) -> return ""
-            (list[2].toInt() % 4 == 0 &&
-                    (list[2].toInt() % 100 != 0 || list[2].toInt() % 400 == 0)
-                    && list[1] == "февраля" && list[0] == "29") -> return "29.02." + list[2]
-        }
-        for (i in year.indices) {
-            if (list[1] == year[i]) {
-                m = i + 1
-            }
-        }
-        if (m == 0) return ""
-        if (list[0].toInt() > mounthnumb[m - 1]) return "" else {
-            result += twoDigitStr(n) + "." + twoDigitStr(m) + "." + list[2]
-        }
-        return result
+        if (list.size < 3) return ""
+        val mounth = year.indexOf(list[1]) + 1
+        if (n > daysInMonth(mounth, list[2].toInt()) || mounth == 0) return ""
+        return twoDigitStr(n) + "." + twoDigitStr(mounth) + "." + list[2]
     } catch (e: NumberFormatException) {
         return ""
     }
@@ -163,7 +152,7 @@ fun jump(jumps: String): Int {
     val regex = Regex("""[1-9][0-9]*( ([-%]|([1-9][0-9]*)*))*""")
     if (!jumps.matches(regex)) return -1
     for (i in jumps.split(Regex("""[\s\-%]"""))) {
-        if (i.isNotEmpty() && i.all { it.isDigit() } && i.toInt() > max) max = i.toInt()
+        if (i.isNotEmpty() && i.toInt() > max) max = i.toInt()
     }
     return max
 }
@@ -249,10 +238,14 @@ fun words(str: String): Int {
     println(list)
     if (list.size == 1) return -1
     var word = 0
-    for (i in list.indices - 1) {
-        if (list[i] == list[i + 1]) {
-            word = i
-            break
+    for (i in list.indices) {
+        try {
+            if (list[i] == list[i + 1]) {
+                word = i
+                break
+            }
+        } catch (e: IndexOutOfBoundsException) {
+            return -1
         }
     }
     for (i in 0 until word) {
@@ -288,6 +281,37 @@ fun mostExpensive(description: String): String = TODO()
  * Вернуть -1, если roman не является корректным римским числом
  */
 fun fromRoman(roman: String): Int = TODO()
+
+fun my(carPetrol: Map<String, String>, gasStation: String): Map<String, String> {
+    val regex = Regex("""([\wА-Яа-я]+:)((( [А-я]+ \d+)|( [А-я]+)) - ((\d+;)|(\d+\.\d+;)))*""")
+    var result = mutableMapOf<String, String>()
+    for (j in carPetrol.keys) {
+        var resName = ""
+        var minPrice = Double.POSITIVE_INFINITY
+
+        for (i in gasStation.split("\n")) {
+            if (!i.matches(regex)) throw java.lang.IllegalArgumentException()
+            var str = i.split(":")
+            val name = str[0]
+            val petrol = str[1].split(Regex("""[-;]"""))
+            println(petrol)
+            for (k in petrol.indices) {
+                if (petrol[k].trim() == carPetrol.getValue(j) && petrol[k + 1].toDouble() <= minPrice) {
+                    minPrice = petrol[k + 1].toDouble()
+                    resName = name
+                }
+            }
+        }
+        if (minPrice == Double.POSITIVE_INFINITY) throw java.lang.IllegalStateException()
+        result.put(j, resName)
+    }
+    println(result)
+//    var toReturn=""
+//    for (i in result.keys){
+//        toReturn+=i.toString()+" - "+result.getValue(i).to
+//    }
+    return result
+}
 
 /**
  * Очень сложная (7 баллов)
@@ -413,17 +437,17 @@ fun movePets(movers: List<String>, pets: List<String>, limit: Int): List<String>
     return res
 }
 
-fun nalog2(taxes: String, money: Int): Int {
-    val regex = Regex("""(\d+ у\.е\. - \d+%; )*(else - \d+%)""")
-    if (!taxes.matches(regex)) throw java.lang.IllegalArgumentException()
-    val str = taxes.replace(Regex("""[у\-.е%;]"""), "").split(Regex("""\s+"""))
-    println(str)
-    var cash = money
-    var i = 0
-    var result = 0
-    for (i in 0..str.size-1 step 2){
-        if (str[i].toInt()<=cash)
-    }
-    return result
-
-}
+//fun nalog2(taxes: String, money: Int): Int {
+//    val regex = Regex("""(\d+ у\.е\. - \d+%; )*(else - \d+%)""")
+//    if (!taxes.matches(regex)) throw java.lang.IllegalArgumentException()
+//    val str = taxes.replace(Regex("""[у\-.е%;]"""), "").split(Regex("""\s+"""))
+//    println(str)
+//    var cash = money
+//    var i = 0
+//    var result = 0
+//    for (i in 0..str.size-1 step 2){
+//        if (str[i].toInt()<=cash)
+//    }
+//    return result
+//
+//}

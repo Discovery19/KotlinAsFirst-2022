@@ -4,6 +4,7 @@ package lesson7.task1
 
 import lesson4.task1.string
 import ru.spbstu.wheels.out
+import ru.spbstu.wheels.toMutableMap
 import java.io.File
 import java.lang.StringBuilder
 import kotlin.collections.MutableMap.MutableEntry
@@ -69,15 +70,12 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  * Подчёркивание в середине и/или в конце строк значения не имеет.
  */
 fun marker(inputName: String, outputName: String) {
-    var line = ""
     val writer = File(outputName).bufferedWriter()
-    fun readFile(fileName: String): List<String> = File(fileName).readLines()
-    val spisok = readFile(inputName)
-    for (i in 0..spisok.size - 1) {
-        line = spisok[i]
-        if (line.isBlank() == true) writer.newLine()
-        else if (line.first() != '_') {
-            writer.write(line)
+    val spisok = File(inputName).readLines()
+    for (i in spisok) {
+        if (i.isBlank()) writer.newLine()
+        else if (i.first() != '_') {
+            writer.write(i)
             writer.newLine()
         }
     }
@@ -99,14 +97,13 @@ fun deleteMarked(inputName: String, outputName: String) {
  * s = spisok.count { it.toString() == substrings[i] }
 result.put(substrings[i], s)
  */
-fun readFile(fileName: String): List<String> = File(fileName).readLines()
+
 fun substr(inputName: String, substrings: List<String>): Map<String, Int> {
     val result = mutableMapOf<String, Int>()
     var s = 0
-    val spisok = readFile(inputName).joinToString().toLowerCase()
-    println(spisok)
-    for (i in 0..substrings.size - 1) {
-        var index: Int = spisok.indexOf(substrings[i].toLowerCase(), 0)
+    val spisok = File(inputName).readLines().joinToString().toLowerCase()
+    for (i in substrings.indices) {
+        var index = spisok.indexOf(substrings[i].toLowerCase(), 0)
         while (index > -1) {
             s += 1
             index = spisok.indexOf(substrings[i].toLowerCase(), index + 1)
@@ -155,7 +152,7 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    val file = readFile(inputName).toList()
+    val file = File(inputName).readLines()
     val filework = file.map { it.trimStart().trimEnd() }
     val max = filework.maxOfOrNull { it.length } ?: 0
     File(outputName).bufferedWriter().use { writer ->
@@ -211,7 +208,7 @@ fun centerFile(inputName: String, outputName: String) {
  */
 //!!!
 fun alignFileByWidth(inputName: String, outputName: String) {
-    val text = readFile(inputName)
+    val text = File(inputName).readLines()
     val writer = File(outputName).bufferedWriter()
     val workText = text.map { it.trim().replace("  ", " ") }
     val m = workText.maxOfOrNull { it.length } ?: 0
@@ -266,14 +263,14 @@ s += 1
 index = line.indexOf(fin[i], index + 1)
 }
  */
-fun top20Words2(inputName: String): Map<String, Int> {
+
+fun top20Words(inputName: String): Map<String, Int> {
     var resstr = mutableListOf<Pair<String, Int>>()
     val res = mutableMapOf<String, Int>()
-    var line = readFile(inputName).joinToString()
-    line = line.replace(regex = Regex("""[^A-Za-zА-Яа-яёЁ]"""), " ")
-    line = line.replace("  ", " ")
+    var line = File(inputName).readLines().joinToString()
+    line = line.replace(Regex("""[^A-Za-zА-Яа-яёЁ]+"""), " ")
     line = line.toLowerCase()
-    if (line == "") return res
+    if (line.isEmpty()) return res
     var fin = line.split(" ")
     for (i in 0..fin.size - 1) {
         if (fin[i] != "") {
@@ -281,28 +278,20 @@ fun top20Words2(inputName: String): Map<String, Int> {
         }
     }
     resstr.sortByDescending { it.second }
-    var resstr2 = mutableMapOf<String, Int>()
-    for (i in resstr) {
-        resstr2.put(i.first, i.second)
-    }
+    var resstr2 = resstr.toMutableMap()
     var count = 0
     var k = 0
-    while (true) {
-        for (i in resstr2) {
-            if (count <= 19) {
-                res.put(i.key, i.value)
-                count += 1
-                k = i.value
-            } else if (k == i.value) {
-                res.put(i.key, k)
-            }
+    for (i in resstr2) {
+        if (count <= 19) {
+            res[i.key] = i.value
+            count += 1
+            k = i.value
+        } else if (k == i.value) {
+            res[i.key] = k
         }
-        break
     }
     return res
 }
-
-fun top20Words(inputName: String): Map<String, Int> = top20Words2(inputName)
 
 
 /**
@@ -394,30 +383,18 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  *
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
-fun findDuplicates(values: List<String>): Set<String> {
-    return values.groupingBy { it }.eachCount().filter { it.value > 1 }.keys
-}
-
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
-    var list = mutableListOf<String>()
-    var res = mutableListOf<String>()
+    val list = File(inputName).readLines().toMutableList()
+    val res = mutableListOf<String>()
     var m = 0
-    for (line in File(inputName).readLines()) {
-        list.add(line)
-    }
     for (i in list) {
-        val name = i.toLowerCase().split("")
-        val repeated = findDuplicates(name)
-        if (repeated.size == 1 && name.size >= m) {
+        val name = i.toLowerCase().split("").toSet()
+        if (name.size -1 >= i.length && i.length >= m) {
             res.add(i)
-            m = name.size
+            m = i.length
         }
     }
-    var res2 = mutableListOf<String>()
-    for (i in res) {
-        if (i.length >= m - 2) res2.add(i)
-    }
-    val line = res2.joinToString(", ")
+    val line = res.joinToString(", ")
     File(outputName).writeText(line)
 }
 
@@ -496,14 +473,14 @@ fun html(inputName: String, outputName: String) {
 //            p = true
 //            continue
 //        } else
-        if (k <= file.size - 2 ) {
+        if (k <= file.size - 2) {
             if (file[k].isBlank()) {
                 writer.write("</p>")
                 writer.write("<p>")
                 continue
             }
         }
-        if (k==file.size-1 && !file[file.size - 1].isEmpty()){
+        if (k == file.size - 1 && !file[file.size - 1].isEmpty()) {
             if (file[k].isBlank()) {
                 writer.write("</p>")
                 writer.write("<p>")
@@ -800,9 +777,6 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
 //            break
 //        }
 //    }
-//    println("pizda "+k)
-//    println("suka "+delit)
-//    println("blyat "+ ost)
 //    con = con - con / rhv * rhv
 //    for (i in k..digits.size - 1) {
 //        while (digits[i] != digits.last()) {
