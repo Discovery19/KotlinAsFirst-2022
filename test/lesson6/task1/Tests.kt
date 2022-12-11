@@ -112,7 +112,6 @@ class Tests {
     @Test
     @Tag("6")
     fun firstDuplicateIndex() {
-        assertEquals(0, firstDuplicateIndex("a a < a a a < a"))
         assertEquals(-1, firstDuplicateIndex("a u b"))
         assertEquals(0, firstDuplicateIndex("a a"))
         assertEquals(-1, firstDuplicateIndex("Привет"))
