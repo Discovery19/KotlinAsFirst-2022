@@ -459,7 +459,7 @@ fun html(inputName: String, outputName: String) {
 
     var q = 0
     while (q <= file.size - 2) {
-        if (file[0].isBlank()) file.removeAt(0)
+        //if (file[0].isBlank()) file.removeAt(0)
         if (file[q].isBlank() && file[q + 1].isBlank()) {
             file.removeAt(q)
             q -= 1
@@ -482,6 +482,8 @@ fun html(inputName: String, outputName: String) {
                 writer.write("</p>")
                 writer.write("<p>")
                 continue
+
+
             }
         }
         if (k == file.size - 1 && !file[file.size - 1].isEmpty()) {
@@ -493,8 +495,8 @@ fun html(inputName: String, outputName: String) {
 
 
 //        var str = replace(k)
-        var list = file[k].replace(Regex("[\\s\\n\\t]+"), " ").split("").toMutableList()
-
+        var list = file[k].split("").toMutableList()
+        println(list)
         for (i in list.indices) {
             if (list[i] == "~" && list[i + 1] == "~" && !s) {
                 list[i] = "<s>"
