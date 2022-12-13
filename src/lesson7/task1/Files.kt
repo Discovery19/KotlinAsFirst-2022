@@ -455,7 +455,7 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
 
 fun html(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
-    var file = File(inputName).readLines().toMutableList()
+    val file = File(inputName).readLines().toMutableList()
 
     var q = 0
     while (q <= file.size - 2) {
