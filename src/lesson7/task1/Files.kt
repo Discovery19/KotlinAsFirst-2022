@@ -459,7 +459,7 @@ fun html(inputName: String, outputName: String) {
 
     var q = 0
     while (q <= file.size - 2) {
-        //if (file[0].isBlank()) file.removeAt(0)
+        if (file[0].isBlank()) file.removeAt(0)
         if (file[q].isBlank() && file[q + 1].isBlank()) {
             file.removeAt(q)
             q -= 1
