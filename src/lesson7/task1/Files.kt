@@ -265,20 +265,19 @@ index = line.indexOf(fin[i], index + 1)
  */
 
 fun top20Words(inputName: String): Map<String, Int> {
-    var resstr = mutableListOf<Pair<String, Int>>()
+    var resstr = mutableMapOf<String,Int>()
     val res = mutableMapOf<String, Int>()
     var line = File(inputName).readLines().joinToString()
-    line = line.replace(Regex("""[^A-Za-zА-Яа-яёЁ]+"""), " ")
-    line = line.toLowerCase()
+    line = line.replace(Regex("""[^A-Za-zА-Яа-яёЁ]+"""), " ").toLowerCase()
     if (line.isEmpty()) return res
     var fin = line.split(" ")
-    for (i in 0..fin.size - 1) {
+    for (i in fin.indices) {
         if (fin[i] != "") {
-            resstr.add(Pair(fin[i], fin.count { it == fin[i] }))
+            if (resstr.containsKey(fin[i])) resstr[fin[i]] = resstr[fin[i]]!! + 1
+            else resstr[fin[i]] = 1
         }
     }
-    resstr.sortByDescending { it.second }
-    var resstr2 = resstr.toMutableMap()
+    var resstr2 = resstr.toList().sortedByDescending { (k, v) -> v }.toMap()
     var count = 0
     var k = 0
     for (i in resstr2) {
@@ -388,15 +387,15 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val res = mutableListOf<String>()
     var m = 0
     for (i in list) {
-        val name = i.toLowerCase().split("").toSet()
-        if (name.size -1 >= i.length && i.length >= m) {
+        val name = i.toLowerCase().toSet()
+        if (name.size >= i.length && i.length >= m) {
             res.add(i)
             m = i.length
         }
     }
-    val res2= mutableListOf<String>()
-    for (i in res){
-        if (i.length==m) res2.add(i)
+    val res2 = mutableListOf<String>()
+    for (i in res) {
+        if (i.length == m) res2.add(i)
     }
     val line = res2.joinToString(", ")
     File(outputName).writeText(line)
@@ -482,10 +481,9 @@ fun html(inputName: String, outputName: String) {
                 writer.write("</p>")
                 writer.write("<p>")
                 continue
-
-
             }
         }
+
         if (k == file.size - 1 && !file[file.size - 1].isEmpty()) {
             if (file[k].isBlank()) {
                 writer.write("</p>")
