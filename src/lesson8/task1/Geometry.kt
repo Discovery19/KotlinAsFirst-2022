@@ -73,6 +73,8 @@ class Triangle private constructor(private val points: Set<Point>) {
 /**
  * Окружность с заданным центром и радиусом
  */
+
+
 data class Circle(val center: Point, val radius: Double) {
     /**
      * Простая (2 балла)
@@ -83,16 +85,18 @@ data class Circle(val center: Point, val radius: Double) {
      * Расстояние между пересекающимися окружностями считать равным 0.0.
      */
     //data class Point(val x: Double, val y: Double){
-    fun distance(other: Circle): Double = TODO()
-        //sqrt(sqr(x - other.x) + sqr(y - other.y))
-//}
+    fun distance(other: Circle): Double {
+        val res = center.distance(other.center) - radius - other.radius
+        return if (res < 0.0) 0.0
+        else res
+    }
 
     /**
      * Тривиальная (1 балл)
      *
      * Вернуть true, если и только если окружность содержит данную точку НА себе или ВНУТРИ себя
      */
-    fun contains(p: Point): Boolean = TODO()
+    fun contains(p: Point): Boolean = p.distance(center) <= radius
 }
 
 /**
@@ -112,7 +116,22 @@ data class Segment(val begin: Point, val end: Point) {
  * Дано множество точек. Вернуть отрезок, соединяющий две наиболее удалённые из них.
  * Если в множестве менее двух точек, бросить IllegalArgumentException
  */
-fun diameter(vararg points: Point): Segment = TODO()
+//fun distance(other: Segment): Double = sqrt(sqr(end - other.begin) + sqr(y - other.y))
+fun diameter(vararg points: Point): Segment {
+//    println(points)
+//    val list=points.toList<Point>()
+//    println(list)
+//    val min=Point(0.0,0.0)
+//    val max=Point(0.0,0.0)
+//    var res=max.equals(min)
+//    for (i in 0..points.size-2){
+//        for (j in i+1..points.size-1){
+//            if (points[j].equals(points[i])>res) res=points[j].equals(points[i])
+//        }
+//    }
+//    return res
+    TODO()
+}
 
 /**
  * Простая (2 балла)
