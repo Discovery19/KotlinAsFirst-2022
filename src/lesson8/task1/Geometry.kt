@@ -3,6 +3,7 @@
 package lesson8.task1
 
 import lesson1.task1.sqr
+import lesson4.task1.center
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -140,7 +141,13 @@ fun diameter(vararg points: Point): Segment {
  * Построить окружность по её диаметру, заданному двумя точками
  * Центр её должен находиться посередине между точками, а радиус составлять половину расстояния между ними
  */
-fun circleByDiameter(diameter: Segment): Circle = TODO()
+fun circleByDiameter(diameter: Segment): Circle {
+    val a=diameter.begin
+    val b=diameter.end
+    val center=Point(maxOf(a.x,b.x)/2- minOf(a.x,b.x)/2,maxOf(a.y,b.y)/2- minOf(a.y,b.y)/2)
+    val radius=a.distance(b)/2
+    return Circle(center,radius)
+}
 
 /**
  * Прямая, заданная точкой point и углом наклона angle (в радианах) по отношению к оси X.
