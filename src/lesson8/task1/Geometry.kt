@@ -84,7 +84,6 @@ data class Circle(val center: Point, val radius: Double) {
      * расстояние между их центрами минус сумма их радиусов.
      * Расстояние между пересекающимися окружностями считать равным 0.0.
      */
-    //data class Point(val x: Double, val y: Double){
     fun distance(other: Circle): Double {
         val res = center.distance(other.center) - radius - other.radius
         return if (res < 0.0) 0.0
@@ -118,19 +117,21 @@ data class Segment(val begin: Point, val end: Point) {
  */
 //fun distance(other: Segment): Double = sqrt(sqr(end - other.begin) + sqr(y - other.y))
 fun diameter(vararg points: Point): Segment {
-//    println(points)
+    println(points)
 //    val list=points.toList<Point>()
 //    println(list)
-//    val min=Point(0.0,0.0)
-//    val max=Point(0.0,0.0)
-//    var res=max.equals(min)
-//    for (i in 0..points.size-2){
-//        for (j in i+1..points.size-1){
-//            if (points[j].equals(points[i])>res) res=points[j].equals(points[i])
-//        }
-//    }
-//    return res
-    TODO()
+    var min=Point(0.0,0.0)
+    var max=Point(0.0,0.0)
+    var res=max.distance(min)
+    for (i in 0..points.size-2){
+        for (j in i+1..points.size-1){
+            if (points[j].distance(points[i])>=res){
+                min=points[i]
+                max=points[j]
+            }
+        }
+    }
+    return Segment(min,max)
 }
 
 /**
