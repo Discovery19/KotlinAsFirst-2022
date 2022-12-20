@@ -265,7 +265,7 @@ index = line.indexOf(fin[i], index + 1)
  */
 
 fun top20Words(inputName: String): Map<String, Int> {
-    var resstr = mutableMapOf<String,Int>()
+    var resstr = mutableMapOf<String, Int>()
     val res = mutableMapOf<String, Int>()
     var line = File(inputName).readLines().joinToString()
     line = line.replace(Regex("""[^A-Za-zА-Яа-яёЁ]+"""), " ").toLowerCase()
@@ -754,12 +754,24 @@ writer.write("-".repeat(line.length))
 writer.newLine()
 }
 }
-//заключающая строка (остаток)
+//заключающая строка
 line = (k - rhv * num.last().toInt()).toString()
 writer.write(line)
 writer.close()
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
+//    val delim = lhv.toString().split("")
+//    var del = delim[0]
+//    val list= mutableListOf<String>()
+//    var res = ""
+//    for (i in 1..delim.size - 1) {
+//        if (del.toInt() / rhv > 0) {
+//            list.add(del)
+//            list.add((del.toInt() % rhv).toString())
+//            res += (del.toInt()/rhv).toString()
+//            del = (del.toInt() % rhv).toString()
+//        } else del += delim[i]
+//    }
     TODO()
 }
 //    val digits = lhv.toString().split("").toMutableList()
@@ -776,8 +788,8 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
 //        println(con)
 //        k = i
 //        if (con / rhv > 0) {
-////            delit.add((con / rhv) * rhv)
-////            ost.add(con - (con / rhv) * rhv)
+//           delit.add((con / rhv) * rhv)
+//           ost.add(con - (con / rhv) * rhv)
 //            break
 //        }
 //    }
