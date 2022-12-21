@@ -760,30 +760,79 @@ writer.write(line)
 writer.close()
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    val digit=lhv.toString().split("").filter { it.isNotBlank() }
-    var str=""
-    var ost=""
-    var f=0
-    val list= mutableListOf<String>()
-    for (i in digit.indices){
-        str+=digit[i]
-        if (str.toInt()/rhv>0) {
-            ost=(str.toInt()%rhv).toString()
-            f=i
+    val digit = lhv.toString().split("").filter { it.isNotBlank() }
+    var str = ""
+    var ost = ""
+    var f = 0
+    var res = mutableListOf<String>()
+    val list = mutableListOf<String>()
+    for (i in digit.indices) {
+        str += digit[i]
+        println(str)
+        if (str.toInt() / rhv > 0) {
+            res.add((str.toInt() / rhv).toString())
+            list.add((str.toInt() / rhv * rhv).toString())
+            ost = (str.toInt() % rhv).toString()
+            f = i
             break
         }
     }
-    for (i in f..digit.size-1){
-        ost+=digit[i]
-        if (ost.toInt()/rhv>0){
-            list.add(ost)
-            list.add((ost.toInt()%rhv).toString())
-            ost=(ost.toInt()%rhv).toString()
-        }
-        else{
+    println(list)
+    println(res)
+    println(ost)
+    if (list.isEmpty()) {
+        list.add("0")
+        list.add(lhv.toString())
+    }
+    val writer = File(outputName).bufferedWriter()
+    val otv = lhv / rhv
+    var first = " " + lhv.toString() + " | " + rhv.toString()
+    println(first.length)
+    writer.write(first)
+    writer.newLine()
+    var line = "-" + list[0]
+    println(line.length)
+    writer.write(line + " ".repeat(first.length - line.length - rhv.toString().length) + "$otv")
+    writer.newLine()
+    writer.write("-".repeat(line.length))
+    var space = line.length - 1
+    writer.newLine()
 
+    println(list)
+    for (i in f + 1..digit.size - 1) {
+        ost += digit[i]
+        if (ost.toInt() / rhv > 0) {
+            list.add(ost)
+            list.add((ost.toInt() / rhv * rhv).toString())
+            res.add((ost.toInt() / rhv).toString())
+            if ((ost.toInt() % rhv).toString() != "0") list.add((ost.toInt() % rhv).toString())
+            ost = (ost.toInt() % rhv).toString()
+        } else {
+            list.add(ost)
+            list.add("0")
         }
     }
+    println(list)
+    var j = 1
+    while (j in 1..list.size - 2) {
+        try {
+
+            line = " ".repeat(space) + list[j]
+            writer.write(line)
+            writer.newLine()
+            writer.write(" ".repeat(line.length - 1 - list[j + 1].length) + "-" + list[j + 1])
+            writer.newLine()
+            writer.write(" ".repeat(line.length - 1 - list[j + 1].length) + "-".repeat(list[j + 1].length + 1))
+            writer.newLine()
+            if (list[j + 1] == "0") space = line.length - 2
+            else space = line.length - 1
+            j += 2
+        } catch (e: IndexOutOfBoundsException) {
+            break
+        }
+    }
+    writer.write(" ".repeat(space) + (lhv % rhv).toString())
+    writer.close()
 }
 //    val digits = lhv.toString().split("").toMutableList()
 //    val writer = File(outputName).bufferedWriter()
