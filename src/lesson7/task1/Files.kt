@@ -760,18 +760,6 @@ writer.write(line)
 writer.close()
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-//    val delim = lhv.toString().split("")
-//    var del = delim[0]
-//    val list= mutableListOf<String>()
-//    var res = ""
-//    for (i in 1..delim.size - 1) {
-//        if (del.toInt() / rhv > 0) {
-//            list.add(del)
-//            list.add((del.toInt() % rhv).toString())
-//            res += (del.toInt()/rhv).toString()
-//            del = (del.toInt() % rhv).toString()
-//        } else del += delim[i]
-//    }
     TODO()
 }
 //    val digits = lhv.toString().split("").toMutableList()
@@ -848,5 +836,5 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
 //    }
 //    writer.close()
 //}
-
-
+//
+//
