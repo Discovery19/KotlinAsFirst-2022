@@ -760,7 +760,30 @@ writer.write(line)
 writer.close()
  */
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()
+    val digit=lhv.toString().split("").filter { it.isNotBlank() }
+    var str=""
+    var ost=""
+    var f=0
+    val list= mutableListOf<String>()
+    for (i in digit.indices){
+        str+=digit[i]
+        if (str.toInt()/rhv>0) {
+            ost=(str.toInt()%rhv).toString()
+            f=i
+            break
+        }
+    }
+    for (i in f..digit.size-1){
+        ost+=digit[i]
+        if (ost.toInt()/rhv>0){
+            list.add(ost)
+            list.add((ost.toInt()%rhv).toString())
+            ost=(ost.toInt()%rhv).toString()
+        }
+        else{
+
+        }
+    }
 }
 //    val digits = lhv.toString().split("").toMutableList()
 //    val writer = File(outputName).bufferedWriter()
