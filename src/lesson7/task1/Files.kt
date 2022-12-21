@@ -839,6 +839,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             writer.newLine()
             writer.write(" ".repeat(line.length - 1 - list[j + 1].length) + "-".repeat(list[j + 1].length + 1))
             writer.newLine()
+            println("brew $space")
             if (list[j + 1] == "0") space = line.length - 2
             else space = line.length - 1
             j += 2
@@ -846,7 +847,9 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             break
         }
     }
+    space=space-(space+(lhv%rhv).toString().length-line.length)
     if (otv==0 && lhv>=10) space=0
+    println(space)
     writer.write(" ".repeat(space) + (lhv % rhv).toString())
     writer.close()
 //    }
