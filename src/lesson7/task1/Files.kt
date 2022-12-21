@@ -819,7 +819,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
                 list.add(ost)
                 list.add((ost.toInt() / rhv * rhv).toString())
                 res.add((ost.toInt() / rhv).toString())
-                if ((ost.toInt() % rhv).toString() != "0") list.add((ost.toInt() % rhv).toString())
+                if ((ost.toInt() % rhv)/10!=0) list.add((ost.toInt() % rhv).toString())
                 ost = (ost.toInt() % rhv).toString()
             } else {
                 list.add(ost)
