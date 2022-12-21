@@ -2,6 +2,7 @@
 
 package lesson7.task1
 
+import lesson4.task1.abs
 import lesson4.task1.string
 import ru.spbstu.wheels.out
 import ru.spbstu.wheels.toMutableMap
@@ -832,7 +833,9 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     var j = 1
     while (j in 1..list.size - 2) {
         try {
-
+//            var k= kotlin.math.abs(list[j-1].length-(list[j].toInt()/10).toString().length-1)
+//            println(k)
+//            if (k>space) k=0
             line = " ".repeat(space) + list[j]
             writer.write(line)
             writer.newLine()
