@@ -798,7 +798,9 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     var first = ""
 
 
-    var line = "-" + list[0]
+    var line = ""
+    if (str.length>1+list[0].length) line=" ".repeat(str.length-1-list[0].length)+"-"+list[0]
+    else line="-" + list[0]
     if (otv / 10 <= 0 && "$lhv".length >= line.length ) first = "$lhv | $rhv"
     else first = " $lhv | $rhv"
     writer.write(first)
@@ -829,7 +831,6 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     println(space)
     var j = 1
     while (j in 1..list.size - 2) {
-        println("suka")
         try {
 
             line = " ".repeat(space) + list[j]
@@ -839,7 +840,6 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             writer.newLine()
             writer.write(" ".repeat(line.length - 1 - list[j + 1].length) + "-".repeat(list[j + 1].length + 1))
             writer.newLine()
-            println("brew $space")
             if (list[j + 1] == "0") space = line.length - 2
             else space = line.length - 1
             j += 2
