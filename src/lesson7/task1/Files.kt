@@ -788,7 +788,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
 
 
     var line = "-" + list[0]
-    if (lhv.toString().length == line.length) first = "$lhv | $rhv"
+    if (otv/10<=0 && "$lhv".toString().length==line.length) first = "$lhv | $rhv"
     else first = " $lhv | $rhv"
     writer.write(first)
     writer.newLine()
