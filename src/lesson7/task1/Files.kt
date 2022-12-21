@@ -764,8 +764,19 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     var str = ""
     var ost = ""
     var f = 0
+    val writer = File(outputName).bufferedWriter()
     var res = mutableListOf<String>()
     val list = mutableListOf<String>()
+//    if (lhv / rhv == 0) {
+//        val exp = "$lhv | $rhv"
+//        writer.write(exp)
+//        writer.newLine()
+//        writer.write("-0" + " ".repeat(exp.length - 4) + "0")
+//        writer.newLine()
+//        writer.write("-".repeat(2))
+//        writer.newLine()
+//        writer.write("$lhv")
+//    } else {
     for (i in digit.indices) {
         str += digit[i]
         println(str)
@@ -782,13 +793,13 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         list.add("0")
         list.add(lhv.toString())
     }
-    val writer = File(outputName).bufferedWriter()
+
     val otv = lhv / rhv
     var first = ""
 
 
     var line = "-" + list[0]
-    if (otv/10<=0 && "$lhv".toString().length==line.length) first = "$lhv | $rhv"
+    if (otv / 10 <= 0 && "$lhv".length >= line.length ) first = "$lhv | $rhv"
     else first = " $lhv | $rhv"
     writer.write(first)
     writer.newLine()
@@ -799,22 +810,26 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     writer.newLine()
 
     println(list)
-    for (i in f + 1 until digit.size) {
-        ost += digit[i]
-        if (ost.toInt() / rhv > 0) {
-            list.add(ost)
-            list.add((ost.toInt() / rhv * rhv).toString())
-            res.add((ost.toInt() / rhv).toString())
-            if ((ost.toInt() % rhv).toString() != "0") list.add((ost.toInt() % rhv).toString())
-            ost = (ost.toInt() % rhv).toString()
-        } else {
-            list.add(ost)
-            list.add("0")
+    if (otv != 0) {
+        for (i in f + 1..digit.size - 1) {
+            ost += digit[i]
+            if (ost.toInt() / rhv > 0) {
+                list.add(ost)
+                list.add((ost.toInt() / rhv * rhv).toString())
+                res.add((ost.toInt() / rhv).toString())
+                if ((ost.toInt() % rhv).toString() != "0") list.add((ost.toInt() % rhv).toString())
+                ost = (ost.toInt() % rhv).toString()
+            } else {
+                list.add(ost)
+                list.add("0")
+            }
         }
     }
     println(list)
+    println(space)
     var j = 1
     while (j in 1..list.size - 2) {
+        println("suka")
         try {
 
             line = " ".repeat(space) + list[j]
@@ -831,8 +846,10 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             break
         }
     }
+    if (otv==0 && lhv>=10) space=0
     writer.write(" ".repeat(space) + (lhv % rhv).toString())
     writer.close()
+//    }
 }
 //    val digits = lhv.toString().split("").toMutableList()
 //    val writer = File(outputName).bufferedWriter()

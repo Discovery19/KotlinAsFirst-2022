@@ -447,7 +447,8 @@ Basic, Ruby, Swift.
         test(16,9,
         "16 | 9\n-9   1\n--\n 7")
         test(16,1," 16 | 1\n-1    16\n--\n 06\n -6\n --\n  0")
-
+        test(16,17,"16 | 17\n-0   0\n--\n16")
+        test(160,170,"160 | 170\n-0    0\n--\n160")
         File("temp.txt").delete()
     }
 }
