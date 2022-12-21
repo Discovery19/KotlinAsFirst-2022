@@ -777,21 +777,21 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
             break
         }
     }
-    println(list)
-    println(res)
-    println(ost)
+
     if (list.isEmpty()) {
         list.add("0")
         list.add(lhv.toString())
     }
     val writer = File(outputName).bufferedWriter()
     val otv = lhv / rhv
-    var first = " " + lhv.toString() + " | " + rhv.toString()
-    println(first.length)
+    var first = ""
+
+
+    var line = "-" + list[0]
+    if (lhv.toString().length == line.length) first = "$lhv | $rhv"
+    else first = " $lhv | $rhv"
     writer.write(first)
     writer.newLine()
-    var line = "-" + list[0]
-    println(line.length)
     writer.write(line + " ".repeat(first.length - line.length - rhv.toString().length) + "$otv")
     writer.newLine()
     writer.write("-".repeat(line.length))
@@ -799,7 +799,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     writer.newLine()
 
     println(list)
-    for (i in f + 1..digit.size - 1) {
+    for (i in f + 1 until digit.size) {
         ost += digit[i]
         if (ost.toInt() / rhv > 0) {
             list.add(ost)
